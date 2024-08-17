@@ -1,6 +1,7 @@
 # 1. 基于官方的 PHP 镜像，选择带有 FPM 和 CLI 的版本
 FROM php:7.2-fpm
 
+
 # 2. 替换为阿里云源并安装必要的系统工具和依赖项
 RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     apt-get update && apt-get install -y \
@@ -28,6 +29,8 @@ RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     default-mysql-client \
     nodejs \
     npm \
+    nginx \
+    supervisor \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring zip gd exif pcntl bcmath intl opcache
 
 # 3. 安装 Redis 扩展和其他 PHP 扩展
@@ -73,12 +76,18 @@ RUN ln -s /var/www/node_modules/jquery.caret /var/www/web/assets/lib/Caret.js &&
 # 10. 设置权限
 RUN chown -R www-data:www-data /var/www
 
-# 11. 暴露端口
-EXPOSE 3120 9000
+# 11. 配置 Nginx
+RUN rm /etc/nginx/sites-enabled/default
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# 12. 启动 WebSocket 和 php-fpm 服务
-CMD ["php", "bin/push-service.php", "start",'-d']
-CMD ["php-fpm"]
+# 12. 配置 Supervisor 来管理 Nginx 和 PHP-FPM
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# 13. 暴露端口 [websocket]
+EXPOSE 3100 3120
+
+# 14. 启动 Supervisor
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 #-----------常用命令---------------
 #导入数据
