@@ -5,6 +5,9 @@ FROM php:7.2-fpm
 # 2. 替换为阿里云源并安装必要的系统工具和依赖项
 RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     apt-get update && apt-get install -y \
+    nginx \
+    supervisor \
+    vim \
     git \
     curl \
     wget \
@@ -29,8 +32,6 @@ RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     default-mysql-client \
     nodejs \
     npm \
-    nginx \
-    supervisor \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring zip gd exif pcntl bcmath intl opcache
 
 # 3. 安装 Redis 扩展和其他 PHP 扩展
@@ -75,6 +76,11 @@ RUN ln -s /var/www/node_modules/jquery.caret /var/www/web/assets/lib/Caret.js &&
 
 # 10. 设置权限
 RUN chown -R www-data:www-data /var/www
+RUN mkdir -p /var/log/php-fpm && \
+    touch /var/log/php-fpm/php-fpm_stdout.log /var/log/php-fpm/php-fpm_stderr.log \
+    /var/log/push-service_stdout.log /var/log/push-service_stderr.log && \
+    chmod 777 /var/log/php-fpm/php-fpm_stdout.log /var/log/php-fpm/php-fpm_stderr.log \
+    /var/log/push-service_stdout.log /var/log/push-service_stderr.log 
 
 # 11. 配置 Nginx
 RUN rm /etc/nginx/sites-enabled/default
@@ -84,7 +90,7 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # 13. 暴露端口 [websocket]
-EXPOSE 3100 3120
+EXPOSE 3110 3120
 
 # 14. 启动 Supervisor
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
