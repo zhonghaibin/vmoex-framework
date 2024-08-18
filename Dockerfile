@@ -87,8 +87,8 @@ RUN  rm -rf /var/app/init.sh /var/app/nginx.conf /var/app/supervisord.conf /var/
 # # 13. 暴露端口 [websocket]
 EXPOSE 3110 3120
 
-# 14. 启动 cron 和 Supervisor
-CMD cron && /usr/local/bin/init.sh
+# 14. 启动 Supervisor
+ CMD ["/usr/local/bin/init.sh"]
 #-----------常用命令---------------
 #导入数据
 # php bin/console doctrine:database:init
