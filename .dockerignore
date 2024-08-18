@@ -2,3 +2,4 @@
 Dockerfile
 .git
 .idea
+./var/data/vmoex-framework.sql
