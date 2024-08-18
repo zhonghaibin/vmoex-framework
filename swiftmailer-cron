@@ -1,1 +1,1 @@
-* * * * * root php /var/www/bin/console swiftmailer:spool:send --time-limit=10 --env=prod >> /var/log/cron.log 2>&1
+* * * * *  /usr/local/bin/php /var/www/bin/console swiftmailer:spool:send --time-limit=10 --env=prod >> /var/log/cron.log 2>&1
