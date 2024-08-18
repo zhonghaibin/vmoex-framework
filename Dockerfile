@@ -32,6 +32,7 @@ RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     default-mysql-client \
     nodejs \
     npm \
+    cron \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring zip gd exif pcntl bcmath intl opcache
 
 # 3. 安装 Redis 扩展和其他 PHP 扩展
@@ -45,55 +46,50 @@ RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/compos
 
 # 5. 配置工作目录
 WORKDIR /var/www
-
+RUN rm /var/www/* -Rf 
 # 6. 拷贝项目文件
-COPY . .
+COPY . /var/app
 
 # 7. 安装项目依赖，并替换 npm 为阿里云源
-# RUN composer install
 RUN npm config set registry https://registry.npmmirror.com/ && npm install -g bower uglify-js yarn
-RUN yarn config set registry https://registry.npmmirror.com/ && yarn install
+RUN yarn config set registry https://registry.npmmirror.com/ 
 RUN ln -s /usr/local/bin/uglifyjs /usr/bin/uglifyjs
-# 8. 安装前端依赖
-RUN composer install &&  yarn install
 
-# 9. 映射目录
-RUN ln -s /var/www/node_modules/jquery.caret /var/www/web/assets/lib/Caret.js && \
-    ln -s /var/www/node_modules/bootstrap /var/www/web/assets/lib/bootstrap && \
-    ln -s /var/www/node_modules/bootstrap-social /var/www/web/assets/lib/bootstrap-social && \
-    ln -s /var/www/node_modules/echarts /var/www/web/assets/lib/echarts && \
-    ln -s /var/www/node_modules/eds-ui /var/www/web/assets/lib/eds-ui && \
-    ln -s /var/www/node_modules/font-awesome /var/www/web/assets/lib/font-awesome && \
-    ln -s /var/www/node_modules/jquery /var/www/web/assets/lib/jquery && \
-    ln -s /var/www/node_modules/jquery-pjax /var/www/web/assets/lib/jquery-pjax && \
-    ln -s /var/www/node_modules/at.js /var/www/web/assets/lib/jquery.atwho && \
-    ln -s /var/www/node_modules/laydate /var/www/web/assets/lib/laydate && \
-    ln -s /var/www/node_modules/metismenu /var/www/web/assets/lib/metisMenu && \
-    ln -s /var/www/node_modules/nprogress /var/www/web/assets/lib/nprogress && \
-    ln -s /var/www/node_modules/socket.io-client /var/www/web/assets/lib/socket.io-client && \
-    ln -s /var/www/node_modules/startbootstrap-sb-admin-2 /var/www/web/assets/lib/startbootstrap-sb-admin-2 && \
-    ln -s /var/www/node_modules/wangeditor /var/www/web/assets/lib/wangeditor
+RUN composer install --working-dir=/var/app && yarn install --cwd /var/app
 
-# 10. 设置权限
-RUN chown -R www-data:www-data /var/www
+
 RUN mkdir -p /var/log/php-fpm && \
     touch /var/log/php-fpm/php-fpm_stdout.log /var/log/php-fpm/php-fpm_stderr.log \
     /var/log/push-service_stdout.log /var/log/push-service_stderr.log && \
     chmod 777 /var/log/php-fpm/php-fpm_stdout.log /var/log/php-fpm/php-fpm_stderr.log \
-    /var/log/push-service_stdout.log /var/log/push-service_stderr.log 
+    /var/log/push-service_stdout.log /var/log/push-service_stderr.log
 
-# 11. 配置 Nginx
+
+
+# # 11. 配置 Nginx
 RUN rm /etc/nginx/sites-enabled/default
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
-# 12. 配置 Supervisor 来管理 Nginx 和 PHP-FPM
+# # 12. 配置 Supervisor 来管理 Nginx 和 PHP-FPM
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# 13. 暴露端口 [websocket]
+
+COPY init.sh /usr/local/bin/init.sh
+RUN  chmod +x /usr/local/bin/init.sh
+
+
+COPY swiftmailer-cron /etc/cron.d/swiftmailer-cron
+RUN chmod 0644 /etc/cron.d/swiftmailer-cron
+RUN crontab /etc/cron.d/swiftmailer-cron
+
+RUN  rm -rf /var/app/init.sh /var/app/nginx.conf /var/app/supervisord.conf /var/app/swiftmailer-cron
+
+# # 13. 暴露端口 [websocket]
 EXPOSE 3110 3120
 
 # 14. 启动 Supervisor
-CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+ CMD ["/usr/local/bin/init.sh"]
+
 
 #-----------常用命令---------------
 #导入数据

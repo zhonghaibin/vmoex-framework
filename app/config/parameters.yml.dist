@@ -16,6 +16,7 @@ parameters:
     # 邮箱smtp配置，不配置则无法向用户发送验证、通知邮件
     mailer_transport: smtp
     mailer_host: ~
+    mailer_port: ~
     mailer_user: ~
     mailer_password: ~
 
