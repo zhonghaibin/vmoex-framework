@@ -5,6 +5,7 @@ FROM php:7.2-fpm
 # 2. 替换为阿里云源并安装必要的系统工具和依赖项
 RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     apt-get update && apt-get install -y \
+    cron \
     nginx \
     supervisor \
     vim \
@@ -32,7 +33,6 @@ RUN sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list && \
     default-mysql-client \
     nodejs \
     npm \
-    cron \
     && docker-php-ext-install pdo pdo_mysql mysqli mbstring zip gd exif pcntl bcmath intl opcache
 
 # 3. 安装 Redis 扩展和其他 PHP 扩展
