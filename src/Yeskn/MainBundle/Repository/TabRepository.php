@@ -23,8 +23,6 @@ class TabRepository extends EntityRepository
     public function getTabsForWidget()
     {
         return $this->createQueryBuilder('p')
-            ->where('p.avatar is not null')
-            ->andWhere("p.avatar != ''")
             ->orderBy('p.id', 'DESC')
             ->setMaxResults(12)
             ->getQuery()

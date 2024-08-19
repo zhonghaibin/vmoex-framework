@@ -45,7 +45,6 @@ class StartRenderTabListEvent extends AbstractCrudListEvent
             $result[] = [
                 $tab->getId(),
                 $tab->getName(),
-                $this->imgColumn($tab->getAvatar()),
                 $tab->getLevel(),
                 $tab->getAlias(),
                 $tab->getDescription()
@@ -53,7 +52,7 @@ class StartRenderTabListEvent extends AbstractCrudListEvent
         }
 
         return [
-            'columns' => ['ID', '名称', '图标', '层级', '别名', '描述'],
+            'columns' => ['ID', '名称', '层级', '别名', '描述'],
             'list' => $result,
             'ids' => $ids
         ];

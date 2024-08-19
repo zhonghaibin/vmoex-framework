@@ -82,15 +82,42 @@
 
 {% block sidebar %}
     <div class="panel panel-default">
+        {% set locale = app.request.locale %}
         <div class="panel-heading">
-            创建主题指南
+            {% if locale == 'en' %}
+                Topic Creation Guidelines
+            {% elseif locale == 'jp'  %}
+                テーマ作成ガイドライン
+            {% elseif locale == 'zh_TW' %}
+                創建主題指南
+            {% else %}
+                创建主题指南
+            {% endif %}
         </div>
         <div class="panel-body">
-            <ol>
+            {% if locale == 'en' %}
+                <ol>
+                    <li>Please comply with relevant laws and regulations.</li>
+                    <li>Do not post any advertising information.</li>
+                    <li>Supports Markdown format.</li>
+                </ol>
+            {% elseif locale == 'jp'  %}
+                <ol>
+                    <li>関連法規を遵守してください</li>
+                    <li>広告情報の投稿はご遠慮ください</li>
+                    <li>Markdown形式に対応しています</li>
+                </ol>
+            {% elseif locale == 'zh_TW' %}
+                <ol>
+                    <li>請遵守相關法律規定</li>
+                    <li>請勿發布任何廣告信息</li>
+                    <li>支持markdown格式</li>
+                </ol>
+            {% else %}
                 <li>请遵守相关法律规定</li>
                 <li>请勿发布任何广告信息</li>
                 <li>支持markdown格式</li>
-            </ol>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

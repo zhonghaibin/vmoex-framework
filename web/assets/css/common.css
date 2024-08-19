@@ -167,8 +167,7 @@ article.main{
     height: 72px;
 }
 .tab-header .tab-info {
-    margin-left: -30px;
-    padding: 10px 10px 10px 0;
+    padding: 10px;
 }
 article div.item-title {
     font-size: 16px;

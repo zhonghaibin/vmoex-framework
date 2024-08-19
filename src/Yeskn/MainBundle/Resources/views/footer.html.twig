@@ -34,8 +34,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div>
-                    会员在线{{ siteState.onlineUserCount }}人，
-                    游客<span id="onlineCnt">1</span>人，
+                    {{ 'member_oneline_count'|trans }}{{ siteState.onlineUserCount }}人，
+                    {{ 'visitor'|trans }}<span id="onlineCnt">1</span>{{ 'person'|trans }}，
                     {{ 'footer_oneline_user_most'|trans }}(无统计) 人
                 </div>
                 <div class="copy">{{ 'site_copyright'|trans|raw }}</div>

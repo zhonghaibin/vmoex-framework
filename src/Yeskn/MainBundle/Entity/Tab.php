@@ -59,12 +59,6 @@ class Tab
      */
     private $description;
 
-    /**
-     * @ORM\Column(name="avatar", type="string", length=200)
-     *
-     * @Assert\File()
-     */
-    private $avatar;
 
     /**
      * @ORM\OneToMany(targetEntity="Yeskn\MainBundle\Entity\Post", mappedBy="tab")
@@ -219,19 +213,4 @@ class Tab
         $this->description = $description;
     }
 
-    /**
-     * @return UploadedFile
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    /**
-     * @param mixed $avatar
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
-    }
 }

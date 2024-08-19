@@ -22,15 +22,12 @@
                         <div class="panel-body">
                             {% for stab in tabs %}
                                 {% if stab.level == 2 and stab.parent == tab %}
-                                    {% if stab.avatar %}
-                                        <div style="width: 100px;float: left;height: 150px;text-align: center; padding: 10px">
-                                            <img src="{{ stab.avatar }}" alt="" width="100%" class="img-circle">
+                                        <div style="float: left;text-align: center; margin-right: 10px;margin-bottom: 10px;border: 1px solid #e3e3e3;padding: 2px 6px;border-radius: 4px;">
                                             <a data-pjax class="tabs-item-button" href="{{ path('homepage', {tab:stab.alias}) }}" role="button">
                                                 {{ stab.name|trans }}
                                             </a>
                                         </div>
 
-                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </div>

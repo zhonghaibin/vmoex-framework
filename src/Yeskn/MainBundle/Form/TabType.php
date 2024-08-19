@@ -24,8 +24,7 @@ class TabType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var Tab $entity */
-        $entity = $builder->getData();
+
 
         $builder->add('level', ChoiceType::class, [
             'label' => '层级',
@@ -57,13 +56,6 @@ class TabType extends AbstractType
         ]);
 
         $builder->add('description', TextareaType::class, ['label' => '描述']);
-
-        $builder->add(
-            $builder->create('avatar', ImageInputType::class, [
-                'label' => '板块标志',
-                'required' => $entity->getAvatar() ? false : true
-            ])
-        );
 
     }
 

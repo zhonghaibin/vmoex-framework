@@ -130,7 +130,7 @@ action_too_fast: 好可怕，速度太快了
 banner_announce: 歡迎您來到Vmoex，這裡是一個二次元交流社區，很期待你成為這裡的一員！
 all: 全部
 hot: 熱門
-site_state: dddd
+site_state: 社區運行狀態
 site_since: 社區成立時間
 site_post_count: 主題數量
 site_comment_count: 回復數量
@@ -185,3 +185,17 @@ cant_modify_current_user_in_admin: null
 hours: 小時
 access_denied: 访问被拒绝
 'locale invalid': null
+历史公告: 歷史公告
+服务条款: 服務條款
+支持: null
+关于Vmoex : 關於Vmoex
+member_oneline_count : 會員在線
+visitor : 遊客
+person : 人
+其他 : null
+电影 : 電影
+番剧 : 番劇
+灌水 : 灌水
+更多 : 更多
+最新发布 : 最新發佈
+最新评论 : 最新評論

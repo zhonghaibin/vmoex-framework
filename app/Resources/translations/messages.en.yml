@@ -94,7 +94,7 @@ documents: Documents
 support: Support
 添加: null
 请先登录: null
-Vmoex当前板块数量: null
+Vmoex当前板块数量: Current Number of Sections on Vmoex
 nav_messages: 'Check all private letters'
 nav_new_fans: 'A new fan'
 nav_all_notifications: 'View all notices'
@@ -130,7 +130,7 @@ action_too_fast: 'Terrible. It''s too fast.'
 banner_announce: 'Welcome to Vmoex, this is a secondary exchange community, I look forward to your becoming a member here!'
 all: whole
 hot: Hot
-site_state: dsds
+site_state: 'Community Operational Status'
 site_since: 'Community establishment time'
 site_post_count: 'Number of topics'
 site_comment_count: 'Reply quantity'
@@ -185,3 +185,17 @@ cant_modify_current_user_in_admin: 'cant modify current user in admin'
 hours: h
 access_denied: 'access denied'
 'locale invalid': 'locale invalid'
+历史公告: Historical Announcements
+服务条款: Terms of Service
+支持: Support
+关于Vmoex : About Vmoex
+member_oneline_count : Member Online
+visitor : Visitor
+person : person
+其他 : other
+电影 : Movie
+番剧 : Anime Series
+灌水 : Spam
+更多 : more
+最新发布 : Latest Posts
+最新评论 : Latest Comments

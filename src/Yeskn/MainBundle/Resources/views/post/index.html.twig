@@ -5,12 +5,7 @@
         {% if currentTab and currentTab.level == 2 %}
             <div class="tab-header">
                <div class="row">
-                   <div class="col-md-2">
-                       <div class="tab-avatar">
-                           <img class=" img-rounded" src="{{ asset(currentTab.avatar) }}" alt="">
-                       </div>
-                   </div>
-                   <div class="col-md-10">
+                   <div class="col-md-12">
                        <div class="tab-info">
                            <b>
                                <a href="{{ path('homepage') }}">{{ 'site_name'|trans }}</a>
@@ -25,6 +20,7 @@
                </div>
             </div>
         {% else %}
+
             <div class="tab-list">
                 <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('post_list', {tab: 'all'}) }}">{{ 'all'|trans }}</a>
                 <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('post_list', {tab: 'hot'}) }}">{{ 'hot'|trans }}</a>
@@ -38,8 +34,8 @@
 
                 <div class="pull-right visible-lg panel-sort-btns">
                     <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">最新发布</a>
-                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">最新评论</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">{{ '最新发布'|trans }}</a>
+                        <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'com'}) }}" class="btn btn-default {% if sortBy == 'com' %}current{% endif %}">{{ '最新评论'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -78,16 +74,16 @@
                             </p>
                         </div>
                     </div>
-                    {#{% if post.tags is not empty %}#}
-                    {#<div style="position: relative;bottom:-10px">#}
-                    {#<p>#}
-                    {#<i class="fa  fa-tags item-tag"></i>#}
-                    {#{% for tag in post.tags %}#}
-                    {#<span class="item-tag"> {{ tag.name }} </span>#}
-                    {#{% endfor %}#}
-                    {#</p>#}
-                    {#</div>#}
-                    {#{% endif %}#}
+                    {% if post.tags is not empty %}
+                    <div style="position: relative;bottom:-10px">
+                    <p>
+                    <i class="fa  fa-tags item-tag"></i>
+                    {% for tag in post.tags %}
+                    <span class="item-tag"> {{ tag.name }} </span>
+                    {% endfor %}
+                    </p>
+                    </div>
+                    {% endif %}
                 </article>
             {% endfor %}
             <ul class="pagination">
