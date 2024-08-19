@@ -32,14 +32,6 @@
             <div class="post-content">
                 {{ post.content|markdown|raw }}
             </div>
-            <div class="post-tags">
-                {% if post.tags is not empty %}
-                    <i class="fa  fa-tags item-tag"></i>
-                    {% for tag in post.tags %}
-                        <span class="item-tag"> {{ tag.name }} </span>
-                    {% endfor %}
-                {% endif %}
-            </div>
         </div>
         {#<div class="post-actions border-bottom">#}
         {#<span><a href="">收藏</a></span>#}

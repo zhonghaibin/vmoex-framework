@@ -54,17 +54,6 @@ class Post
      */
     private $author;
 
-    /**
-     * @var
-     * @ORM\ManyToMany(targetEntity="Yeskn\MainBundle\Entity\Tag", inversedBy="posts")
-     */
-    private $tags;
-
-    /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Category", inversedBy="posts")
-     */
-    private $category;
 
     /**
      * @var
@@ -78,13 +67,6 @@ class Post
      */
     private $views = 1;
 
-    /**
-     * @var string
-     * @ORM\Column(name="cover", type="string", length=100, nullable=true)
-     *
-     * @Assert\File()
-     */
-    private $cover = '';
 
     /**
      * @var \DateTime
@@ -135,7 +117,7 @@ class Post
      */
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+
         $this->comments = new ArrayCollection();
     }
 
@@ -342,55 +324,6 @@ class Post
         return $this->status;
     }
 
-    /**
-     * Add tag
-     *
-     * @param \Yeskn\MainBundle\Entity\Tag $tag
-     *
-     * @return Post
-     */
-    public function addTag(Tag $tag)
-    {
-        $this->tags[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \Yeskn\MainBundle\Entity\Tag $tag
-     */
-    public function removeTag(Tag $tag)
-    {
-        $this->tags->removeElement($tag);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param Category $category
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
 
     /**
      * Add Comment
@@ -423,29 +356,6 @@ class Post
         return $this->comments;
     }
 
-    /**
-     * Set cover
-     *
-     * @param string $cover
-     *
-     * @return Post
-     */
-    public function setCover($cover)
-    {
-        $this->cover = $cover;
-
-        return $this;
-    }
-
-    /**
-     * Get cover
-     *
-     * @return string
-     */
-    public function getCover()
-    {
-        return $this->cover;
-    }
 
     /**
      * Set views

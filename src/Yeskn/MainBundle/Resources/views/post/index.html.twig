@@ -74,16 +74,6 @@
                             </p>
                         </div>
                     </div>
-                    {% if post.tags is not empty %}
-                    <div style="position: relative;bottom:-10px">
-                    <p>
-                    <i class="fa  fa-tags item-tag"></i>
-                    {% for tag in post.tags %}
-                    <span class="item-tag"> {{ tag.name }} </span>
-                    {% endfor %}
-                    </p>
-                    </div>
-                    {% endif %}
                 </article>
             {% endfor %}
             <ul class="pagination">
