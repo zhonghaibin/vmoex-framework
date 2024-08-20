@@ -45,10 +45,6 @@ class OptionsBasic extends AbstractType
 
         $builder->add('baiduTransAppId', null, ['label' => '百度翻译AppId']);
         $builder->add('baiduTransKey', null, ['label' => '百度翻译Key']);
-        $builder->add('maxOnlineNum', IntegerType::class, [
-            'label' => '最高在线人数',
-            'required' => true,
-        ]);
         $builder->add('siteAnnounce', CheckboxType::class, [
             'label' => '开启公告',
             'required' => false,

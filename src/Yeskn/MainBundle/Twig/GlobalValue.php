@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -41,6 +42,8 @@ class GlobalValue extends AbstractExtension
 
     private $socketHost;
 
+    private $varDir;
+
     /**
      * GlobalValue constructor.
      * @param EntityManagerInterface $em
@@ -54,6 +57,7 @@ class GlobalValue extends AbstractExtension
         TranslatorInterface $translator,
         RouterInterface $router,
         TokenStorageInterface $tokenStorage,
+        KernelInterface $kernel,
         $socketHost
     )
     {
@@ -62,6 +66,7 @@ class GlobalValue extends AbstractExtension
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
         $this->socketHost = $socketHost;
+        $this->varDir = rtrim( $kernel->getProjectDir(), '/') . '/var';
     }
 
     /**
@@ -189,13 +194,19 @@ class GlobalValue extends AbstractExtension
                 'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),
                 'onlineUserCount' => $this->em->getRepository('YesknMainBundle:Active')->countOnlineUser(),
                 'footerLinks' => $this->em->getRepository('YesknMainBundle:FooterLink')->findBy([], ['priority' => 'DESC']),
-                'maxOnlineNum' => $this->em->getRepository('YesknMainBundle:Options')->maxOnlineNum()
+                'maxOnlineNum' =>$this->loadMaxOnlineCount()
             ];
         }
 
         return $site;
     }
-
+    function loadMaxOnlineCount() {
+        $file = $this->varDir . '/max_online_count';
+        if (file_exists($file)) {
+            return (int) file_get_contents($file);
+        }
+        return 0;
+    }
     public function avatar(array $user)
     {
         if (empty($user['avatar']) && !empty($user['username'])) {

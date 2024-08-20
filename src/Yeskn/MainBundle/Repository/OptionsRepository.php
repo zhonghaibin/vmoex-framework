@@ -16,18 +16,5 @@ class OptionsRepository extends EntityRepository
 {
     use RepositoryTrait;
 
-    public function maxOnlineNum()
-    {
-        try {
-            return (int) $value = $this->createQueryBuilder('p')
-                ->select('p.value')  // 确保选择的是 'p.value' 而不是 'value'
-                ->where('p.name = :name')  // 使用参数化查询
-                ->setParameter('name', 'maxOnlineNum')  // 绑定参数
-                ->getQuery()
-                ->getSingleScalarResult();
-        } catch (NoResultException $exception) {
-            return 0;
-        }
 
-    }
 }
