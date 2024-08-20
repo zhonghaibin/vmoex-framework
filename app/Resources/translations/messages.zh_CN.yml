@@ -39,7 +39,6 @@ today.activity: 今日活跃度
 'continuous_signed count day': 已连续签到count天
 create_new_topic: 创建新主题
 activity: 活跃度
-wpcast_available_with: 'Wpcast 可用于: '
 用户名: 用户名
 邮箱: 邮箱
 密码: 密码
@@ -80,7 +79,7 @@ buy_beer: null
 我的主页: null
 个人设置: null
 添加新的评论: null
-发表有颜色的评论将消耗5金币哦: null
+发表有颜色的评论: 发表有颜色的评论将消耗1金币哦
 好可怕，速度太快了: null
 关于作者: null
 拉黑: null
@@ -94,7 +93,7 @@ buy_beer: null
 个新的粉丝: null
 赞: null
 什么是瞎聊: null
-blind_description: 随便聊聊。
+blind_description: “聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。
 社区运行状态: null
 社区成立时间: null
 主题数量: null
@@ -135,15 +134,12 @@ site_since: 社区成立时间
 site_post_count: 主题数量
 site_comment_count: 回复数量
 site_user_count: 注册用户数量
-site_copyright: "@2018 \tVmoex - 打造最美好的二次元社区"
+site_copyright: "@2024 Vmoex - 打造最美好的二次元社区"
 site_title: 'Vmoex - 打造最美好的二次元社区'
 site_name: Vmoex
+site_domain: 'http://vmoex.com'
 user_place_in_site: 第count位Vmoex用户
 footer_available_with: '可用于: '
-yingwe: sdsd
-sds: dsd
-kdssd: dsd
-dsdsd: sdsdsdsd
 user_my_messages: 我的私信
 user_my_received_messages: 我接收的
 user_my_sent_messages: 我发出的

@@ -50,7 +50,7 @@
             <b>{{ 'comment'|trans|upper }}</b>
 
             <div class="btn-group pull-right text-small-gray">
-                <a href="#comment-box">{{ 'post_add_comment'|trans }}</a>
+{#                <a href="#comment-box">{{ 'post_add_comment'|trans }}</a>#}
             </div>
         </div>
         {% if post.comments is not empty %}
@@ -84,8 +84,7 @@
                                           <i class="fa fa-thumbs{{ open }}-up {{ hasThumb ? 'text-success' : '' }}"></i>
                                         </b>
                                         <b class="thumb-count">{{ comment.thumbUpUsers.count ?: '赞'|trans }}</b>
-                                    </span>
-
+                                    </spa
                                 <span class="snow">·</span>
 
                                 <span data-toggle="tooltip" title="{{ comment.createdAt|date }}"><i class="fa fa-clock-o"></i> {{ comment.createdAt|ago }}</span>
@@ -100,7 +99,9 @@
             <p>{{ 'post_no_comment'|trans }}~~</p>
         {% endif %}
     </div>
-
+    <div class="alert alert-warning" role="alert">
+        <i class="fa fa-question-circle"></i> {{ '发表有颜色的评论'|trans }}
+    </div>
     <div class="panel panel-default comment-box" id="comment-box">
         <div class="form-group">
             <label class="control-label required" for="editor-trigger">{{ 'post_add_comment'|trans }}</label>
@@ -115,6 +116,7 @@
                 <div style="background-color: rgb(127, 140, 141)"></div>
             </div>
         </div>
+
         <div class="form-group">
             {% if app.user %}
                 <button type="button" data-postId="{{ post.id }}" id="addCommentToPost" class="btn btn-info btn-sm">{{ '添加'|trans }}</button>
@@ -139,18 +141,19 @@
 
                 let replayU = $(this).attr('data-atu');
                 let $editor = $('#editor-comment');
-                let comment = $editor.val();
-                let lastChar = comment.charAt(comment.length -1);
+                let comment = $editor.html(); // 使用 html() 方法获取内容
+                let lastChar = comment.charAt(comment.length - 1);
 
                 if (lastChar.length === 0 || lastChar === ' ' || lastChar === "\n") {
-                    $editor.val(comment + '@' + replayU + ' ');
+                    $editor.html(comment + '@' + replayU + '&nbsp'); // 使用 html() 方法设置内容
                 } else {
-                    $editor.val(comment + ' @' + replayU + ' ');
+                    $editor.html(comment + ' @' + replayU + '&nbsp');
                 }
 
                 setEndOfContenteditable(document.getElementById('editor-comment'));
-            })
-        })
+            });
+        });
+
     </script>
 {% endblock %}
 

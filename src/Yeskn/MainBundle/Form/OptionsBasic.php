@@ -11,6 +11,7 @@ namespace Yeskn\MainBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Yeskn\MainBundle\Form\Type\DatetimeRangeType;
@@ -44,7 +45,10 @@ class OptionsBasic extends AbstractType
 
         $builder->add('baiduTransAppId', null, ['label' => '百度翻译AppId']);
         $builder->add('baiduTransKey', null, ['label' => '百度翻译Key']);
-
+        $builder->add('maxOnlineNum', IntegerType::class, [
+            'label' => '最高在线人数',
+            'required' => true,
+        ]);
         $builder->add('siteAnnounce', CheckboxType::class, [
             'label' => '开启公告',
             'required' => false,

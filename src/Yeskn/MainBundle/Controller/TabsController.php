@@ -33,6 +33,7 @@ class TabsController extends Controller
         $count = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->createQueryBuilder('p')
             ->select('COUNT(p)')
+            ->where('p.level=2')
             ->getQuery()
             ->getSingleScalarResult();
 

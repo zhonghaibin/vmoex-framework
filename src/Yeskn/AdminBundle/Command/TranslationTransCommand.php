@@ -45,7 +45,7 @@ class TranslationTransCommand extends AbstractCommand
 
         $this->baiduId = $this->getOption('baiduTransAppId');
         $this->baiduKey = $this->getOption('baiduTransKey');
-
+        $this->maxOnlineNum = $this->getOption('maxOnlineNum');
         foreach ($trans as $tran) {
             if (empty($tran->getChinese())) {
                 continue;

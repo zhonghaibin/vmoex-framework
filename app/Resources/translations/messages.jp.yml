@@ -26,7 +26,7 @@ about: について
 messages: 私信
 notifications: 通知する
 trends: 傾向
-blind.chat: 聊聊
+blind.chat: 雑談
 板块: のプレート
 Vmoex当前板块数量: Vmex現在のプレートの数
 hello_stranger: こんにちは、知らない人
@@ -39,7 +39,6 @@ activity: 活発度
 create_new_topic: 新しいテーマを作成
 today.activity: 今日活躍度
 'continuous_signed count day': 已連續簽到count天
-wpcast_available_with: Wpcast可用於：
 全部: すべて
 热门: 人気
 福利: 福祉
@@ -61,7 +60,7 @@ buy_beer: 虹の恋にビールを飲
 个人设置: 個人設定
 verify_email: 'あなたのメールはまだ活性化されていません。<a href="javascript:" class="alert-link">ここでアクティブにする</a>'
 添加新的评论: 新しいコメントを追加
-发表有颜色的评论将消耗5金币哦: 色のコメントを発表すると5金貨が消費されますよ
+发表有颜色的评论: カラーコメントを投稿すると、1コインが消費されます。
 好可怕，速度太快了: 怖い、スピードが速い
 关于作者: 作者
 拉黑: ラブラック
@@ -135,15 +134,12 @@ site_since: コミュニティの成立時間
 site_post_count: テーマの数
 site_comment_count: 回答数
 site_user_count: 登録ユーザーの数
-site_copyright: '@ 2018 Vmex -最高の二次元コミュニティを作る'
-site_title: 'Vmex -最高の二次元コミュニティを作る'
+site_copyright: '@2024 Vmoex -最高の二次元コミュニティを作る'
+site_title: 'Vmoex -最高の二次元コミュニティを作る'
 site_name: Vmoex
+site_domain: null
 user_place_in_site: Cunt位Wpcrftユーザー
 footer_available_with: 使用可能：
-yingwe: sdsd
-sds: dsd
-kdssd: dsd
-dsdsd: sdsdsdsd
 user_my_messages: 私の私信
 user_my_received_messages: 私が受け取った
 user_my_sent_messages: 私が出したのは

@@ -36,7 +36,7 @@
                 <div>
                     {{ 'member_oneline_count'|trans }}{{ siteState.onlineUserCount }}人，
                     {{ 'visitor'|trans }}<span id="onlineCnt">1</span>{{ 'person'|trans }}，
-                    {{ 'footer_oneline_user_most'|trans }}(无统计) 人
+                    {{ 'footer_oneline_user_most'|trans }}{{ siteState.maxOnlineNum }}人
                 </div>
                 <div class="copy">{{ 'site_copyright'|trans|raw }}</div>
             </div>
@@ -45,9 +45,7 @@
         {% set ads = adsWidget() %}
         {% for ad in ads if ad.location == 'footer1' %}
             <div class="visible-lg footer-ad-img" style="position: absolute; right: 0; top: 0;">
-                <a target="_blank" href="https://www.vultr.com/?ref=7228942">
-                    <img width="210px" src="{{ asset('assets/images/ad/vultr.png') }}" alt="">
-                </a>
+                {{ ad.content|raw }}
             </div>
         {% endfor %}
     </div>

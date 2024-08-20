@@ -103,3 +103,8 @@ EXPOSE 3110 3120
 # php bin/console assetic:dump --env=prod
 #启动websocket
 # php bin/push-service.php start -d
+
+#php bin/console doctrine:cache:clear-metadata
+#php bin/console doctrine:cache:clear-query
+#php bin/console doctrine:cache:clear-result
+#php bin/console cache:clear

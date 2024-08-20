@@ -124,7 +124,6 @@ class CommentController extends AbstractController
 
         $content = $parsedContent = $markdown->transformMarkdown($content);
         $content = preg_replace('/<p>(.*?)<\/p>/', '$1', $content);// 不需要markdown为我添加p标签！！！
-
         foreach ($mentioned as $item) {
             $username = trim($item, '@ ');
 

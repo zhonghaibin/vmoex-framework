@@ -133,7 +133,6 @@ class PostController extends Controller
         $post->setAuthor($this->getUser());
         $post->setIsDeleted(false);
         $post->setSummary('');
-        $post->setCover('');
         $post->setTab($tab);
         $post->setStatus('published');
 

@@ -188,8 +188,8 @@ class GlobalValue extends AbstractExtension
                 'userCount' => $this->em->getRepository('YesknMainBundle:User')->countUser(),
                 'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),
                 'onlineUserCount' => $this->em->getRepository('YesknMainBundle:Active')->countOnlineUser(),
-                'footerLinks' => $this->em->getRepository('YesknMainBundle:FooterLink')
-                    ->findBy([], ['priority' => 'DESC'])
+                'footerLinks' => $this->em->getRepository('YesknMainBundle:FooterLink')->findBy([], ['priority' => 'DESC']),
+                'maxOnlineNum' => $this->em->getRepository('YesknMainBundle:Options')->maxOnlineNum()
             ];
         }
 

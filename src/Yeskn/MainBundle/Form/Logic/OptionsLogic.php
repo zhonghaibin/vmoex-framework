@@ -36,6 +36,7 @@ class OptionsLogic
         'githubRedirectUrl',
         'baiduTransAppId',
         'baiduTransKey',
+        'maxOnlineNum'
     ];
 
     private $girlOptions = [

@@ -7,8 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Yeskn\AdminBundle\CrudEvent\ProcessEditPostEvent;
-use Yeskn\AdminBundle\CrudEvent\StartEditPostEvent;
 use Yeskn\MainBundle\Entity\Post;
 
 /**
@@ -41,7 +39,7 @@ class PostController extends Controller
             $entityManager->persist($post);
             $entityManager->flush();
 
-            $this->addFlash('success', '创建文章成功');
+            $this->addFlash('success', '创建帖子成功');
             return $this->redirectToRoute('admin_list', ['entity' => 'post']);
         }
 
@@ -61,26 +59,22 @@ class PostController extends Controller
     {
         $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
             ->find($request->get('id'));
-
-        $this->get(StartEditPostEvent::class)->setEntity($post)->execute();
-
+        
         $form = $this->createForm('Yeskn\MainBundle\Form\PostType', $post);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $this->get(ProcessEditPostEvent::class)->setEntity($post)->execute();
-
+            
             $post->setUpdatedAt(new \DateTime());
 
             $entityManager->flush();
 
-            $this->addFlash('success', '编辑文章成功');
+            $this->addFlash('success', '编辑帖子成功');
             return $this->redirectToRoute('admin_list', ['entity' => 'post']);
         }
 
         return $this->render('@YesknAdmin/post/create.html.twig', [
-            'title' => '编辑文章',
+            'title' => '编辑帖子',
             'post' => $post,
             'form' => $form->createView(),
         ]);
