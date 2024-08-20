@@ -304,7 +304,7 @@ class UserController extends AbstractController
             ->setTo($email)
             ->setBody(
                 $this->renderView('emails/verify-email.html.twig', [
-                    'code' => $code
+                    'code' => $code,
                 ]), 'text/html'
             );
 

@@ -99,9 +99,6 @@
             <p>{{ 'post_no_comment'|trans }}~~</p>
         {% endif %}
     </div>
-    <div class="alert alert-warning" role="alert">
-        <i class="fa fa-question-circle"></i> {{ '发表有颜色的评论'|trans }}
-    </div>
     <div class="panel panel-default comment-box" id="comment-box">
         <div class="form-group">
             <label class="control-label required" for="editor-trigger">{{ 'post_add_comment'|trans }}</label>
@@ -115,6 +112,7 @@
                 <div style="background-color: rgb(192, 57, 43)"></div>
                 <div style="background-color: rgb(127, 140, 141)"></div>
             </div>
+            <i class="fa fa-question-circle"></i> {{ '发表有颜色的评论'|trans }}
         </div>
 
         <div class="form-group">
