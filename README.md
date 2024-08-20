@@ -26,20 +26,64 @@ vmoex是一个开源的二次元社区程序，同时也是一个多用户多角
 ![](web/assets/images/vmoex-home.png)
 
 ## 安装
+```
+mkdir vmoex-framework
+```
+```
+cd vmoex-framework
+```
+### 启动容器
+```
+docker run -d -p 3110:3110 -p 3120:3120 -p 3121:3121 --name vmoex  -v $(pwd):/var/www zhonghaibin/vmoex-framework
+```
+3110是web端口，3120是websocket端口
+### 进入容器
+```
+docker exec -it vmoex   bash
+```
+### 填写数据库和reids等等配置信息
+```
+vi /var/www/app/config/parameters.yml
+```
+### 导入数据库
+```
+php bin/console doctrine:database:init
+```
+### 载入翻译数据
+```
+php bin/console translation:persist
+```
+### 修改管理员密码
+```
+ php bin/console doctrine:schema:update --force 
+```
+```
+ php bin/console change-password -u admin -p [password]
+```
+### 清理缓存
+```
+ php bin/console cache:clear --env=prod
+```
+### 创建静态资源文件
+```
+ php bin/console assetic:dump --env=prod
+```
+## 现在请通过 http://127.0.0.1:3110 进行访问
 
-[安装文档请戳我](https://vmoex-docs.yeskn.com)
-
-## 疗效
-
-[戳我见效果](https://vmoex.yeskn.com/)
-
-## 依赖
-
-- PHP   7.2+
-- MySQL 5.7+
-- Node  6.14+
-- Yarn  1.7+
-- Redis 3.2+
+### 重启websocket
+```
+ php bin/push-service.php restart -d
+```
+### 其他命令
+```angular2html
+php bin/console doctrine:cache:clear-metadata
+```
+```angular2html
+php bin/console doctrine:cache:clear-metadata
+```
+```angular2html
+php bin/console doctrine:cache:clear-result
+```
 
 ## 功能
 

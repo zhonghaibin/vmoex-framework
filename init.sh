@@ -7,11 +7,8 @@ TARGET_DIR="/var/www"
 
 if [ -z "$(ls -A $TARGET_DIR)" ]; then
   echo "正在初始化应用程序"
-  echo "大概要十分钟,请耐心等待"
     mv /var/app/* /var/www
     rm -Rf /var/app
-
-  echo "感谢你的耐心等待"
   echo "初始化应用程序已完成"
   # 创建符号链接
   ln -s /var/www/node_modules/jquery.caret /var/www/web/assets/lib/Caret.js
