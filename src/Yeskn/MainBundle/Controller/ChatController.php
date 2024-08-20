@@ -108,7 +108,10 @@ class ChatController extends Controller
 
         $this->get('socket.push')->pushAll('new_chat', [
             'username' => $user->getNickname(),
-            'content' => $chat->getContent()
+            'nickname' => $user->getNickname(),
+            'avatar' => $user->getAvatar(),
+            'content' => $chat->getContent(),
+            'from' =>$user->getUsername() // 或者 $user->getUsername()
         ]);
 
         return new ApiOk();

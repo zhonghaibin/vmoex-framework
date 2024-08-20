@@ -101,6 +101,38 @@ function handleNewFollower(data) {
 function handleNewChat(data) {
     success(data.username + '：' + data.content);
     $('.nav-chat-dot').addClass('push-notifications-count');
+    var chatBox = $('#chat-box ul.chat');
+    var loc ='left';
+    var chatItem = `
+            <li class="${loc} clearfix">
+                <span class="chat-img pull-${loc}">
+                    <img style="border-radius: 5px" width="50" height="50" src="${data.avatar}" alt="User Avatar">
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        ${loc === 'right' ? `
+                            <small class="text-muted">
+                                <i class="fa fa-clock-o fa-fw"></i> 刚刚
+                            </small>
+                            <strong class="pull-right primary-font"><a href="/member/${data.username}">${data.nickname}</a></strong>
+                        ` : `
+                            <strong class="primary-font"><a href="/member/${data.username}">${data.nickname}</a></strong>
+                            <small class="pull-right text-muted">
+                                <i class="fa fa-clock-o fa-fw"></i> 刚刚
+                            </small>
+                        `}
+                    </div>
+                    <p class="pull-${loc}" style="margin-top: 5px">${data.content}</p>
+                </div>
+            </li>
+        `;
+
+    // 将新消息添加到聊天列表中
+    chatBox.append(chatItem);
+
+    // 自动滚动到底部
+    var elem = document.getElementById('chat-box');
+    elem.scrollTop = elem.scrollHeight;
 }
 
 function handleCreateBlogEvent(data) {
