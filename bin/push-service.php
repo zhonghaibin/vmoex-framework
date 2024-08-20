@@ -13,7 +13,7 @@ $uidConnectionMap = array();
 
 $last_online_count = 0; // 上次在线用户数
 $last_online_page_count = 0; // 上次在线页面数
-$max_online_count = 0;
+$max_online_count = loadMaxOnlineCount();
 
 $socketPort = 3120; // Socket.IO服务监听的默认端口
 $socketPushPort = 3121; // HTTP推送服务监听的默认端口
@@ -173,7 +173,7 @@ $sender_io->on('workerStart', function () {
 
         $online_count_now = count($uidConnectionMap); // 当前在线用户数
         $online_page_count_now = array_sum($uidConnectionMap); // 当前在线页面数
-
+        $max_online_count=loadMaxOnlineCount();
         // 检查是否需要更新历史最大在线人数
         if ($online_count_now > $max_online_count) {
             $max_online_count = $online_count_now;
@@ -210,6 +210,14 @@ $sender_io->on('workerStart', function () {
 function saveMaxOnlineCount($count) {
     $file = __DIR__ . '/../var/max_online_count';
     file_put_contents($file, $count);
+}
+
+function loadMaxOnlineCount() {
+    $file = __DIR__ . '/../var/max_online_count';
+    if (file_exists($file)) {
+        return (int) file_get_contents($file);
+    }
+    return 0;
 }
 
 // 如果没有定义GLOBAL_START，启动所有Worker
