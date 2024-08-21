@@ -955,7 +955,7 @@ INSERT INTO `translation` VALUES (29, 'messages', '私信', 'Msg', '私信', '�
 INSERT INTO `translation` VALUES (30, 'notifications', '通知', 'Notice', '通知する', '通知', 1);
 INSERT INTO `translation` VALUES (31, 'comment', '评论', ' comment', '評論', '評論', 1);
 INSERT INTO `translation` VALUES (32, 'hello_stranger', ' 您好，陌生人！', 'Hello, Stranger !', 'こんにちは、知らない人', '你好，陌生人', 1);
-INSERT INTO `translation` VALUES (33, 'hello_stranger_detail', '如果你喜欢Vmoex，请记得注册或者保存网址哦~', 'If you like Vmoex, please remember to register or save the website.', 'もしあなたがVmexが好きなら、登録や保存サイトを覚えてください。', '如果你喜歡Vmoex，請記得注册或者保存網址哦~', 1);
+INSERT INTO `translation` VALUES (33, 'hello_stranger_detail', '如果你喜欢Vmoex，请记得注册或者保存网址哦~', 'If you like Vmoex, please remember to register or save the website.', 'もしあなたがVmoexが好きなら、登録や保存サイトを覚えてください。', '如果你喜歡Vmoex，請記得注册或者保存網址哦~', 1);
 INSERT INTO `translation` VALUES (34, 'my.status', '我的状态', 'My Status', '私の状態', '我的狀態', 1);
 INSERT INTO `translation` VALUES (35, 'hot.users', '活跃用户', 'Activist Users', '活躍するユーザー', '活躍用戶', 1);
 INSERT INTO `translation` VALUES (36, 'today.hot.topics', '热门文档', 'Hot Topics Today', '本日の活躍', '今日熱門話題', 1);
@@ -971,7 +971,7 @@ INSERT INTO `translation` VALUES (45, '密码', '密码', 'Password', 'パスワ
 INSERT INTO `translation` VALUES (46, 'verify_email', '你的邮箱尚未激活，<a data-pjax href=\"/user/setting#emailSetting\" class=\"alert-link\">点此激活</a>', 'Your Email is not activated，<a href=\"javascript:\" class=\"alert-link\">Click to Activate</a>', 'あなたのメールはまだ活性化されていません。<a href=\"javascript:\" class=\"alert-link\">ここでアクティブにする</a>', '你的郵箱尚未啟動，<a href=\"javascript:\" class=\"alert-link\">點此啟動</a>', 1);
 INSERT INTO `translation` VALUES (47, '在线可撩', '在线可撩', 'online', '線上可撩', '線上可撩', 1);
 INSERT INTO `translation` VALUES (48, '加入于', '加入于', 'joined at ', 'に加える', '加入於', 1);
-INSERT INTO `translation` VALUES (49, '第count位Vmoex用户', '第count位Vmoex用户', 'the count\'st Vmoex member', 'count位Vmexユーザー', '第count比特Vmoex用戶', 1);
+INSERT INTO `translation` VALUES (49, '第count位Vmoex用户', '第count位Vmoex用户', 'the count\'st Vmoex member', 'count位Vmoexユーザー', '第count比特Vmoex用戶', 1);
 INSERT INTO `translation` VALUES (50, '最后在线时间：time', '最后在线时间：time', 'last online time：time', '最後のオンライン時間：time', '最後線上時間：time', 1);
 INSERT INTO `translation` VALUES (51, 'name发布的帖子', 'name发布的帖子', 'name\'s topics', 'nameの招待状', 'name發佈的帖子', 1);
 INSERT INTO `translation` VALUES (52, 'name的回复', 'name的回复', 'name\' comments', 'nameの返事', 'name的回復', 1);
@@ -984,7 +984,7 @@ INSERT INTO `translation` VALUES (58, 'support', '支持', 'Support', 'Support',
 INSERT INTO `translation` VALUES (59, 'vmoex_slogan', NULL, 'Build the best two yuan community', '最も美しい2次元のコミュニティを作ります', '打造最美好的二次元社區', 1);
 INSERT INTO `translation` VALUES (60, 'vmoex_description', NULL, 'Vmoex is inspired by the V2EX creative workers community, and most of the V2EX is the Internet/IT topic, so Vmoex hopes for anime, two, and Opera (and Meng\'s [w Omega]) enthusiasts to join, share, discover, and create more beauty in life.', NULL, NULL, 1);
 INSERT INTO `translation` VALUES (61, '刷新', NULL, 'refresh', NULL, NULL, 1);
-INSERT INTO `translation` VALUES (62, 'banner.copyright', NULL, 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.', 'このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。', '本網站的內容可能侵犯了您的權益，當前Vmoex使用您的文章（或者圖片等）僅用於測試真實上線情况，如您不允許，請致郵：support@vmoex.com。', 1);
+INSERT INTO `translation` VALUES (62, 'banner.copyright', NULL, 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.', 'このウェブサイトの内容はあなたの権益を侵害した可能性がありますが、現在Vmoexがあなたの文章（または画像など）を使用して、真実の上線の状況をテストするために使用されます。', '本網站的內容可能侵犯了您的權益，當前Vmoex使用您的文章（或者圖片等）僅用於測試真實上線情况，如您不允許，請致郵：support@vmoex.com。', 1);
 INSERT INTO `translation` VALUES (63, 'trends_description', NULL, 'This section is used to display the user, plate or theme you are interested in, and this function is being developed.', 'このプレートは、あなたが注目しているユーザー、プレート、またはテーマを展示するために使用されています。', NULL, 1);
 INSERT INTO `translation` VALUES (64, '板块', NULL, 'Tabs', 'のプレート', '板塊', 1);
 INSERT INTO `translation` VALUES (65, '当前在线count人', NULL, 'Current Online count Users', 'count人のオンラインオンライン', '當前線上count人', 1);
@@ -1019,7 +1019,7 @@ INSERT INTO `translation` VALUES (93, '支持我们', NULL, 'Support Us', '私�
 INSERT INTO `translation` VALUES (94, '个新的粉丝', NULL, ' new follower', '新しいファン', '個新的粉絲', 1);
 INSERT INTO `translation` VALUES (95, '赞', NULL, 'Like', '賛', '贊', 1);
 INSERT INTO `translation` VALUES (96, '什么是瞎聊', NULL, 'What\'s Blind Chat ?', NULL, '什麼是瞎聊', 1);
-INSERT INTO `translation` VALUES (97, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Blind Chat\" is an online chat function provided by the Vmoex community. Each sending a \"chatting\" will consume a gold coin.', '「雑談」は、Vmexコミュニティで提供されたオンライン即時チャットの機能であり、「雑談」を送るごとに金貨1枚が消費される。', '“瞎聊”是Vmoex社區提供的一個線上即時聊天的功能，每發送一條“瞎聊”將消耗一枚金幣', 1);
+INSERT INTO `translation` VALUES (97, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Blind Chat\" is an online chat function provided by the Vmoex community. Each sending a \"chatting\" will consume a gold coin.', '「雑談」は、Vmoexコミュニティで提供されたオンライン即時チャットの機能であり、「雑談」を送るごとに金貨1枚が消費される。', '“瞎聊”是Vmoex社區提供的一個線上即時聊天的功能，每發送一條“瞎聊”將消耗一枚金幣', 1);
 INSERT INTO `translation` VALUES (98, '社区运行状态', NULL, 'State of Vmoex', 'コミュニティの運行状態', '社區運行狀態', 1);
 INSERT INTO `translation` VALUES (99, '社区成立时间', NULL, 'Foundation at', 'コミュニティの成立時間', '社區成立時間', 1);
 INSERT INTO `translation` VALUES (100, '主题数量', NULL, 'Topic Count', 'テーマの数', '主題數量', 1);
@@ -1027,7 +1027,7 @@ INSERT INTO `translation` VALUES (101, '回复数量', NULL, 'Reply Count', '回
 INSERT INTO `translation` VALUES (102, '注册用户数量', NULL, 'Memember Count', '登録ユーザーの数', '註冊用戶數量', 1);
 INSERT INTO `translation` VALUES (103, '添加', NULL, NULL, '追加', NULL, 1);
 INSERT INTO `translation` VALUES (104, '请先登录', NULL, NULL, '先に登録してください', NULL, 1);
-INSERT INTO `translation` VALUES (105, 'Vmoex当前板块数量', NULL, 'Current Number of Sections on Vmoex', 'Vmex現在のプレートの数', 'Vmoex當前板塊數量', 1);
+INSERT INTO `translation` VALUES (105, 'Vmoex当前板块数量', NULL, 'Current Number of Sections on Vmoex', 'Vmoex現在のプレートの数', 'Vmoex當前板塊數量', 1);
 INSERT INTO `translation` VALUES (106, 'vmoex_available_with', NULL, NULL, '', 'Vmoex 可用於: ', 1);
 INSERT INTO `translation` VALUES (107, 'userhome_send_message', '发送私信', 'Send a private letter', '私信を送る', '發送私信', 1);
 INSERT INTO `translation` VALUES (108, 'userhome_has_followed', '已经关注', 'has followed', 'すでに注目している', '已經關注', 1);
@@ -1052,7 +1052,7 @@ INSERT INTO `translation` VALUES (126, 'notice_replied_you', '回复我的', 'Re
 INSERT INTO `translation` VALUES (127, 'post_top', '置顶', 'Top', '棚を置く', '置頂', 1);
 INSERT INTO `translation` VALUES (128, 'like', '赞', 'Fabulous', '称賛する', '贊', 1);
 INSERT INTO `translation` VALUES (129, 'action_too_fast', '好可怕，速度太快了', 'Terrible. It\'s too fast.', '怖い、スピードが速い', '好可怕，速度太快了', 1);
-INSERT INTO `translation` VALUES (130, 'banner_announce', '欢迎您来到Vmoex，这里是一个二次元交流社区，很期待你成为这里的一员！', 'Welcome to Vmoex, this is a secondary exchange community, I look forward to your becoming a member here!', 'Vmexへようこそ、ここは二次元交流コミュニティで、あなたがここの一員になるのを楽しみにしています！', '歡迎您來到Vmoex，這裡是一個二次元交流社區，很期待你成為這裡的一員！', 1);
+INSERT INTO `translation` VALUES (130, 'banner_announce', '欢迎您来到Vmoex，这里是一个二次元交流社区，很期待你成为这里的一员！', 'Welcome to Vmoex, this is a secondary exchange community, I look forward to your becoming a member here!', 'Vmoexへようこそ、ここは二次元交流コミュニティで、あなたがここの一員になるのを楽しみにしています！', '歡迎您來到Vmoex，這裡是一個二次元交流社區，很期待你成為這裡的一員！', 1);
 INSERT INTO `translation` VALUES (131, 'all', '全部', 'whole', 'すべて', '全部', 1);
 INSERT INTO `translation` VALUES (132, 'hot', '热门', 'Hot', '人気', '熱門', 1);
 INSERT INTO `translation` VALUES (133, 'site_state', '社区运行状态', 'Community Operational Status', 'コミュニティの運行状態', '社區運行狀態', 1);
@@ -1060,8 +1060,8 @@ INSERT INTO `translation` VALUES (134, 'site_since', '社区成立时间', 'Comm
 INSERT INTO `translation` VALUES (135, 'site_post_count', '主题数量', 'Number of topics', 'テーマの数', '主題數量', 1);
 INSERT INTO `translation` VALUES (136, 'site_comment_count', '回复数量', 'Reply quantity', '回答数', '回復數量', 1);
 INSERT INTO `translation` VALUES (137, 'site_user_count', '注册用户数量', 'Number of registered users', '登録ユーザーの数', '注册用户数量', 1);
-INSERT INTO `translation` VALUES (138, 'site_copyright', '@2024 Vmoex - 打造最美好的二次元社区', '@2024 Vmoex - Create the Best Secondary Community', '@2024 Vmoex -最高の二次元コミュニティを作る', '@2024 Vmoex -打造最美好的二次元社區', 1);
-INSERT INTO `translation` VALUES (139, 'site_title', 'Vmoex - 打造最美好的二次元社区', 'Vmoex - Create the Best Secondary Community', 'Vmoex -最高の二次元コミュニティを作る', 'Vmoex -打造最美好的二次元社區', 1);
+INSERT INTO `translation` VALUES (138, 'site_copyright', '@2024 Vmoex - 知识与兴趣聚集地', '@2024 Vmoex - Create the Best Secondary Community', '@2024 Vmoex -最高の二次元コミュニティを作る', '@2024 Vmoex -打造最美好的二次元社區', 1);
+INSERT INTO `translation` VALUES (139, 'site_title', 'Vmoex - 知识与兴趣聚集地', 'Vmoex - Create the Best Secondary Community', 'Vmoex -最高の二次元コミュニティを作る', 'Vmoex -打造最美好的二次元社區', 1);
 INSERT INTO `translation` VALUES (140, 'site_name', 'Vmoex', 'Vmoex', 'Vmoex', 'Vmoex', 1);
 INSERT INTO `translation` VALUES (141, 'user_place_in_site', '第count位Vmoex用户', 'the count\'st Vmoex member', 'Cunt位Wpcrftユーザー', '第count比特Vmoex用戶', 1);
 INSERT INTO `translation` VALUES (142, 'footer_available_with', '可用于: ', 'available with: ', '使用可能：', '可用於：', 1);
