@@ -119,7 +119,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     public function getTodayLoggedUserCount()
     {
         $count = $this->createQueryBuilder('p')
-            ->select('SUM(p.id)')
+            ->select('COUNT(p.id)')
             ->where('p.loginAt >= :today')
             ->setParameter('today', new \DateTime('today'))
             ->getQuery()
