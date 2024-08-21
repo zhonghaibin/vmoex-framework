@@ -32,14 +32,17 @@
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input checked id="remember_me" name="_remember_me" type="checkbox"> 记住登录状态
+                                            <input checked id="remember_me" name="_remember_me" type="checkbox">
+                                            {{ '记住登录状态'|trans  }}
                                         </label>
                                     </div>
                                     <input type="hidden" name="_target_path" value="/admin"/>
                                     <!-- Change this to a button or input when using this as a form -->
                                     <button type="submit" class="btn btn-lg btn-success btn-block">{{ 'login'|trans }}</button>
                                     <div class="form-group">
-                                    <a data-pjax href="{{ path('register') }}" class="checkbox">立即注册</a>
+                                    <a data-pjax href="{{ path('register') }}" class="checkbox">
+                                        {{ '立即注册'|trans  }}
+                                    </a>
                                     </div>
                                 </fieldset>
                             </form>

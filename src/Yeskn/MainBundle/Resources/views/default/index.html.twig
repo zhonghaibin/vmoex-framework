@@ -14,16 +14,13 @@
             </div>
         {% else %}
             <div class="tab-list">
-                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('homepage', {tab: 'all'}) }}">{{ 'all'|trans }}</a>
-                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: 'hot'}) }}">{{ 'hot'|trans }}</a>
-
+                <a data-pjax class="{{ tab == 'all' ? 'current-tab':'' }}" href="{{ path('post_list', {tab: 'all'}) }}">{{ 'all'|trans }}</a>
+                <a data-pjax class="{{ tab == 'hot' ? 'current-tab':'' }}"  href="{{ path('post_list', {tab: 'hot'}) }}">{{ 'hot'|trans }}</a>
                 {% for tabItem in tabs %}
-                    <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}">{{ tabItem.name|trans }}</a>
+                    <a data-pjax class="{{ tab == tabItem.alias ? 'current-tab':'' }}"  href="{{ path('homepage', {tab: tabItem.alias}) }}">{{ tabItem.name|trans|trim }}</a>
                 {% endfor %}
                 <a data-pjax href="{{ path('tabs_index') }}">{{ '更多'|trans }}&raquo;</a>
-
                 {% set routeName = app.request.attributes.get('_forwarded').get('_route') %}
-
                 <div class="pull-right visible-lg panel-sort-btns">
                     <div class="btn-group btn-group-xs" role="group" aria-label="...">
                         <a data-pjax href="{{ path(routeName, {tab: tab, sortBy: 'pub'}) }}" class="btn btn-default {% if sortBy == 'pub' %}current{% endif %}">{{ '最新发布'|trans }}</a>
@@ -126,7 +123,11 @@
                 </li>
             </ul>
         {% else %}
-            <div class="well no-post">{{ '暂时没有任何文档！' }}</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well" style="margin: 15px">{{ '暂时没有任何文档！' }}</div>
+                </div>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

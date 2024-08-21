@@ -1,196 +1,200 @@
-about_site: 'About Vmox'
-chinese: 'Simplified Chinese'
+about_site: 'About Vmoex'
+chinese: Simplified Chinese
 english: English
-chinese.tw: 'Traditional Chinese'
+chinese.tw: Traditional Chinese
 japanese: Japanese
-click: click
 ago: ago
-second: sec
-day: day
-hour: h
-minute: min
+second: seconds
+day: days
+hour: hours
+minute: minutes
 login: Login
 logout: Logout
-register: 'Register '
-success: success
-fail: fail
-vmoex_slogan: 'A Hub of Knowledge and Interests'
-vmoex_description: 'Vmoex is inspired by the V2EX creative workers community, and most of the V2EX is the Internet/IT topic, so Vmoex hopes for anime, two, and Opera (and Meng''s [w Omega]) enthusiasts to join, share, discover, and create more beauty in life.'
-刷新: refresh
-banner.copyright: 'The content of this site may be infringed on your rights, Vmoex use your articles (or pictures, etc.) only for testing the real line, if you do not allow, please mail: support@vmoex.com.'
-trends_description: 'This section is used to display the user, plate or theme you are interested in, and this function is being developed.'
+register: Register
+success: Operation successful
+fail: Operation failed
+click: Click
+nav_messages: View all messages
+nav_new_fans: new followers
+nav_all_notifications: View all notifications
+nav_user_home: User Center
+nav_user_setting: Settings
+footer_online_user_count: Currently count users online
+footer_oneline_user_most: Highest record
 trends: Trends
-activity: ' Activity'
-blind.chat: ChatChat
-about: About
-板块: Tabs
-comment: ' comment'
+blind.chat: Chat
 search: Search
-messages: Msg
-notifications: Notice
-hello_stranger: 'Hello, Stranger !'
-hello_stranger_detail: 'If you like Vmoex, please remember to register or save the website.'
-my.status: 'My Status'
-hot.users: 'Activist Users'
-today.hot.topics: 'Hot Topics Today'
-newly.comments: 'Latest Comments '
-today.activity: 'Today Activity'
-'continuous_signed count day': 'continuous signed count day'
-create_new_topic: 'Create New Topic'
-当前在线count人: 'Current Online count Users'
-历史最高: 'The highest in history'
-致谢: Thanks
-buy_beer: 'Buy Me '
-全部: All
-热门: Hot
-追剧: Tv
-福利: Wel
-插画: Picture
-歌姬: 'Hawayi Music'
-游戏: Game
-站务公告: Announce
-漫展: ComicDis
+about: About
+messages: Messages
+notifications: Notifications
+comment: Comment
+hello_stranger: 'Hello, Stranger!'
+hello_stranger_detail: If you like Vmoex, remember to register or bookmark us~
+my.status: My Status
+hot.users: Active Users
+today.hot.topics: Hot Topics
+newly.comments: Latest Comments
+today.activity: Today's Activity
+'continuous_signed count day': Continuous check-in count days
+create_new_topic: Create New Topic
+activity: Activity
 用户名: Username
 邮箱: Email
 密码: Password
-查看所有通知: 'All Notifications'
-查看所有私信: 'All Messages'
-我的主页: 'My Homepage'
-个人设置: Setting
-verify_email: 'Your Email is not activated，<a href="javascript:" class="alert-link">Click to Activate</a>'
-添加新的评论: 'Add new Comment'
-发表有颜色的评论: 'Posting a colored comment will cost 1 coin.'
-好可怕，速度太快了: 'It''s awful, the speed is too fast'
-关于作者: 'the author'
+verify_email: 'Your email is not yet activated, <a data-pjax href="/user/setting#emailSetting" class="alert-link">click here to activate</a>'
+在线可撩: Available Online
+加入于: Joined on
+第count位Vmoex用户: The count-th Vmoex user
+最后在线时间：time: 'Last online time: time'
+name发布的帖子: name's posts
+name的回复: name's replies
+'time 发表在': 'Posted on time'
+name的关注: name's following
+name的粉丝: name's followers
+发送成功: Sent successfully
+documents: Documents
+support: Support
+刷新: Refresh
+板块: Sections
+当前在线count人: Currently count users online
+历史最高: Highest record
+全部: All
+热门: Hot
+查看所有通知: View all notifications
+查看所有私信: View all messages
+个人设置: Personal Settings
+添加新的评论: Add new comment
+发表有颜色的评论: Posting a colored comment will cost 1 coin
+好可怕，速度太快了: Scary, that's too fast
+关于作者: About the Author
 拉黑: Block
 昵称: Nickname
 状态: Status
 头像: Avatar
 保存: Save
-修改: Modity
-修改密码: 'Modity Password'
-支持我们: 'Support Us'
-个新的粉丝: ' new follower'
-在线可撩: online
-加入于: 'joined at '
-第count位Vmoex用户: 'the count''st Vmoex member'
-最后在线时间：time: 'last online time：time'
-name发布的帖子: 'name''s topics'
-name的回复: 'name'' comments'
-'time 发表在': 'time posted at'
-name的关注: 'name''s following'
-name的粉丝: 'name'' followers'
-发送成功: 'send success'
+修改: Modify
+修改密码: Change Password
+支持我们: Support Us
+个新的粉丝: new followers
 赞: Like
-什么是瞎聊: 'What''s Blind Chat ?'
-blind_description: '"Blind Chat" is an online chat function provided by the Vmoex community. Each sending a "chatting" will consume a gold coin.'
-社区运行状态: 'State of Vmoex'
-社区成立时间: 'Foundation at'
-主题数量: 'Topic Count'
-回复数量: 'Reply Count'
-注册用户数量: 'Memember Count'
-documents: Documents
-support: Support
-添加: null
-请先登录: null
-Vmoex当前板块数量: Current Number of Sections on Vmoex
-nav_messages: 'Check all private letters'
-nav_new_fans: 'A new fan'
-nav_all_notifications: 'View all notices'
-nav_user_home: 'Personal Center'
-nav_user_setting: 'Personal settings'
-footer_online_user_count: 'Current online count people'
-footer_oneline_user_most: 'The highest in history'
-wpcast_slogan: '9 seconds to help you build your own blog.'
-vmoex_available_with: null
-userhome_send_message: 'Send a private letter'
-userhome_has_followed: 'has followed'
-userhome_follow: follow
-userhome_block: block
-userhome_no_recent_reply: 'The user has not responded recently.'
-userhome_he_is_cold: 'Relatively cold, there is no concern for anyone at present.'
-userhome_he_has_no_follower: 'No reputation, no fans.'
-post_add_comment: 'Add comments'
-post_no_comment: 'The article did not comment.'
-chat_sorry_co_content: 'Sorry, there is no chat message for the time being.'
-chat_please_type: 'Please enter'
-send: 'Send out'
-please_login: 'Please log in'
-why_this: 'Why is that?'
-userhome_no_published_post: 'Users do not publish articles at present.'
+什么是瞎聊: What is Chat
+blind_description: '"Chat" is an instant messaging feature provided by the Vmoex community. Each "Chat" message sent will cost one coin.'
+社区运行状态: Community Status
+社区成立时间: Community Established
+主题数量: Topic Count
+回复数量: Reply Count
+注册用户数量: Registered Users
+添加: Add
+请先登录: Please log in first
+Vmoex当前板块数量: Vmoex's current section count
+userhome_send_message: Send Message
+userhome_has_followed: Already Followed
+userhome_follow: Follow
+userhome_block: Block
+userhome_no_recent_reply: This user has no recent replies
+userhome_he_is_cold: 'A bit distant? Currently not following anyone.'
+userhome_he_has_no_follower: Not very popular, has no followers ╮(╯_╰)╭
+post_add_comment: Add Comment
+post_no_comment: No comments on this post
+chat_sorry_co_content: Sorry, no chat messages at the moment
+chat_please_type: Please type
+send: Send
+please_login: Please login
+why_this: Why is this happening?
+userhome_no_published_post: The user has not published any articles
 reply: Reply
-notice_my_notice: 'My Notice'
-notice_unread: 'Unread notifications'
-notice_read: 'red notice'
-notice_replied_you: 'Reply to me'
-post_top: Top
-like: Fabulous
-action_too_fast: 'Terrible. It''s too fast.'
-banner_announce: Welcome to Vmoex, a hub of knowledge and interests. We're excited to have you join us!
-all: whole
+notice_my_notice: My Notifications
+notice_unread: Unread Notifications
+notice_read: Read Notifications
+notice_replied_you: Replied to me
+post_top: Pinned
+like: Like
+action_too_fast: Scary, that's too fast
+banner_announce: Welcome to Vmoex, a place where knowledge and interests converge. We look forward to you becoming a part of this community!
+all: All
 hot: Hot
-site_state: 'Community Operational Status'
-site_since: 'Community establishment time'
-site_post_count: 'Number of topics'
-site_comment_count: 'Reply quantity'
-site_user_count: 'Number of registered users'
-site_copyright: '@2024 Vmoex - A Hub of Knowledge and Interests'
-site_title: 'Vmoex - Create the Best Secondary Community'
+site_state: Community Status
+site_since: Community Established
+site_post_count: Topic Count
+site_comment_count: Reply Count
+site_user_count: Registered Users
+site_copyright: "@2024 Vmoex - A Hub of Knowledge and Interests"
+site_title: 'Vmoex - A Hub of Knowledge and Interests'
 site_name: Vmoex
-user_place_in_site: 'the count''st Vmoex member'
-footer_available_with: 'available with: '
-user_my_messages: 'My Messages'
+user_place_in_site: The count-th Vmoex user
+footer_available_with: 'Available with: '
+user_my_messages: My Messages
 user_my_received_messages: Received
-user_my_sent_messages: Send
-sorry_no_content: 'Sorry, there is no content yet!'
-user_you_send_message_to: 'you said to receiver: '
-user_send_message_to_you: 'said to you: '
+user_my_sent_messages: Sent
+sorry_no_content: Sorry, no content available at the moment!
+user_you_send_message_to: You said to receiver
+user_send_message_to_you: receiver said to you
 Title: Title
-Cover: cover
-Detail: details
-latest_blogs: 'The latest creation'
-nav_create_blog: 'Create a blog'
-nav_create_post: 'Create new theme'
-'Old password': 'Old code'
-'New Password': 'New password'
-'Repeat Password': 'Duplicate password'
-home_now_register: 'register now！'
-user_my_posts: 'My post'
-user_my_comments: 'My comments'
-user_my_following: 'My attention'
-user_my_follower: 'Pay attention to me'
-user_my_blog: 'The blog I created'
-email: mailbox
-user_setting_email_verified: 'The mailbox has been verified through.'
+Cover: Cover
+Detail: Details
+latest_blogs: Latest Blogs
+nav_create_blog: Create Blog
+nav_create_post: Create New Topic
+'Old password': Old Password
+'New Password': New Password
+'Repeat Password': Repeat Password
+home_now_register: Register Now!
+user_my_posts: My Posts
+user_my_comments: My Comments
+user_my_following: My Followings
+user_my_follower: My Followers
+user_my_blog: My Blog
+email: Email
+user_setting_email_verified: Email verified
 community: Community
-notice_comment_mention_you: 'Mention you in the commentary.'
-post_add_comment_hint: 'Please try to add meaningful comments.'
-users.gold_rank: 'User Gold Coin List'
-users.rank: ranking
-username: 'User name'
-gold: 'Gold coin'
-users.sign_rank: 'User Check-in List'
-global.sign: 'Sign in'
-post_not_exist: 'The article does not exist'
-length_not_support: 'What''s inside? The length seems inappropriate.'
-do_not_repeat_mention_others: 'Don''t repeat @others!'
-no_enough_gold: 'Shortage of gold coins'
-comment_not_exist: 'Comments do not exist'
-cant_modify_current_user_in_admin: 'cant modify current user in admin'
-hours: h
-access_denied: 'access denied'
-'locale invalid': 'locale invalid'
+notice_comment_mention_you: Mentioned you in a comment
+post_add_comment_hint: Please try to add meaningful comments.
+users.gold_rank: User Gold Rankings
+users.rank: Rank
+username: Username
+gold: Coins
+users.sign_rank: User Sign-in Rankings
+global.sign: Sign In
+post_not_exist: Post does not exist
+length_not_support: Hmm... seems like the length isn't quite right!
+do_not_repeat_mention_others: Please don't repeat @mention others!
+no_enough_gold: Not enough coins
+comment_not_exist: Comment does not exist
+cant_modify_current_user_in_admin: Can't modify current user info in the admin panel, please change it in your user center.
+user_not_exist: User does not exist
+locale_invalid: Invalid language
+hours: hours
+access_denied: Access denied
+'locale invalid': Unknown language
 历史公告: Historical Announcements
 服务条款: Terms of Service
 支持: Support
-关于Vmoex : About Vmoex
-member_oneline_count : Member Online
-visitor : Visitor
-person : person
-其他 : other
-电影 : Movie
-番剧 : Anime Series
-灌水 : Spam
-更多 : more
-最新发布 : Latest Posts
-最新评论 : Latest Comments
+关于Vmoex: About Vmoex
+member_oneline_count: Members online
+visitor: Visitor
+person: Person
+最新发布: Latest Releases
+最新评论: Latest Comments
+更多: More
+使用条款: Terms of Use
+第三方登录: Third-Party Login
+已有帐号？: Already have an account?
+直接登录: Log in directly
+立即注册: Register now
+记住登录状态: Remember login status
+推荐主题: Recommended Topics
+日常: Daily
+闲聊灌水: Casual Chat
+职场吐槽: Workplace Rants
+好玩: Fun
+分享发现: Share Discoveries
+发起活动: Start Activity
+奇思妙想: Creative Ideas
+问答: Q&A
+问题求助: Help & Support
+技术: Technology
+编程: Programming
+分享创造: Share Creations
+交易: Trading
+二手交易: Second-hand Trading
+免费赠送: Free Gifts

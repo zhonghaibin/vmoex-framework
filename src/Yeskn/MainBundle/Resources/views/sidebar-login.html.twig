@@ -1,21 +1,45 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        第三方登录
+        {{ '第三方登录'|trans  }}
     </div>
     <div class="panel-body">
         <a href="{{ path('login_from_github') }}" class="btn btn-block btn-social btn-github">
-            <i class="fa fa-github"></i> Github登录
+            <i class="fa fa-github"></i> Github {{ 'login'|trans  }}
         </a>
     </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading">
-        使用条款
+       {{ '使用条款'|trans  }}
     </div>
     <div class="panel-body">
-        欢迎您注册成为Vmoex平台的用户！在注册之前，请仔细阅读
-        <a data-pjax href="{{'tos'}}" style="color: black;font-weight: bold;" >服务条款</a>
-        。这些事项旨在确保您在Vmoex的体验顺利且安全。
+        {% set locale = app.request.locale %}
+        {% if locale == 'en' %}
+            <p>
+                Welcome to register as a user of the Vmoex platform! Before registering, please carefully read the
+                <a data-pjax href="{{'tos'}}" style="color: black;font-weight: bold;">Terms of Service</a>
+                . These terms are intended to ensure that your experience on Vmoex is smooth and secure.
+            </p>
+        {% elseif locale == 'jp'  %}
+            <p>
+                Vmoexプラットフォームのユーザーとして登録することを歓迎します！登録前に、以下の
+                <a data-pjax href="{{'tos'}}" style="color: black;font-weight: bold;">利用規約</a>
+                をよくお読みください。これらの事項は、Vmoexでの体験がスムーズで安全であることを保証するためのものです。
+            </p>
+            <p></p>
+        {% elseif locale == 'zh_TW' %}
+            <p>
+                歡迎您註冊成為Vmoex平台的用戶！在註冊之前，請仔細閱讀
+                <a data-pjax href="{{'tos'}}" style="color: black;font-weight: bold;">服務條款</a>
+                。這些事項旨在確保您在Vmoex的體驗順利且安全。
+            </p>
+        {% else %}
+            <p>
+                欢迎您注册成为Vmoex平台的用户！在注册之前，请仔细阅读
+                <a data-pjax href="{{'tos'}}" style="color: black;font-weight: bold;" >服务条款</a>
+                。这些事项旨在确保您在Vmoex的体验顺利且安全。
+            </p>
+        {% endif %}
     </div>
 </div>
 

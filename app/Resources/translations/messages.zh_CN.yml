@@ -21,7 +21,6 @@ nav_user_home: 个人中心
 nav_user_setting: 个人设置
 footer_online_user_count: 当前在线count人
 footer_oneline_user_most: 历史最高
-wpcast_slogan: 9秒助你打造自己的博客
 trends: 动态
 blind.chat: 聊聊
 search: 搜索
@@ -55,54 +54,39 @@ name的粉丝: name的粉丝
 发送成功: 发送成功
 documents: 交流分享
 support: 支持
-vmoex_slogan: null
-vmoex_description: null
-刷新: null
-banner.copyright: null
-trends_description: null
-板块: null
-当前在线count人: null
-历史最高: null
-致谢: null
-buy_beer: null
-全部: null
-热门: 热力门
-追剧: null
-福利: null
-插画: null
-歌姬: null
-游戏: null
-站务公告: null
-漫展: null
-查看所有通知: null
-查看所有私信: null
-我的主页: null
-个人设置: null
-添加新的评论: null
+刷新: 刷新
+板块: 板块
+当前在线count人: 当前在线count人
+历史最高: 历史最高
+全部: 全部
+热门: 热门
+查看所有通知: 查看所有通知
+查看所有私信: 查看所有私信
+个人设置: 个人设置
+添加新的评论: 添加新的评论
 发表有颜色的评论: 发表有颜色的评论将消耗1金币哦
-好可怕，速度太快了: null
-关于作者: null
-拉黑: null
-昵称: null
-状态: null
-头像: null
-保存: null
-修改: null
-修改密码: null
-支持我们: null
-个新的粉丝: null
-赞: null
-什么是瞎聊: null
+好可怕，速度太快了: 好可怕，速度太快了
+关于作者: 关于作者
+拉黑: 拉黑
+昵称: 昵称
+状态: 状态
+头像: 头像
+保存: 保存
+修改: 修改
+修改密码: 修改密码
+支持我们: 支持我们
+个新的粉丝: 个新的粉丝
+赞: 赞
+什么是瞎聊: 什么是聊聊
 blind_description: “聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。
-社区运行状态: null
-社区成立时间: null
-主题数量: null
-回复数量: null
-注册用户数量: null
-添加: null
-请先登录: null
-Vmoex当前板块数量: null
-vmoex_available_with: null
+社区运行状态: 社区运行状态
+社区成立时间: 社区成立时间
+主题数量: 主题数量
+回复数量: 回复数量
+注册用户数量: 注册用户数量
+添加: 添加
+请先登录: 请先登录
+Vmoex当前板块数量: Vmoex当前板块数量
 userhome_send_message: 发送私信
 userhome_has_followed: 已经关注
 userhome_follow: 关注
@@ -185,14 +169,32 @@ access_denied: 访问被拒绝
 历史公告: 历史公告
 服务条款: 服务条款
 支持: 支持
-关于Vmoex : 关于Vmoex
-member_oneline_count : 会员在线
-visitor : 游客
-person : 人
-其他 : 其他
-电影 : 电影
-番剧 : 番剧
-灌水 : 灌水
-更多 : 更多
-最新发布 : 最新发布
-最新评论 : 最新评论
+关于Vmoex: 关于Vmoex
+member_oneline_count: 会员在线
+visitor: 游客
+person: 人
+最新发布: 最新发布
+最新评论: 最新评论
+更多: 更多
+使用条款: 使用条款
+第三方登录: 第三方登录
+已有帐号？: 已有帐号？
+直接登录: 直接登录
+立即注册: 立即注册
+记住登录状态: 记住登录状态
+推荐主题: 推荐主题
+日常: 日常
+闲聊灌水:  闲聊灌水
+职场吐槽: 职场吐槽
+好玩: 好玩
+分享发现: 分享发现
+发起活动: 发起活动
+奇思妙想: 奇思妙想
+问答: 问答
+问题求助: 问题求助
+技术: 技术
+编程: 编程
+分享创造: 分享创造
+交易: 交易
+二手交易: 二手交易
+免费赠送: 免费赠送
