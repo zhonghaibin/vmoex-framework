@@ -16,7 +16,7 @@ register: 登録
 success: 操作が成功する
 fail: 操作に失敗する
 comment: 評論
-vmoex_slogan: 最も美しい2次元のコミュニティを作ります
+vmoex_slogan: 知識と興味の集まる場所
 添加: 追加
 请先登录: 先に登録してください
 trends_description: このプレートは、あなたが注目しているユーザー、プレート、またはテーマを展示するために使用されています。
@@ -126,7 +126,7 @@ notice_replied_you: 私に返事する
 post_top: 棚を置く
 like: 称賛する
 action_too_fast: 怖い、スピードが速い
-banner_announce: Vmexへようこそ、ここは二次元交流コミュニティで、あなたがここの一員になるのを楽しみにしています！
+banner_announce: Vmoexへようこそ！ここは知識と興味の集まる場所です。あなたがここで一員になることを楽しみにしています
 all: すべて
 hot: 人気
 site_state: コミュニティの運行状態
@@ -134,8 +134,8 @@ site_since: コミュニティの成立時間
 site_post_count: テーマの数
 site_comment_count: 回答数
 site_user_count: 登録ユーザーの数
-site_copyright: '@2024 Vmoex -最高の二次元コミュニティを作る'
-site_title: 'Vmoex -最高の二次元コミュニティを作る'
+site_copyright: @2024 Vmoex -知識と興味の集まる場所
+site_title: Vmoex -知識と興味の集まる場所
 site_name: Vmoex
 user_place_in_site: Cunt位Wpcrftユーザー
 footer_available_with: 使用可能：

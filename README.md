@@ -1,12 +1,8 @@
-<h1 align="center">Vmoex - 期望成为最美好的二次元社区</h1>
+<h1 align="center">Vmoex - 期望成为知识与兴趣聚集地</h1>
 <p align="center">
     <a href="LICENSE" target="_blank">
         <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
     </a>
-</p>
-
-<p align="center">
-vmoex是一个开源的二次元社区程序，同时也是一个多用户多角色的内容管理系统。
 </p>
 
 首页：
@@ -130,5 +126,3 @@ php bin/console doctrine:cache:clear-result
 
 ## 帮助与反馈
 
-首先欢迎使用此程序搭建自己的二次元社区，在安装和使用中，遇到任何问题，请在本仓库的提交issue；如果你有搭建成功，欢迎在issues页提交自己的域名，
-我会考虑将你的域名和网站名称放在此介绍页。

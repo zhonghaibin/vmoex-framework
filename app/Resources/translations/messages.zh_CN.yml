@@ -126,7 +126,7 @@ notice_replied_you: 回复我的
 post_top: 置顶
 like: 赞
 action_too_fast: 好可怕，速度太快了
-banner_announce: 欢迎您来到Vmoex，这里是一个二次元交流社区，很期待你成为这里的一员！
+banner_announce:  歡迎您來到Vmoex，這裡是一個知识与兴趣聚集地，很期待你成為這裡的一員！
 all: 全部
 hot: 热门
 site_state: 社区运行状态
@@ -134,8 +134,8 @@ site_since: 社区成立时间
 site_post_count: 主题数量
 site_comment_count: 回复数量
 site_user_count: 注册用户数量
-site_copyright: "@2024 Vmoex - 打造最美好的二次元社区"
-site_title: 'Vmoex - 打造最美好的二次元社区'
+site_copyright: "@2024 Vmoex - 知识与兴趣聚集地"
+site_title: 'Vmoex - 知识与兴趣聚集地'
 site_name: Vmoex
 user_place_in_site: 第count位Vmoex用户
 footer_available_with: '可用于: '

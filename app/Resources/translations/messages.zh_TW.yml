@@ -14,7 +14,7 @@ register: 注册
 click: 点击
 success: 操作成功
 fail: 操作失敗
-vmoex_slogan: 打造最美好的二次元社區
+vmoex_slogan: 知識與興趣聚集地
 banner.copyright: 本網站的內容可能侵犯了您的權益，當前Vmoex使用您的文章（或者圖片等）僅用於測試真實上線情况，如您不允許，請致郵：support@vmoex.com。
 trends: 動態
 search: 搜尋
@@ -126,7 +126,7 @@ notice_replied_you: 回復我的
 post_top: 置頂
 like: 贊
 action_too_fast: 好可怕，速度太快了
-banner_announce: 歡迎您來到Vmoex，這裡是一個二次元交流社區，很期待你成為這裡的一員！
+banner_announce: 歡迎您來到Vmoex，這裡是一個知識與興趣聚集地，很期待您成為這裡的一員！
 all: 全部
 hot: 熱門
 site_state: 社區運行狀態
@@ -134,8 +134,8 @@ site_since: 社區成立時間
 site_post_count: 主題數量
 site_comment_count: 回復數量
 site_user_count: 注册用户数量
-site_copyright: '@2024 Vmoex -打造最美好的二次元社區'
-site_title: 'Vmoex -打造最美好的二次元社區'
+site_copyright: '@2024 Vmoex -知识与兴趣聚集地'
+site_title: 'Vmoex -知识与兴趣聚集地'
 site_name: Vmoex
 user_place_in_site: 第count比特Vmoex用戶
 footer_available_with: 可用於：
