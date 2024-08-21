@@ -12,7 +12,7 @@ namespace Yeskn\AdminBundle\Form\SearchForm;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Yeskn\MainBundle\Form\Type\DatetimeRangeType;
-
+use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 class SearchUserType extends DefaultSearchType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -40,6 +40,14 @@ class SearchUserType extends DefaultSearchType
             'label' => '邮箱',
             'required' => false,
         ]);
+
+
+        $builder->add('loginAt', DatetimeRangeType::class, [
+            'label' => '登录时间',
+            'field_type' => 'date',
+            'required' => false,
+        ]);
+
 
     }
 }

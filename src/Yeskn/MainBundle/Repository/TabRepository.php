@@ -28,4 +28,9 @@ class TabRepository extends EntityRepository
             ->getQuery()
             ->getResult(Query::HYDRATE_SIMPLEOBJECT);
     }
+
+    public function findByParentId($parentId)
+    {
+        return $this->findBy(['parent' => $parentId]);
+    }
 }

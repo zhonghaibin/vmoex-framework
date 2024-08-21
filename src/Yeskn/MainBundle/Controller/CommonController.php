@@ -43,13 +43,17 @@ class CommonController extends AbstractController
         }
 
         $tabObj = null;
-
+        $tabChild= null;
         if ($tab && !in_array($tab, ['hot', 'all'])) {
             $tabObj = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
                 ->findOneBy(['alias' => $tab]);
+
             if (empty($tabObj)) {
                 return $this->errorResponse('嘤嘤嘤，板块不存在呢~');
             }
+            $parentId = $tabObj->getId();
+            $tabChild = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
+                ->findByParentId($parentId);
         }
 
         list($count, $posts) = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
@@ -61,13 +65,15 @@ class CommonController extends AbstractController
         $pageData['allPage'] = ceil($count / $pagesize);
         $pageData['currentPage'] = $page;
 
+
         $params = [
             'posts' => $posts,
             'tab' => $tab,
             'currentTab' => $tabObj,
             'tabs' => $allTabs,
             'sortBy' => $sortBy,
-            'pageData' => $pageData
+            'pageData' => $pageData,
+            'tabChild' => $tabChild
         ];
 
         if ($scope == 'home') {

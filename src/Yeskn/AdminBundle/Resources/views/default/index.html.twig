@@ -66,8 +66,12 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#">
-                        <div class="panel-footer">
+                    {% set today = "now"|date("Y-m-d") %}
+                    {% set tomorrow = "now"|date_modify("+1 day")|date("Y-m-d") %}
+                    {% set loginAt = today ~ ' - ' ~ tomorrow %}
+                    <a href="{{ path('admin_list', {entity: 'user', 'search_user[loginAt]': loginAt  }) }}">
+
+                    <div class="panel-footer">
                             <span class="pull-left">查看详情</span>
                             <span class="pull-right">
                                 <i class="fa fa-arrow-circle-right"></i></span>

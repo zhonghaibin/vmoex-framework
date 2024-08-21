@@ -48,12 +48,13 @@ class StartRenderUserListEvent extends AbstractCrudListEvent
                 $tag->getNickname(),
                 $tag->getEmail(),
                 $this->globalValue->ago($tag->getRegisterAt()),
+                $this->globalValue->ago($tag->getLoginAt()),
                 $tag->getGold()
             ];
         }
 
         return [
-            'columns' => ['ID', '用户名', '头像', '昵称', '邮箱', '注册时间', '金币'],
+            'columns' => ['ID', '用户名', '头像', '昵称', '邮箱', '注册时间','登录时间', '金币'],
             'column_width' => [0 => 5, 2 => 10, 4 => 15, 6 => 5],
             'list' => $result,
             'ids' => $ids

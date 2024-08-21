@@ -41,42 +41,57 @@ $.extend({
  * @param refresh 重复获取时执行的函数
  * @returns {*}
  */
-window.YesknPlugins.get = function (name, callback, refresh) {
+window.YesknPlugins.get = function(name, callback, refresh) {
     const self = window.YesknPlugins;
 
+    if (!self[name]) {
+        self[name] = {
+            initialized: false,
+            scripts: [],
+            links: [],
+            result: null,  // 用于存储插件的结果
+            identifier: null // 这里假设 identifier 是用来识别插件的全局变量名称
+        };
+    }
+
+    // 避免重复加载和初始化
     if (self[name].initialized === true) {
-        if (refresh) refresh(self[name].result);
-        if (callback) self[name].result = callback(eval(self[name].identifier));
+        if (refresh && typeof self[name].result !== 'undefined') {
+            refresh(self[name].result);
+        }
+        if (callback && typeof self[name].identifier === 'string') {
+            self[name].result = callback(eval(self[name].identifier));
+        }
         return self[name];
     }
 
-    const scripts = self[name].scripts;
-    const links = self[name].links;
+    const scripts = self[name].scripts || {};
+    const links = self[name].links || {};
 
-    for (const key in scripts) {
-        let scriptElm = document.createElement('script');
-        if (scripts.hasOwnProperty(key)) {
-            scriptElm.setAttribute('src', scripts[key]);
-            document.getElementsByTagName('head')[0].insertBefore(scriptElm, null);
+    // 动态加载脚本文件
+    Object.keys(scripts).forEach((key, index, array) => {
+        let scriptElm = document.createElement("script");
+        scriptElm.setAttribute("src", scripts[key]);
+        document.getElementsByTagName("head")[0].appendChild(scriptElm);
+
+        // 仅在最后一个脚本加载完成时执行初始化
+        if (index === array.length - 1) {
+            scriptElm.onload = function() {
+                if (callback && typeof self[name].identifier === 'string') {
+                    self[name].result = callback(eval(self[name].identifier));
+                }
+                self[name].initialized = true;  // 标记插件已初始化
+            }
         }
+    });
 
-        if (key * 1 === scripts.length - 1) {
-            scriptElm.onload = function () {
-                if (callback) self[name].result = callback(eval(self[name].identifier));
-            };
-        }
-    }
-
-    for (const key in links) {
-        let linkElm = document.createElement('link');
-        if (links.hasOwnProperty(key)) {
-            linkElm.setAttribute('href', links[key]);
-            linkElm.setAttribute('rel', 'stylesheet');
-            document.getElementsByTagName('head')[0].insertBefore(linkElm, null);
-        }
-    }
-
-    self[name].initialized = true;
+    // 动态加载样式文件
+    Object.keys(links).forEach(key => {
+        let linkElm = document.createElement("link");
+        linkElm.setAttribute("href", links[key]);
+        linkElm.setAttribute("rel", "stylesheet");
+        document.getElementsByTagName("head")[0].appendChild(linkElm);
+    });
 
     return self[name];
 };
