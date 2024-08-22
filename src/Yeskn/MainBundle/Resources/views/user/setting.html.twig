@@ -7,14 +7,14 @@
         <div class="col-lg-8 content-main" role="main">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-gear"></i> 个人设置
+                    <i class="fa fa-gear"></i> {{ 'nav_user_setting'|trans }}
                 </div>
 
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home" data-toggle="tab">基本资料</a></li>
-                        <li><a href="#account" data-toggle="tab">修改密码</a></li>
-                        <li><a href="#emailSetting" data-toggle="tab">邮箱</a></li>
+                        <li class="active"><a href="#home" data-toggle="tab">{{ '基本资料'|trans }}</a></li>
+                        <li><a href="#account" data-toggle="tab">{{ '修改密码'|trans }}</a></li>
+                        <li><a href="#emailSetting" data-toggle="tab">{{ '邮箱'|trans }}</a></li>
                     </ul>
 
                     <div class="tab-content">
@@ -27,7 +27,7 @@
                                                 <label for="username" class="col-sm-2 control-label">{{ '用户名'|trans }}</label>
                                                 <div class="col-sm-10">
                                                     <input type="text" value="{{ app.user.username }}" class="form-control" id="username" disabled>
-                                                    <span id="helpBlock" class="help-block">用户名不能被修改</span>
+                                                    <span id="helpBlock" class="help-block">{{ '用户名不能被修改'|trans }}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -37,7 +37,7 @@
                                                            name="nickname"
                                                            {{ canEditNicknameDays ? 'disabled' : '' }}>
                                                     <span id="helpBlock" class="help-block">
-                                                        {{ canEditNicknameDays ? (canEditNicknameDays ~ '天后可修改昵称。') : '昵称每180天可修改一次，请谨慎修改。' }}
+                                                        {{ canEditNicknameDays ? (canEditNicknameDays ~ {{ '天后可修改昵称。'|trans }}) : {{ '昵称每180天可修改一次，请谨慎修改。'|trans }}}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -54,7 +54,9 @@
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <input type="file" id="avatar" name="avatar" class="form-control">
-                                                    <p class="help-block">支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币</p>
+                                                    <p class="help-block">
+                                                        {{ '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币'|trans }}
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -82,7 +84,7 @@
                                             {{ form_widget(form) }}
                                             <div class="form-group">
                                                 <div class="col-sm-offset-2 col-sm-6">
-                                                    <button type="submit" class="btn btn-default">更新</button>
+                                                    <button type="submit" class="btn btn-default">{{ '更新'|trans }}</button>
                                                 </div>
                                             </div>
                                             {{ form_end(form) }}
@@ -98,15 +100,15 @@
                                         <form data-pjax-form id="emailForm" action="{{ path('user_setting_verify_email') }}" class="form-horizontal" style="margin-top: 30px">
                                             {% if app.user.isEmailVerified == false %}
                                                 <div class="form-group">
-                                                    <label for="email" class="col-sm-2 control-label">邮箱</label>
+                                                    <label for="email" class="col-sm-2 control-label">{{ '邮箱'|trans }}</label>
                                                     <div class="input-group col-sm-6" style="padding-left: 15px;padding-right: 15px">
                                                         <input type="email" id="email" name="email" class="form-control" value="{{ app.user.email }}" />
-                                                            <span class="input-group-addon" id="sendCodeBtn" style="cursor: pointer">发送验证码</span>
+                                                            <span class="input-group-addon" id="sendCodeBtn" style="cursor: pointer">{{ '发送验证码'|trans }}</span>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="code" class="col-sm-2 control-label">验证码</label>
+                                                    <label for="code" class="col-sm-2 control-label">{{ '验证码'|trans }}</label>
                                                     <div class="col-sm-6">
                                                         <input type="text" name="code" autocomplete="off" id="code" required class="form-control" />
                                                     </div>
@@ -114,7 +116,7 @@
 
                                                 <div class="form-group">
                                                     <div class="col-sm-offset-2 col-sm-6">
-                                                        <button type="submit" class="btn btn-default">验证</button>
+                                                        <button type="submit" class="btn btn-default">验证 {{ '验证'|trans }}</button>
                                                     </div>
                                                 </div>
                                                 {% else %}
