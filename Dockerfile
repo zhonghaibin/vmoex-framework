@@ -84,8 +84,19 @@ RUN crontab /etc/cron.d/swiftmailer-cron
 
 RUN  rm -rf /var/app/init.sh /var/app/nginx.conf /var/app/supervisord.conf /var/app/swiftmailer-cron /var/data/vmoex-framework.sql
 
-# # 13. 暴露端口 [websocket]
+# 13. 暴露端口 [websocket]
 EXPOSE 3110 3120
+
+# 配置 Opcache
+RUN { \
+      echo 'opcache.memory_consumption=128'; \
+      echo 'opcache.interned_strings_buffer=8'; \
+      echo 'opcache.max_accelerated_files=4000'; \
+      echo 'opcache.revalidate_freq=2'; \
+      echo 'opcache.fast_shutdown=1'; \
+      echo 'opcache.enable_cli=1'; \
+    } > /usr/local/etc/php/conf.d/opcache.ini
+
 
 # 14. 启动 Supervisor
  CMD ["/usr/local/bin/init.sh"]
