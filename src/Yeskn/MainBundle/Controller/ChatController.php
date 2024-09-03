@@ -97,11 +97,12 @@ class ChatController extends Controller
         $chat->setCreatedAt(new \DateTime());
         $chat->setContent($content);
 
+
         $em = $this->getDoctrine()->getManager();
 
         $cost = 1;
 
-        $user->setGold($user->getGold()-$cost);
+        $user->setGold($user->getGold() - $cost);
 
         $em->persist($chat);
         $em->flush();
@@ -111,7 +112,7 @@ class ChatController extends Controller
             'nickname' => $user->getNickname(),
             'avatar' => $user->getAvatar(),
             'content' => $chat->getContent(),
-            'from' =>$user->getUsername() // 或者 $user->getUsername()
+            'timestamp' => $chat->getCreatedAt()->getTimestamp()
         ]);
 
         return new ApiOk();

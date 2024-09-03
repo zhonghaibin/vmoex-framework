@@ -28,23 +28,22 @@
                             {% for chat in chats %}
                                 {% set loc = (app.user and chat.user.id == app.user.id) ? 'right' : 'left' %}
                                 <li class="{{ loc }} clearfix">
-                                    <span class="chat-img pull-{{ loc }}">
-                                        <img style="border-radius: 5px" width="50" height="50" src="{{ asset(chat.user.avatar) }}" alt="User Avatar">
-                                    </span>
+                                <span class="chat-img pull-{{ loc }}">
+                                    <img style="border-radius: 5px" width="50" height="50" src="{{ asset(chat.user.avatar) }}" alt="User Avatar">
+                                </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
                                             {% if loc == 'right' %}
-                                                <small class="text-muted" data-toggle="tooltip" title="{{ chat.createdAt|date }}">
-                                                    <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|ago }}
+                                                <small class="text-muted chat-timestamp" data-timestamp="{{ chat.createdAt|date('U') }}" data-toggle="tooltip">
+                                                    <i class="fa fa-clock-o fa-fw"></i> <!-- Placeholder for JS -->
                                                 </small>
-                                                <strong class="pull-right primary-font"><a data-pjax href="{{ path('member_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
-                                                {% else %}
-                                                    <strong class="primary-font"><a data-pjax href="{{ path('member_home', {username:chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
-                                                    <small class="pull-right text-muted" data-toggle="tooltip" title="{{ chat.createdAt|date }}">
-                                                        <i class="fa fa-clock-o fa-fw"></i> {{ chat.createdAt|ago }}
-                                                    </small>
+                                                <strong class="pull-right primary-font"><a data-pjax href="{{ path('member_home', {username: chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                            {% else %}
+                                                <strong class="primary-font"><a data-pjax href="{{ path('member_home', {username: chat.user.username}) }}">{{ chat.user.nickname }}</a></strong>
+                                                <small class="pull-right text-muted chat-timestamp" data-timestamp="{{ chat.createdAt|date('U') }}" data-toggle="tooltip">
+                                                    <i class="fa fa-clock-o fa-fw"></i> <!-- Placeholder for JS -->
+                                                </small>
                                             {% endif %}
-
                                         </div>
                                         <p class="pull-{{ loc }}" style="margin-top: 5px">{{ chat.content|raw }}</p>
                                     </div>
@@ -57,6 +56,7 @@
                         </div>
                     {% endif %}
                 </div>
+
                 <!-- /.panel-body -->
                 <div class="panel-footer">
                     <div class="input-group">

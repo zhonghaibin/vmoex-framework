@@ -138,18 +138,13 @@ $sender_io->on('workerStart', function () {
             case 'publish':
                 global $sender_io;
                 $to = @$_POST['to']??'';
-                $from = @$_POST['data']['from']??''; // 消息的发起者
                 // 如果指定了目标用户，将消息推送给该用户
                 if ($to) {
                     // 检查消息发起者与接收者是否相同
-                    if ($to !== $from) {
-                        $sender_io->to($to)->emit($_POST['event'], $_POST['data']);
-                    }
+                    $sender_io->to($to)->emit($_POST['event'], $_POST['data']);
                 } else {
                     // 如果没有指定目标用户，则将消息发送给所有用户
-                    foreach ($uidConnectionMap as $uid => $connections) {
-                        $sender_io->emit($_POST['event'], $_POST['data']);
-                    }
+                    $sender_io->emit($_POST['event'], $_POST['data']);
                 }
 
                 // 返回推送结果
