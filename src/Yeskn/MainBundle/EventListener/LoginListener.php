@@ -2,9 +2,6 @@
 // src/EventListener/LoginListener.php
 namespace Yeskn\MainBundle\EventListener;
 
-// src/EventListener/LoginListener.php
-namespace Yeskn\MainBundle\EventListener;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Predis\Client as RedisClient;
@@ -39,7 +36,6 @@ class LoginListener
             // 生成并保存 Token 到 Redis
             $token = $this->generateToken($user);
             $this->redis->set('token_secret:' . $user->getUsername(), $token);
-            $this->redis->expire('token_secret:' . $user->getUsername(), 3600); // 设置过期时间为1小时
         }
     }
 

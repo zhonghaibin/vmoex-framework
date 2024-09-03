@@ -27,6 +27,10 @@ services:
             $redis: '@snc_redis.default' # 使用 snc_redis.default 服务
         tags:
         - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
-
+    Yeskn\MainBundle\EventListener\LogoutHandler:
+#        arguments:
+#            $redis: '@redis'
+        tags:
+            - { name: 'security.logout_success_handler', firewall: 'main' }
     Symfony\Bridge\Twig\Extension\AssetExtension: "@twig.extension.assets"
     Symfony\Bundle\SecurityBundle\Security\FirewallMap: "@security.firewall.map"

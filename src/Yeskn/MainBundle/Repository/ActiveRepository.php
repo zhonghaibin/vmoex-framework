@@ -63,4 +63,25 @@ class ActiveRepository extends EntityRepository
         return $active;
     }
 
+    /**
+     * @return int
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countOnlineUser()
+    {
+        $datetime = new \DateTime('-15 minute');
+
+        try {
+            return (int) $this->createQueryBuilder('p')
+                ->select('COUNT(p.id)')
+                ->where('p.updatedAt >= :update')
+                ->setParameter('update', $datetime, Type::DATETIME)
+                ->distinct()
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NoResultException $exception) {
+            return 0;
+        }
+
+    }
 }

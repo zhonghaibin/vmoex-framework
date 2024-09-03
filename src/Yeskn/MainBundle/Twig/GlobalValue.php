@@ -42,8 +42,6 @@ class GlobalValue extends AbstractExtension
 
     private $socketHost;
 
-    private $varDir;
-
     private $redis;
 
     /**
@@ -69,7 +67,6 @@ class GlobalValue extends AbstractExtension
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
         $this->socketHost = $socketHost;
-        $this->varDir = rtrim( $kernel->getProjectDir(), '/') . '/var';
         $this->redis = $redis;
     }
 
@@ -196,6 +193,7 @@ class GlobalValue extends AbstractExtension
                 'topicCount' => $this->em->getRepository('YesknMainBundle:Post')->countPost(),
                 'userCount' => $this->em->getRepository('YesknMainBundle:User')->countUser(),
                 'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),
+                'onlineUserCount' => $this->em->getRepository('YesknMainBundle:Active')->countOnlineUser(),
                 'footerLinks' => $this->em->getRepository('YesknMainBundle:FooterLink')->findBy([], ['priority' => 'DESC']),
             ];
         }

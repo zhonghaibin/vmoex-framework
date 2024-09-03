@@ -11,12 +11,8 @@ include __DIR__ . '/../vendor/autoload.php'; // 自动加载Composer依赖
 // 初始化用于存储用户连接信息的数组
 $uidConnectionMap = array();
 
-$sessionMap = array(); // 用于跟踪每个会话
-
-// 初始化游客和会员计数器
-$guestCount = 0;
-$memberCount = 0;
-
+$last_online_count = 0; // 上次在线用户数
+$last_online_page_count = 0; // 上次在线页面数
 $max_online_count = loadMaxOnlineCount();
 
 $socketPort = 3120; // Socket.IO服务监听的默认端口
@@ -60,15 +56,12 @@ function getRedis()
 
     // 静态变量用于缓存Redis实例
     static $redis = null;
+
     // 如果Redis实例不存在或未连接，创建一个新的连接
     if (empty($redis) || $redis->isConnected() == false) {
-        try {
-            $redis = new \Predis\Client($parameters['redis_dsn']);
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            exit;
-        }
+        $redis = new \Predis\Client($parameters['redis_dsn']);
     }
+
     return $redis; // 返回Redis实例
 }
 
@@ -77,88 +70,58 @@ $sender_io = new SocketIO($socketPort, $context);
 
 // 监听新连接事件
 $sender_io->on('connection', function (\PHPSocketIO\Socket $socket) {
-
-
+    // 处理用户登录事件
     $socket->on('login', function ($data) use ($socket) {
-        global $uidConnectionMap, $guestCount, $memberCount, $sessionMap;;
+        global $uidConnectionMap, $last_online_count, $last_online_page_count;
 
+        $user = $data['username']; // 获取用户名
+        $token = $data['token']; // 获取Token
 
-        $user = $data['username'];
-        $token = $data['token'];
-
-        // 获取会话ID（可以使用socket ID作为唯一标识符）
-        $sessionId = $socket->id;
-
-
-        // 新连接默认作为游客
-        if (!isset($sessionMap[$sessionId])) {
-            if(isset($uidConnectionMap[$user])){
-                    return;
+        // 验证Token
+        if ($token) {
+            $redisToken = getRedis()->get('socket:'. $user);
+            if (empty($redisToken) || $redisToken != $token) {
+                return ; // 如果Token无效，终止登录流程
             }
-            $guestCount++;
-            $sessionMap[$sessionId] = ['uid' => null, 'loggedIn' => false];
         }
 
-
-        if (!$token) {
-            return;
-        }
-
-
-        $redisToken = getRedis()->get('token_secret:' . $user);
-        if (empty($redisToken) || $redisToken != $token) {
-            return;
-        }
-
+        // 如果Socket已经绑定了用户ID，直接返回
         if (isset($socket->uid)) {
-            return; // 如果已经登录，则直接返回
-        }
-
-
-        // 防止重复添加连接
-        if (isset($uidConnectionMap[$user]) && $uidConnectionMap[$user] > 0) {
             return;
         }
 
-
-        if (isset($sessionMap[$socket->id]['uid'])) {
-            return; // 如果已经登录，则直接返回
+        // 初始化用户连接计数器
+        if (!isset($uidConnectionMap[$user])) {
+            $uidConnectionMap[$user] = 0;
         }
 
-        // 如果当前是游客，转换为会员
-        if (!$sessionMap[$socket->id]['loggedIn']) {
-            $guestCount--;
-            $memberCount++;
-            $sessionMap[$socket->id]['loggedIn'] = true;
-        }
-        $sessionMap[$socket->id]['uid'] = $user;
-        $socket->join($user);
-        $socket->uid = $user;
-        updateOnlineCount();
+        // 增加用户连接数
+        ++$uidConnectionMap[$user];
+        $socket->join($user); // 将用户加入对应的房间
+        $socket->uid = $user; // 绑定用户ID到Socket
+
+        // 向客户端发送当前在线用户和页面统计信息
+        $data = [
+            'onlineCount' => $last_online_count,
+            'pageCount' => $last_online_page_count
+        ];
+
+        $socket->emit('update_online_count', json_encode($data));
     });
 
+    // 处理用户断开连接事件
     $socket->on('disconnect', function () use ($socket) {
-        global $guestCount, $memberCount, $uidConnectionMap, $sessionMap;
+        if (!isset($socket->uid)) {
+            return; // 如果Socket没有绑定用户ID，直接返回
+        }
+        global $uidConnectionMap;
 
-        $sessionId = $socket->id;
-        if (isset($sessionMap[$sessionId])) {
-            $uid = $sessionMap[$sessionId]['uid'];
-            if ($uid) {
-                // 断开连接时减少连接计数
-                if (--$uidConnectionMap[$uid] <= 0) {
-                    unset($uidConnectionMap[$uid]);
-                    $memberCount--; // 减少会员数
-
-                }
-            } else {
-                $guestCount--; // 减少游客数
-            }
-            unset($sessionMap[$sessionId]);
+        // 减少用户连接数，如果连接数为0，则移除用户
+        if (--$uidConnectionMap[$socket->uid] <= 0) {
+            unset($uidConnectionMap[$socket->uid]);
         }
     });
-
 });
-
 
 // 监听worker启动事件，启动HTTP推送服务
 $sender_io->on('workerStart', function () {
@@ -174,8 +137,8 @@ $sender_io->on('workerStart', function () {
         switch (@$_POST['type']) {
             case 'publish':
                 global $sender_io;
-                $to = @$_POST['to'] ?? '';
-                $from = @$_POST['data']['from'] ?? ''; // 消息的发起者
+                $to = @$_POST['to']??'';
+                $from = @$_POST['data']['from']??''; // 消息的发起者
                 // 如果指定了目标用户，将消息推送给该用户
                 if ($to) {
                     // 检查消息发起者与接收者是否相同
@@ -183,7 +146,10 @@ $sender_io->on('workerStart', function () {
                         $sender_io->to($to)->emit($_POST['event'], $_POST['data']);
                     }
                 } else {
-                    $sender_io->emit($_POST['event'], $_POST['data']);
+                    // 如果没有指定目标用户，则将消息发送给所有用户
+                    foreach ($uidConnectionMap as $uid => $connections) {
+                        $sender_io->emit($_POST['event'], $_POST['data']);
+                    }
                 }
 
                 // 返回推送结果
@@ -199,48 +165,55 @@ $sender_io->on('workerStart', function () {
     $inner_http_worker->listen(); // 启动HTTP推送服务
 
     // 定时任务，每秒检查并广播在线用户统计
-    Timer::add(5, function () {
-        updateOnlineCount();
+    Timer::add(2, function () {
+        global $uidConnectionMap, $last_online_count, $last_online_page_count, $sender_io,$max_online_count;
+
+
+        $online_count_now = count($uidConnectionMap); // 当前在线用户数
+        $online_page_count_now = array_sum($uidConnectionMap); // 当前在线页面数
+        $max_online_count=loadMaxOnlineCount();
+        // 检查是否需要更新历史最大在线人数
+        if ($online_count_now > $max_online_count) {
+            $max_online_count = $online_count_now;
+            // 在这里可以将最大值保存到持久存储中
+            saveMaxOnlineCount($max_online_count);
+        }
+
+
+        // 如果在线用户数或页面数发生变化，广播更新
+        if ($last_online_count != $online_count_now
+            || $last_online_page_count != $online_page_count_now
+        ) {
+            $data = [
+                'onlineCount' => $online_count_now,
+                'pageCount' => $online_page_count_now,
+                'maxOnlineCount' => $max_online_count // 将历史最大在线人数传递给客户端
+            ];
+
+            $sender_io->emit('update_online_count', json_encode($data)); // 广播更新
+
+            $last_online_count = $online_count_now; // 更新上次记录的在线用户数
+            $last_online_page_count = $online_page_count_now; // 更新上次记录的在线页面数
+        }
     });
+
 
 });
 
-function updateOnlineCount(): void
-{
-    global $guestCount, $memberCount, $sender_io, $max_online_count;
-
-    $max_online_count = loadMaxOnlineCount();
-
-    if ($guestCount+$memberCount > $max_online_count) {
-        $max_online_count = $guestCount+$memberCount;
-        saveMaxOnlineCount($max_online_count);
-    }
-
-    // 只发送新的在线数据，不再比较和广播上次的数据
-    $data = [
-        'guestCount' => $guestCount, // 新增游客数
-        'memberCount' => $memberCount, // 新增会员数
-        'maxOnlineCount' => $max_online_count,// 最大在线人数
-    ];
-
-    $sender_io->emit('update_online_count', json_encode($data));
-}
 
 /**
  * 保存历史最大在线人数到文件中
  * @param int $count
  */
-function saveMaxOnlineCount($count)
-{
+function saveMaxOnlineCount($count) {
     $file = __DIR__ . '/../var/max_online_count';
     file_put_contents($file, $count);
 }
 
-function loadMaxOnlineCount()
-{
+function loadMaxOnlineCount() {
     $file = __DIR__ . '/../var/max_online_count';
     if (file_exists($file)) {
-        return (int)file_get_contents($file);
+        return (int) file_get_contents($file);
     }
     return 0;
 }
