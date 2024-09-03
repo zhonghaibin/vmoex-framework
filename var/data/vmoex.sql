@@ -11,7 +11,7 @@
  Target Server Version : 101106 (10.11.6-MariaDB)
  File Encoding         : 65001
 
- Date: 22/08/2024 07:38:19
+ Date: 03/09/2024 20:12:38
 */
 
 SET NAMES utf8mb4;
@@ -31,11 +31,14 @@ CREATE TABLE `active`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_4B1EFC02A76ED395`(`user_id` ASC) USING BTREE,
   CONSTRAINT `FK_4B1EFC02A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of active
 -- ----------------------------
+INSERT INTO `active` VALUES (1, 1, 807, '2024-09-03', '2024-09-03 00:27:42', '2024-09-03 12:11:09');
+INSERT INTO `active` VALUES (2, 2, 1, '2024-09-03', '2024-09-03 04:04:06', '2024-09-03 04:04:06');
+INSERT INTO `active` VALUES (3, 2, 1, '2024-09-03', '2024-09-03 04:04:06', '2024-09-03 04:04:06');
 
 -- ----------------------------
 -- Table structure for advertisement
@@ -74,7 +77,7 @@ CREATE TABLE `announce`  (
 -- ----------------------------
 -- Records of announce
 -- ----------------------------
-INSERT INTO `announce` VALUES (1, '   欢迎来到vmoex社区！😊', 1, '2024-08-20 12:55:46', '2024-08-20 12:55:46');
+INSERT INTO `announce` VALUES (1, '   欢迎来到Vmoex社区！😊', 1, '2024-08-20 12:55:46', '2024-08-20 12:55:46');
 
 -- ----------------------------
 -- Table structure for chat
@@ -281,10 +284,10 @@ INSERT INTO `options` VALUES (1, 'siteLogo', '/assets/images/logo.png');
 INSERT INTO `options` VALUES (2, 'siteSince', '2024-08-20');
 INSERT INTO `options` VALUES (3, 'siteVersion', 'v1.0');
 INSERT INTO `options` VALUES (4, 'siteAnnounce', '1');
-INSERT INTO `options` VALUES (5, 'girl_enable', '0');
-INSERT INTO `options` VALUES (9, 'githubClientId', 'Ov23li7qaAHRfd0Z96Bq');
-INSERT INTO `options` VALUES (10, 'githubClientSecret', '5cd7cebdfb51df269a4b1d957ea962ed7879a9ec');
-INSERT INTO `options` VALUES (11, 'githubRedirectUrl', 'https://vmoex.us.kg/oauth/github');
+INSERT INTO `options` VALUES (5, 'girl_enable', '1');
+INSERT INTO `options` VALUES (9, 'githubClientId', NULL);
+INSERT INTO `options` VALUES (10, 'githubClientSecret', NULL);
+INSERT INTO `options` VALUES (11, 'githubRedirectUrl', NULL);
 INSERT INTO `options` VALUES (12, 'baiduTransAppId', NULL);
 INSERT INTO `options` VALUES (13, 'baiduTransKey', NULL);
 INSERT INTO `options` VALUES (14, 'maintain_enable', '');
@@ -351,11 +354,12 @@ CREATE TABLE `post`  (
   INDEX `IDX_5A8A6C8D8D0C9323`(`tab_id` ASC) USING BTREE,
   CONSTRAINT `FK_5A8A6C8D8D0C9323` FOREIGN KEY (`tab_id`) REFERENCES `tab` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_5A8A6C8DA196F9FD` FOREIGN KEY (`authorId`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post
 -- ----------------------------
+INSERT INTO `post` VALUES (1, '测试帖子', '', '<p>请多多支持</p>', '2024-09-03 00:48:07', '2024-09-03 11:38:55', 0, 'published', 1, 29, 0, 2, '2024-09-03 11:38:55');
 
 -- ----------------------------
 -- Table structure for sign
@@ -425,7 +429,7 @@ CREATE TABLE `translation`  (
   `can_delete` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `message_unique`(`message_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 201 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 217 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of translation
@@ -509,8 +513,8 @@ INSERT INTO `translation` VALUES (76, '修改密码', '修改密码', 'Change Pa
 INSERT INTO `translation` VALUES (77, '支持我们', '支持我们', 'Support Us', 'サポート', '支持我們', 1);
 INSERT INTO `translation` VALUES (78, '个新的粉丝', '个新的粉丝', 'new followers', '新しいフォロワー', '個新的粉絲', 1);
 INSERT INTO `translation` VALUES (79, '赞', '赞', 'Like', 'いいね', '贊', 1);
-INSERT INTO `translation` VALUES (80, '什么是瞎聊', '什么是聊聊', 'What is Chat', '雑談', '什麼是瞎聊', 1);
-INSERT INTO `translation` VALUES (81, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Chat\" is an instant messaging feature provided by the Vmoex community. Each \"Chat\" message sent will cost one coin.', '「雑談」はVmoexコミュニティが提供するリアルタイムチャット機能で、メッセージを送信するたびに1ゴールドを消費します。', '“瞎聊”是 Vmoex 社區提供的一個線上即時聊天功能，每發送一條“瞎聊”消息將消耗一枚金幣。', 1);
+INSERT INTO `translation` VALUES (80, '什么是瞎聊', '什么是聊聊', 'What is Chat', '雑談', '什麼是聊聊', 1);
+INSERT INTO `translation` VALUES (81, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Chat\" is an instant messaging feature provided by the Vmoex community. Each \"Chat\" message sent will cost one coin.', '「雑談」はVmoexコミュニティが提供するリアルタイムチャット機能で、メッセージを送信するたびに1ゴールドを消費します。', '“聊聊”是 Vmoex 社區提供的一個線上即時聊天功能，每發送一條“聊聊”消息將消耗一枚金幣。', 1);
 INSERT INTO `translation` VALUES (82, '社区运行状态', '社区运行状态', 'Community Status', 'コミュニティの運営状態', '社區運行狀態', 1);
 INSERT INTO `translation` VALUES (83, '社区成立时间', '社区成立时间', 'Community Established', 'コミュニティ設立日', '社區成立時間', 1);
 INSERT INTO `translation` VALUES (84, '主题数量', '主题数量', 'Topic Count', 'トピック数', '主題數量', 1);
@@ -630,6 +634,22 @@ INSERT INTO `translation` VALUES (197, '分享创造', '分享创造', 'Share Cr
 INSERT INTO `translation` VALUES (198, '交易', '交易', 'Trading', '取引', '交易', 1);
 INSERT INTO `translation` VALUES (199, '二手交易', '二手交易', 'Second-hand Trading', '中古取引', '二手交易', 1);
 INSERT INTO `translation` VALUES (200, '免费赠送', '免费赠送', 'Free Gifts', '無料贈呈', '免費贈送', 1);
+INSERT INTO `translation` VALUES (201, '暂时没有任何文档！', '暂时没有任何文档！', 'No documents available at the moment!', '現在、ドキュメントはありません！', '暫時沒有任何文檔！', 1);
+INSERT INTO `translation` VALUES (202, '签到领取奖励', '签到领取奖励', 'Check in to receive rewards', '出席して報酬を受け取る', '簽到領取獎勳', 1);
+INSERT INTO `translation` VALUES (203, '验证码', '验证码', 'Verification code', '認証コード', '驗證碼', 1);
+INSERT INTO `translation` VALUES (204, '验证', '验证', 'Verification', '検証', '驗證', 1);
+INSERT INTO `translation` VALUES (205, '发送验证码', '发送验证码', 'Send verification code', '認証コードを送信する', '發送驗證碼', 1);
+INSERT INTO `translation` VALUES (206, '基本资料', '基本资料', 'Basic information', '基本情報', '基本資料', 1);
+INSERT INTO `translation` VALUES (207, '用户名不能被修改', '用户名不能被修改', 'Username cannot be changed', 'ユーザー名は変更できません', '用戶名不能被修改', 1);
+INSERT INTO `translation` VALUES (208, '昵称每180天可修改一次，请谨慎修改。', '昵称每180天可修改一次，请谨慎修改。', 'Nickname can be changed once every 180 days. Please make changes carefully.', 'ニックネームは180日に1回変更できます。慎重に変更してください。', '昵称每180天可修改一次，請謹慎修改。', 1);
+INSERT INTO `translation` VALUES (209, '天后可修改昵称。', '天后可修改昵称。', 'Nickname can be changed after day.', '天後にニックネームを変更できます。', '天後可修改暱稱。', 1);
+INSERT INTO `translation` VALUES (210, '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', 'Supports jpg, png, and gif formats up to 2MB. It is recommended to use a 200*200 PNG file for the best effect. Gif format requires 50 coins.', '2MB以内のjpg、png、gif形式がサポートされています。最適な効果を得るには200*200のPNGファイルを使用することをお勧めします。gif形式は50コインが必要です。', '支援 2MB 以內的jpg、png、gif格式，推薦使用一張 200*200 的 PNG 文件以獲得最佳效果，gif格式需消耗50金幣', 1);
+INSERT INTO `translation` VALUES (211, '我的信箱', '我的信箱', 'My mailbox', '私のメールボックス', '我的信箱', 1);
+INSERT INTO `translation` VALUES (212, '更新', '更新', 'Update', '更新', '更新', 1);
+INSERT INTO `translation` VALUES (213, '管理员', '管理员', 'Administrator', 'かんりしゃ', '管理員', 1);
+INSERT INTO `translation` VALUES (214, '内容', '内容', 'Content', '内容', '內容', 1);
+INSERT INTO `translation` VALUES (215, '选择板块', '选择板块', 'Select Board', '板を選択', '選擇板塊', 1);
+INSERT INTO `translation` VALUES (216, '提交', '提交', 'Submit', '提出', '提交', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -656,12 +676,13 @@ CREATE TABLE `user`  (
   UNIQUE INDEX `UNIQ_8D93D649F85E0677`(`username` ASC) USING BTREE,
   UNIQUE INDEX `UNIQ_8D93D649A188FE64`(`nickname` ASC) USING BTREE,
   UNIQUE INDEX `UNIQ_8D93D649E7927C74`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', 'admin', '$2y$13$6/ty6/UFtdBevVHz6wrwSeAjQnB91XE5tNg0DpwWVTPwVdRLUFfFO', '756152823@qq.com', 'avatar/default.png', '管理员', 65, 144, 1, 1, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2024-08-21 15:04:51', '2022-08-20 02:58:51');
+INSERT INTO `user` VALUES (1, 'admin', 'admin', '$2y$13$6/ty6/UFtdBevVHz6wrwSeAjQnB91XE5tNg0DpwWVTPwVdRLUFfFO', '756152823@qq.com', 'avatar/admin.png', '管理员', 723, 103, 1, 1, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2024-09-03 12:05:16', '2022-08-20 02:58:51');
+INSERT INTO `user` VALUES (2, 'test', 'test', '$2y$13$P24ssXTGRvcNbmIKuMUJnuTHXbKiTLjTaT9ONS5LZA.FI1uNX7SRC', '111@qq.com', 'upload/avatar/eca22fc06ed7a851baefb916fe57e485.png', '', 1, 9, 0, 0, 'ROLE_USER', '566200bf005dd77cc39a69eb752c1d75', '2024-09-03 04:03:50', '2024-09-03 12:05:34', NULL);
 
 -- ----------------------------
 -- Table structure for user_thumbup_comment
