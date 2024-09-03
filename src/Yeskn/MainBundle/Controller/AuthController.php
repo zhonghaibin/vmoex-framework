@@ -211,7 +211,7 @@ class AuthController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        throw new HttpException('使用Github登录失败');
+        throw new \HttpException('使用Github登录失败');
     }
 
     /**

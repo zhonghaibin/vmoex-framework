@@ -156,21 +156,22 @@ if(!norunFlag){
 	},15000);
 
 	function showHitokoto(){
-		if(sessionStorage.getItem("Sleepy")!=="1"){
-			if(!AITalkFlag){
-				$.getJSON('https://v1.hitokoto.cn/',function(result){
-					talkValTimer();
-					showMessage(result.hitokoto, 0);
-				});
-			}
-		}else{
-			hideMessage(0);
-			if(sleepTimer_==null){
-				sleepTimer_ = setInterval(function(){
-					checkSleep();
-				},200);
-			}
-		}
+
+		// if(sessionStorage.getItem("Sleepy")!=="1"){
+		// 	if(!AITalkFlag){
+		// 		$.getJSON('https://v1.hitokoto.cn/',function(result){
+		// 			talkValTimer();
+		// 			showMessage(result.hitokoto, 0);
+		// 		});
+		// 	}
+		// }else{
+		// 	hideMessage(0);
+		// 	if(sleepTimer_==null){
+		// 		sleepTimer_ = setInterval(function(){
+		// 			checkSleep();
+		// 		},200);
+		// 	}
+		// }
 	}
 
 	function checkSleep(){

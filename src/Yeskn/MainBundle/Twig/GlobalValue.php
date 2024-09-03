@@ -44,6 +44,8 @@ class GlobalValue extends AbstractExtension
 
     private $varDir;
 
+    private $redis;
+
     /**
      * GlobalValue constructor.
      * @param EntityManagerInterface $em
@@ -58,6 +60,7 @@ class GlobalValue extends AbstractExtension
         RouterInterface $router,
         TokenStorageInterface $tokenStorage,
         KernelInterface $kernel,
+        \Predis\Client $redis,
         $socketHost
     )
     {
@@ -67,6 +70,7 @@ class GlobalValue extends AbstractExtension
         $this->tokenStorage = $tokenStorage;
         $this->socketHost = $socketHost;
         $this->varDir = rtrim( $kernel->getProjectDir(), '/') . '/var';
+        $this->redis = $redis;
     }
 
     /**
@@ -192,21 +196,13 @@ class GlobalValue extends AbstractExtension
                 'topicCount' => $this->em->getRepository('YesknMainBundle:Post')->countPost(),
                 'userCount' => $this->em->getRepository('YesknMainBundle:User')->countUser(),
                 'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),
-                'onlineUserCount' => $this->em->getRepository('YesknMainBundle:Active')->countOnlineUser(),
                 'footerLinks' => $this->em->getRepository('YesknMainBundle:FooterLink')->findBy([], ['priority' => 'DESC']),
-                'maxOnlineNum' =>$this->loadMaxOnlineCount()
             ];
         }
 
         return $site;
     }
-    function loadMaxOnlineCount() {
-        $file = $this->varDir . '/max_online_count';
-        if (file_exists($file)) {
-            return (int) file_get_contents($file);
-        }
-        return 0;
-    }
+
     public function avatar(array $user)
     {
         if (empty($user['avatar']) && !empty($user['username'])) {
@@ -221,9 +217,10 @@ class GlobalValue extends AbstractExtension
         $user = $this->tokenStorage->getToken()->getUser();
 
         if ($user instanceof UserInterface) {
+            $socketToken = $this->redis->get('token_secret:' . $user->getUsername());
             $userParam = [
                 'username' => $user->getUsername(),
-                'socketToken' => ''
+                'socketToken' => $socketToken
             ];
 
             $noticeCount = $this->em->getRepository('YesknMainBundle:Notice')->getUnreadCount($user->getId());

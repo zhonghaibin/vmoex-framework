@@ -1,4 +1,5 @@
 services:
+    Predis\Client: '@snc_redis.default'
     _defaults:
         autowire: true
         autoconfigure: true
@@ -21,6 +22,9 @@ services:
         - { name: kernel.event_listener, event: kernel.response }
 
     Yeskn\MainBundle\EventListener\LoginListener:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $redis: '@snc_redis.default' # 使用 snc_redis.default 服务
         tags:
         - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
 

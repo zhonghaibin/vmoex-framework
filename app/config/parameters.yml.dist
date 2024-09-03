@@ -11,7 +11,7 @@ parameters:
     database_password: ~
 
     # redis配置，下面passwd为redis的密码（请务必设置redis密码！）
-    redis_dsn: 'redis://<passwd>@localhost'
+    redis_dsn: 'redis://:<passwd>@localhost'
 
     # 邮箱smtp配置，不配置则无法向用户发送验证、通知邮件
     mailer_transport: smtp
@@ -42,3 +42,6 @@ parameters:
 
     # 资源文件的cdn地址，或者直接用当前网站地址
     assets_base_url: http://127.0.0.1:8000
+
+    # token secret
+    token_secret: 123456

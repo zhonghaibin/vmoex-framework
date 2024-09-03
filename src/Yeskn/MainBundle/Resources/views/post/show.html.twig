@@ -64,7 +64,7 @@
                             <div class="comment-user-info">
                                 <strong class="primary-font"><a href="{{ path('member_home', {username: comment.user.username}) }}" data-pjax>{{ comment.user.nickname }}</a></strong>
                                 {% if comment.user.role == 'ROLE_ADMIN' %}
-                                    <span class="mod-text" data-content="管理员" title="MOD">mod</span>
+                                    <span class="mod-text" data-content="{{ '管理员'|trans }}" title="MOD">mod</span>
                                 {% elseif comment.user == post.author %}
                                     <span class="author-label" data-content="author" title="author">author</span>
                                 {% endif %}
