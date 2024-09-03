@@ -8,6 +8,18 @@ use Symfony\Component\Yaml\Yaml;
 
 include __DIR__ . '/../vendor/autoload.php'; // 自动加载Composer依赖
 
+
+$user = 'www-data';
+$userInfo = posix_getpwnam($user);
+
+if ($userInfo) {
+    posix_setgid($userInfo['gid']);  // 设置组 ID
+    posix_setuid($userInfo['uid']);  // 设置用户 ID
+} else {
+    die("用户 $user 不存在");
+}
+
+
 // 初始化用于存储用户连接信息的数组
 $uidConnectionMap = array();
 

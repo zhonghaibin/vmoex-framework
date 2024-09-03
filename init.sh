@@ -30,7 +30,7 @@ else
   rm -Rf /var/app
 fi
 # 设置正确的权限
-chown -R www-data:www-data $TARGET_DIR && chmod 777 -Rf /var/www/web/upload  && chmod 777 -Rf /var/www/var
+chown -R www-data:www-data $TARGET_DIR&& chmod 755 -Rf /var/www/   && chmod 777 -Rf /var/www/web/upload  && chmod 777 -Rf /var/www/var
 echo "启动应用服务"
 echo "请通过 http://127.0.0.1:3110 进行访问 "
 # 启动 Supervisor
