@@ -166,6 +166,120 @@ class UserController extends AbstractController
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
+     *
+     * @Route("/favorite", name="user_favorite")
+     */
+    public function favoriteAction(Request $request)
+    {
+        $page = $request->query->getInt('page', 1); // 当前页，从 URL 查询参数中获取
+        $pagesize =20; // 每页显示的收藏项数目
+
+        $favoriteRepository = $this->getDoctrine()->getRepository('YesknMainBundle:PostFavorites');
+
+        // 计算总的收藏记录数量
+        $totalCount = $favoriteRepository->count(['user' => $this->getUser()]);
+
+        // 查询当前用户收藏的帖子，支持分页
+        $favorites = $favoriteRepository->findBy(
+            ['user' => $this->getUser()],
+            ['createdAt' => 'DESC'],
+            $pagesize,
+            ($page - 1) * $pagesize
+        );
+
+        // 从 PostFavorites 实体中提取帖子
+        $posts = [];
+        foreach ($favorites as $favorite) {
+            $post = $favorite->getPost(); // 获取帖子
+            $author = $post->getAuthor(); // 获取帖子作者
+            $posts[] = [
+                'post' => $post,
+                'author' => $author,
+                'avatar' => $author ? $author->getAvatar() : null, // 获取作者头像
+                'favoriteDate' => $favorite->getCreatedAt() // 获取收藏时间
+            ];
+        }
+
+        // 计算总页数
+        $totalPages = ceil($totalCount / $pagesize);
+
+        $pageData = [
+            'allPage' => $totalPages,
+            'currentPage' => $page
+        ];
+
+        // 渲染模板并传递数据
+        return $this->render('@YesknMain/user/favorite.html.twig', $this->getUserHomeInfo() + [
+            'scope' => 'favorite',
+            'favorites' => $posts,  // 传递帖子列表到模板
+            'pageData' => $pageData,
+        ]);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \LogicException
+     *
+     * @Route("/thanks", name="user_thanks")
+     */
+    public function thinksAction(Request $request)
+    {
+
+        $user = $this->getUser(); // 获取当前用户
+
+        $thinksRepository = $this->getDoctrine()->getRepository('YesknMainBundle:PostThanks');
+
+        // 查询自己发出的感谢 (当前用户作为发送者)
+        $sThanks = $thinksRepository->findBy(
+            ['sender' => $user], // 当前用户是发送者
+            ['createdAt' => 'DESC']
+        );
+
+        // 查询收到的感谢 (当前用户作为接收者)
+        $rThanks = $thinksRepository->findBy(
+            ['receiver' => $user], // 当前用户是接收者
+            ['createdAt' => 'DESC']
+        );
+
+        // 处理发出的感谢，提取接收者的头像和帖子信息
+        $sentThanks = [];
+        foreach ($sThanks as $thanks) {
+            $receiver = $thanks->getReceiver(); // 获取接收者
+            $post = $thanks->getPost(); // 获取帖子
+            $sentThanks[] = [
+                'thanks' => $thanks,
+                'receiver' => $receiver,
+                'receiverAvatar' => $receiver ? $receiver->getAvatar() : null,
+                'receiverUserName' => $receiver ? $receiver->getUserName() : null,
+                'post' => $post, // 获取感谢对应的帖子
+            ];
+        }
+
+        // 处理收到的感谢，提取发送者的头像和帖子信息
+        $receivedThanks = [];
+        foreach ($rThanks as $thanks) {
+            $sender = $thanks->getSender(); // 获取发送者
+            $post = $thanks->getPost(); // 获取帖子
+            $receivedThanks[] = [
+                'thanks' => $thanks,
+                'sender' => $sender,
+                'senderAvatar' => $sender ? $sender->getAvatar() : null,
+                'senderUserName' => $sender ? $sender->getUserName() : null,
+                'post' => $post, // 获取感谢对应的帖子
+
+            ];
+        }
+        // 渲染模板并传递数据
+        return $this->render('@YesknMain/user/thanks.html.twig',$this->getUserHomeInfo() +  [
+            'scope' => 'thanks',
+            'sThanks' => $sentThanks,    // 发出的感谢，带接收者头像和帖子信息
+            'rThanks' => $receivedThanks // 收到的感谢，带发送者头像和帖子信息
+        ]);
+    }
+
+    /**
      * @Route("/change-password", name="user_change_password")
      *
      * @param $request

@@ -37,8 +37,9 @@
                     {% endif %}
                 </tr>
                 </thead>
-                <tbody>
+
                 {% for key, item in list %}
+                <tbody>
                     <tr>
                         {% for key, one in item %}
                             {%  set columnAttr = extra.columnAttr[key] is defined ? extra.columnAttr[key] : ''  %}
@@ -52,7 +53,14 @@
                                     {% else %}
                                         <a data-edit role="button" class="btn btn-warning btn-sm" href="{{ path('admin_edit', {entity: entity,id:ids[key]}) }}"><i class="fa fa-edit"></i> 编辑</a>
                                     {% endif %}
-                                    <a data-delete role="button" class="btn btn-danger btn-sm" href="{{ path('admin_delete',{entity: entity, id:ids[key]}) }}"><i class="fa fa-remove"></i> 删除</a>
+                                    {% if delete_btn is not empty %}
+                                        {% if item[8] == '' %}
+                                            <a data-delete role="button" class="btn btn-warning btn-sm" href="{{ path('yeskn_admin_post_delete',{id:ids[key]}) }}"><i class="fa fa-remove"></i>软删除</a>
+                                        {% else %}
+                                            <a data-delete role="button" class="btn btn-success btn-sm" href="{{ path('yeskn_admin_post_restore', {id:ids[key]}) }}"><i class="fa  fa-undo"></i>恢复删除</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    <a data-delete role="button" class="btn btn-danger btn-sm" href="{{ path('admin_delete',{entity: entity, id:ids[key]}) }}"><i class="fa fa-remove"></i>删除</a>
                                 </div>
                             </td>
                         {% endif %}

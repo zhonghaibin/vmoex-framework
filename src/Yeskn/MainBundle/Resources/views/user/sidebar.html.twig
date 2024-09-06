@@ -36,6 +36,8 @@
                 <a data-pjax class="list-group-item {{ scope == 'home' ? 'active':'' }}" href="{{ path('user_home') }}">{{ 'nav_user_home'|trans }}</a>
                 <a data-pjax class="list-group-item {{ scope == 'notice' ? 'active':'' }}" href="{{ path('user_notice') }}">{{ 'notice_my_notice'|trans }} <span class="badge">{{ notice_count }}</span></a>
                 <a data-pjax class="list-group-item {{ scope == 'message' ? 'active':'' }}" href="{{ path('user_message') }}">{{ '我的信箱'|trans }} <span class="badge">{{ message_count }}</span></a>
+                <a data-pjax class="list-group-item {{ scope == 'favorite' ? 'active':'' }}" href="{{ path('user_favorite') }}">{{ '我的收藏'|trans }}</a>
+                <a data-pjax class="list-group-item {{ scope == 'thanks' ? 'active':'' }}" href="{{ path('user_thanks') }}">{{ '我的感谢'|trans }}</a>
                 <a data-pjax class="list-group-item {{ scope == 'setting' ? 'active':'' }}" href="{{ path('user_setting') }}">{{ 'nav_user_setting'|trans }}</a>
             </div>
         </div>

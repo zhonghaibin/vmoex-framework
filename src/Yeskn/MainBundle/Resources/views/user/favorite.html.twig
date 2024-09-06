@@ -1,0 +1,94 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block page_wraper %}
+    <div class="row content-row">
+        {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-star fa-fw"></i> {{ '我的收藏'|trans }}
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#receive" data-toggle="tab"> {{ '主题'|trans }}</a>
+                        </li>
+                    </ul>
+                    {% if favorites is not empty %}
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="receive">
+                            {% if favorites is not empty %}
+                                <ul class="messages list-group">
+                                    {% for favorite in favorites %}
+                                        <li class="list-group-item">
+                                            <img src="{{ asset(favorite.avatar) }}" alt="" width="30" height="30" class="img-rounded">
+                                            {{  favorite.author.username }}
+                                            <a data-pjax href="{{ path('post_show', { 'id': favorite.post.id }) }}">
+                                             : {{ favorite.post.title }}  </a>
+                                            <span class="pull-right">{{ favorite.favoriteDate|ago }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    {{ 'sorry_no_content'|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <ul class="pagination" style="padding: 0 ;margin: 0">
+                            {% set route = 'user_favorite'  %}
+                            {% if pageData.currentPage == 1 %}
+                                <li class="disabled">
+                                    <a href="#">&laquo;</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{{ path(route, {page:pageData['currentPage']-1}) }}" data-pjax>&laquo;</a>
+                                </li>
+                            {% endif %}
+
+                            {% if pageData.currentPage > 3 %}
+                                <li class="disabled">
+                                    <a href="#">...</a>
+                                </li>
+                            {% endif %}
+
+                            {% for p in 1..pageData.allPage %}
+                                {% if p < pageData.currentPage - 2 %}
+                                {% endif %}
+
+                                {% if p == pageData.currentPage %}
+                                    <li class="active"><a href="javascript:">{{ p }}</a></li>
+                                {% elseif p >= pageData.currentPage - 2 and p != pageData.currentPage and p <= pageData.currentPage+2 %}
+                                    <li><a href="{{ path(route, {'page':p}) }}" data-pjax>{{ p }}</a></li>
+                                {% endif %}
+
+
+                                {% if p > pageData.currentPage+2 %}
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if pageData.allPage > pageData.currentPage+2 %}
+                                <li class="disabled">
+                                    <a href="#">...</a>
+                                </li>
+                            {% endif %}
+
+                            <li {% if pageData.currentPage == pageData.allPage %} class="disabled" {% endif %}>
+                                <a href="{{ path(route, {page:pageData['currentPage']+1}) }}" data-pjax>&raquo;
+                                </a>
+                            </li>
+                        </ul>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="well" style="margin: 15px">{{ '暂时没有任何文档！' }}</div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

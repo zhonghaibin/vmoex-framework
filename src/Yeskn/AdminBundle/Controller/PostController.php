@@ -2,6 +2,7 @@
 
 namespace Yeskn\AdminBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -79,4 +80,47 @@ class PostController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/delete/{id}", name="yeskn_admin_post_delete", methods={"GET", "POST"})
+     *
+     * @param $request
+     * @return Response
+     */
+    public function deleteAction(Post $post)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        // 软删除帖子
+        $post->setDeletedAt(new \DateTime());
+
+        $em->persist($post);
+        $em->flush();
+
+        return new JsonResponse(['status' => 1, 'message' => '删除成功']);
+    }
+
+
+    /**
+     * @Route("/restore/{id}", name="yeskn_admin_post_restore", methods={"GET", "POST"})
+     *
+     * @param $request
+     * @return Response
+     */
+    public function restoreAction(Post $post)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        // 恢复帖子
+        $post->setDeletedAt(null);
+
+        $em->persist($post);
+        $em->flush();
+
+        return new JsonResponse(['status' => 1, 'message' => '回复成功']);
+    }
+
 }

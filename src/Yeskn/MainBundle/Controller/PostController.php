@@ -17,9 +17,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\MainBundle\Entity\Comment;
 use Yeskn\MainBundle\Entity\Post;
+use Yeskn\MainBundle\Entity\PostBlocked;
 use Yeskn\MainBundle\Utils\HtmlPurer;
+use Yeskn\MainBundle\Entity\PostFavorites;
+use Yeskn\MainBundle\Entity\PostThanks;
+use Yeskn\Support\Http\ApiFail;
+use Yeskn\Support\Http\ApiOk;
 
 /**
  * Class PostController
@@ -59,9 +65,9 @@ class PostController extends Controller
     public function postShowAction($id)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-
+        $user = $this->getUser(); // 获取当前登录用户
         /** @var Post $post */
-        $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->find($id);
+        $post = $this->getDoctrine()->getRepository('YesknMainBundle:Post') ->findWithoutDeleted($id);
         if (empty($post)) {
             return $this->render('@YesknMain/error.html.twig', [
                 'message' => '文章不存在'
@@ -81,9 +87,45 @@ class PostController extends Controller
             }
         }
 
+        // 查询用户是否收藏了该帖子
+        $isFavorited = $this->getDoctrine()
+                ->getRepository(PostFavorites::class)
+                ->findOneBy([
+                    'user' => $user,
+                    'post' => $post,
+                ]) !== null;
+
+        $favoritesCount = $em->getRepository(PostFavorites::class)
+            ->createQueryBuilder('pf')
+            ->select('COUNT(pf.id)')
+            ->where('pf.post = :post')
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $isThanks = $this->getDoctrine()
+                ->getRepository(PostThanks::class)
+                ->findOneBy([
+                    'sender' => $user,
+                    'post' => $post,
+                ]) !== null;
+
+
+        $thanksCount = $em->getRepository(PostThanks::class)
+            ->createQueryBuilder('pt')
+            ->select('COUNT(pt.id)')
+            ->where('pt.post = :post')
+            ->setParameter('post', $post)
+            ->getQuery()
+            ->getSingleScalarResult();
+
         $response = $this->render('@YesknMain/post/show.html.twig', array(
             'post' => $post,
-            'commentUsers' => json_encode($commentUsers)
+            'commentUsers' => json_encode($commentUsers),
+            'isFavorited' => $isFavorited,
+            'favoritesCount' => $favoritesCount,
+            'isThanks' => $isThanks,
+            'thanksCount' => $thanksCount
         ));
 
         return $response;
@@ -178,5 +220,94 @@ class PostController extends Controller
                 $this->getParameter('assets_base_url') . '/' . $fileName
             ]
         ]);
+    }
+
+    /**
+     *@Route("/{id}/thank", name="post_thank", methods={"POST"})
+     */
+    public function thankAction(Request $request, Post $post, TranslatorInterface $trans)
+    {
+        $user = $this->getUser(); // 获取当前登录用户
+
+        // 检查用户是否已经感谢过该帖子
+        $existingThanks = $this->getDoctrine()
+            ->getRepository(PostThanks::class)
+            ->findOneBy([
+                'sender' => $user,
+                'post' => $post,
+            ]);
+
+        if ($existingThanks) {
+            // 如果用户已经感谢过该帖子
+            return new ApiFail($trans->trans( 'already_thanked'));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        // 获取帖子的作者
+        $receiver = $post->getAuthor();
+
+        if (!$receiver) {
+            // 如果帖子没有作者，返回错误消息
+            return new ApiFail($trans->trans( 'Post has no author'));
+        }
+
+        // 检查用户是否试图感谢自己的帖子
+        if ($receiver === $user) {
+            return new ApiFail($trans->trans( 'You cannot thank yourself'));
+        }
+
+        // 创建新的感谢记录
+        $thanks = new PostThanks();
+        $thanks->setSender($user);
+        $thanks->setReceiver($receiver); // 设置接收感谢的用户
+        $thanks->setPost($post);
+
+        $em->persist($thanks);
+        $em->flush();
+
+        return new ApiOk();
+    }
+
+    /**
+     * 屏蔽帖子操作
+     *
+     * @Route("/{id}/block", name="post_block")
+     */
+    public function blockAction(Request $request, Post $post, TranslatorInterface $trans)
+    {
+        $user = $this->getUser(); // 获取当前登录的用户
+
+        // 检查用户是否已经屏蔽了该帖子
+        $existingBlock = $this->getDoctrine()
+            ->getRepository(PostBlocked::class)
+            ->findOneBy([
+                'user' => $user,
+                'post' => $post
+            ]);
+
+        $em = $this->getDoctrine()->getManager();
+
+        if ($existingBlock) {
+            // 如果已经屏蔽过，返回提示
+            return new ApiFail($trans->trans('already_blocked'));
+        }
+        // 获取帖子的作者
+        $author = $post->getAuthor();
+
+        // 检查用户是否试图感谢自己的帖子
+        if ($author === $user) {
+            return new ApiFail($trans->trans('不能自己屏蔽自己'));
+        }
+
+        // 添加屏蔽记录
+        $block = new PostBlocked();
+        $block->setUser($user);
+        $block->setPost($post);
+
+        $em->persist($block);
+        $em->flush();
+
+        return new ApiOk();
     }
 }

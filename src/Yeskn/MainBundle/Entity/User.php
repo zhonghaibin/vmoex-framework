@@ -772,4 +772,66 @@ class User implements UserInterface
 
         return 0;
     }
+
+    /**
+     * Get isEmailVerified.
+     *
+     * @return bool
+     */
+    public function getIsEmailVerified()
+    {
+        return $this->isEmailVerified;
+    }
+
+    /**
+     * Add thumbUpComment.
+     *
+     * @param \Yeskn\MainBundle\Entity\Comment $thumbUpComment
+     *
+     * @return User
+     */
+    public function addThumbUpComment(\Yeskn\MainBundle\Entity\Comment $thumbUpComment)
+    {
+        $this->thumbUpComments[] = $thumbUpComment;
+
+        return $this;
+    }
+
+    /**
+     * Remove thumbUpComment.
+     *
+     * @param \Yeskn\MainBundle\Entity\Comment $thumbUpComment
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeThumbUpComment(\Yeskn\MainBundle\Entity\Comment $thumbUpComment)
+    {
+        return $this->thumbUpComments->removeElement($thumbUpComment);
+    }
+
+    /**
+     * Add chat.
+     *
+     * @param \Yeskn\MainBundle\Entity\Chat $chat
+     *
+     * @return User
+     */
+    public function addChat(\Yeskn\MainBundle\Entity\Chat $chat)
+    {
+        $this->chats[] = $chat;
+
+        return $this;
+    }
+
+    /**
+     * Remove chat.
+     *
+     * @param \Yeskn\MainBundle\Entity\Chat $chat
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeChat(\Yeskn\MainBundle\Entity\Chat $chat)
+    {
+        return $this->chats->removeElement($chat);
+    }
 }

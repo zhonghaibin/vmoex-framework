@@ -1,0 +1,69 @@
+{% extends '@YesknMain/base.html.twig' %}
+
+{% block page_wraper %}
+    <div class="row content-row">
+        {% include '@YesknMain/user/sidebar.html.twig' %}
+        <div class="col-lg-8 content-main" role="main">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-heart fa-fw"></i> {{ '我的感谢'|trans }}
+                </div>
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#receive" data-toggle="tab"> {{ '我收到的'|trans }}</a>
+                        </li>
+                        <li><a href="#send" data-toggle="tab"> {{ '我送出的'|trans }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="receive">
+                            {% if rThanks is not empty %}
+
+                                <ul class="messages list-group">
+                                    {% for thank in rThanks %}
+                                        <li class="list-group-item">
+                                            <img src="{{ asset(thank.senderAvatar) }}" alt="" width="30" height="30" class="img-rounded">
+                                             {{  thank.senderUserName }}
+                                            <a data-pjax href="{{ path('post_show', { 'id': thank.post.id }) }}">
+                                             : {{ thank.post.title }}
+                                            </a>
+                                            <span class="pull-right">{{ thank.thanks.createdAt|ago }}</span>
+
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    {{ 'sorry_no_content'|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="tab-pane fade" id="send">
+                            {% if sThanks is not empty %}
+                                <ul class="messages list-group">
+                                    {% for thank in sThanks %}
+                                        <li class="list-group-item">
+                                            <img src="{{ asset(thank.receiverAvatar) }}" alt="" width="30" height="30" class="img-rounded">
+                                           {{  thank.receiverUserName }}
+                                            <a data-pjax href="{{ path('post_show', { 'id': thank.post.id }) }}">
+                                                : {{ thank.post.title }}
+                                            </a>
+                                            <span class="pull-right">{{ thank.thanks.createdAt|ago }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="alert alert-warning">
+                                    {{ 'sorry_no_content'|trans }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

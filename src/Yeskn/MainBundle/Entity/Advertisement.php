@@ -154,4 +154,14 @@ class Advertisement
     {
         $this->title = $title;
     }
+
+    /**
+     * Get enable.
+     *
+     * @return bool
+     */
+    public function getEnable()
+    {
+        return $this->enable;
+    }
 }

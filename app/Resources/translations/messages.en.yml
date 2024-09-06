@@ -64,7 +64,7 @@ support: Support
 查看所有私信: View all messages
 个人设置: Personal Settings
 添加新的评论: Add new comment
-发表有颜色的评论: Posting a colored comment will cost 1 coin
+发表评论: Posting a comment will cost 1 coin.
 好可怕，速度太快了: Scary, that's too fast
 关于作者: About the Author
 拉黑: Block
@@ -199,6 +199,11 @@ person: Person
 内容: Content
 选择板块: Select Board
 提交: Submit
+我的收藏: My Favorites
+我的感谢: My Thanks
+主题: Topics
+我收到的: Received
+我送出的: Sent
 日常: Daily
 闲聊灌水: Casual Chat
 职场吐槽: Workplace Rants

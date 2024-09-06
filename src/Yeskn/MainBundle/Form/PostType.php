@@ -5,6 +5,7 @@ namespace Yeskn\MainBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,6 +36,15 @@ class PostType extends AbstractType
                'choice_value' => 'id',
                'label' => '作者'
            ])
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    '已发布' => 'published',
+                    '草稿' => 'draft',
+                ],
+                'label' => '状态',
+                'expanded' => true,
+                'multiple' => false,
+            ])
            ->add('views', TextType::class, ['label' => '点击'])
            ->add('isTop',CheckboxType::class,array('label' => '置顶','required'=>false))
        ;

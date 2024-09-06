@@ -88,12 +88,6 @@ class Post
      */
     private $lastCommentAt;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="isDeleted", type="boolean")
-     */
-    private $isDeleted;
 
     /**
      * @ORM\Column(name="isTop",type="boolean")
@@ -111,6 +105,12 @@ class Post
      * @ORM\ManyToOne(targetEntity="Yeskn\MainBundle\Entity\Tab", inversedBy="posts")
      */
     private $tab;
+
+    /**
+     * @ORM\Column(name="deletedAt", type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
 
     /**
      * Constructor
@@ -277,30 +277,6 @@ class Post
     }
 
     /**
-     * Set isDeleted
-     *
-     * @param boolean $isDeleted
-     *
-     * @return Post
-     */
-    public function setIsDeleted($isDeleted)
-    {
-        $this->isDeleted = $isDeleted;
-
-        return $this;
-    }
-
-    /**
-     * Get isDeleted
-     *
-     * @return bool
-     */
-    public function getIsDeleted()
-    {
-        return $this->isDeleted;
-    }
-
-    /**
      * Set status
      *
      * @param string $status
@@ -459,5 +435,23 @@ class Post
     public function onCreate()
     {
         $this->setLastCommentAt(new \DateTime());
+    }
+
+    // 添加 getter 和 setter
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->deletedAt !== null;
     }
 }

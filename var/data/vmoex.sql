@@ -500,7 +500,7 @@ INSERT INTO `translation` VALUES (63, '查看所有通知', '查看所有通知'
 INSERT INTO `translation` VALUES (64, '查看所有私信', '查看所有私信', 'View all messages', 'すべてのメッセージを表示', '查看所有私信', 1);
 INSERT INTO `translation` VALUES (65, '个人设置', '个人设置', 'Personal Settings', '個人設定', '個人設置', 1);
 INSERT INTO `translation` VALUES (66, '添加新的评论', '添加新的评论', 'Add new comment', '新しいコメントを追加', '添加新的評論', 1);
-INSERT INTO `translation` VALUES (67, '发表有颜色的评论', '发表有颜色的评论将消耗1金币哦', 'Posting a colored comment will cost 1 coin', 'カラフルなコメントを投稿するには1ゴールドを消費します', '發表有顏色的評論將消耗1金幣哦', 1);
+INSERT INTO `translation` VALUES (67, '发表评论', '发表评论将消耗1金币哦', 'Posting a colored comment will cost 1 coin', 'カラフルなコメントを投稿するには1ゴールドを消費します', '發表有顏色的評論將消耗1金幣哦', 1);
 INSERT INTO `translation` VALUES (68, '好可怕，速度太快了', '好可怕，速度太快了', 'Scary, that\'s too fast', '速すぎて怖い！', '好可怕，速度太快了', 1);
 INSERT INTO `translation` VALUES (69, '关于作者', '关于作者', 'About the Author', '著者について', '關於作者', 1);
 INSERT INTO `translation` VALUES (70, '拉黑', '拉黑', 'Block', 'ブロック', '拉黑', 1);

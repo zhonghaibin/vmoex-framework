@@ -125,4 +125,14 @@ class FooterLink
     {
         $this->isPjax = $isPjax;
     }
+
+    /**
+     * Get isPjax.
+     *
+     * @return bool
+     */
+    public function getIsPjax()
+    {
+        return $this->isPjax;
+    }
 }

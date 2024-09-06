@@ -23,26 +23,60 @@ class PostRepository extends EntityRepository
      * @param $page [$pageNo, $pageSize]
      * @return Post[]
      */
-    public function getIndexList($tab, $sort, array $page)
+    public function getIndexList($tabObj, $sort, $pagination, $user = null)
     {
-        list($pageNo, $pageSize) = $page;
+        list($page, $pageSize) = $pagination;
 
-        $cursor =  $pageSize * ($pageNo - 1);
-
-        $qb = $this->createQueryPostBuilder($tab);
-
-        $total = $qb->select('count(p)')->getQuery()->getSingleScalarResult();
-
-        $qb->select('p')->orderBy('p.isTop', 'desc');
-
-        foreach ($sort as $key => $order) {
-            $qb->addOrderBy('p.' . $key, $order);
+        // 创建帖子查询
+        $qb = $this->createQueryBuilder('p')
+            ->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize)
+            ->andWhere('p.deletedAt IS NULL') // 排除软删除的帖子
+            ->andWhere('p.status = :status')
+            ->setParameter('status', 'published');
+        // 遍历并添加所有排序条件
+        foreach ($sort as $field => $direction) {
+            $qb->addOrderBy('p.' . $field, $direction);
         }
 
-        $qb->setFirstResult($cursor)->setMaxResults($pageSize);
+        if ($tabObj) {
+            $qb->andWhere('p.tab = :tab')
+                ->setParameter('tab', $tabObj);
+        }
 
-        return [$total, $qb->getQuery()->getResult()];
+        if ($user) {
+            $qb->leftJoin('YesknMainBundle:PostBlocked', 'pb', 'WITH', 'pb.post = p AND pb.user = :user')
+                ->andWhere('pb.id IS NULL')
+                ->setParameter('user', $user);
+        }
+
+        $query = $qb->getQuery();
+        $posts = $query->getResult();
+
+        // 创建计数查询
+        $countQuery = $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->andWhere('p.deletedAt IS NULL')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', 'published');
+
+        if ($tabObj) {
+            $countQuery->andWhere('p.tab = :tab')
+                ->setParameter('tab', $tabObj);
+        }
+
+        if ($user) {
+            $countQuery->leftJoin('YesknMainBundle:PostBlocked', 'pb', 'WITH', 'pb.post = p AND pb.user = :user')
+                ->andWhere('pb.id IS NULL')
+                ->setParameter('user', $user);
+        }
+
+        // 返回总数
+        $count = $countQuery->getQuery()->getSingleScalarResult();
+
+        return [$count, $posts];
     }
+
 
     /**
      * @param Tab|null $tab
@@ -137,5 +171,19 @@ class PostRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+
+    public function findWithoutDeleted($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.deletedAt IS NULL')
+            ->setParameter('id', $id)
+            ->andWhere('p.status = :status')
+            ->setParameter('status', 'published')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
 }

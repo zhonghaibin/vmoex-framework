@@ -33,14 +33,18 @@
                 {{ post.content|markdown|raw }}
             </div>
         </div>
-{#        <div class="post-actions border-bottom">#}
-{#        <span><a href="">收藏</a></span>#}
-{#        <span><a href="">感谢</a></span>#}
-{#        <span><a href="">分享</a></span>#}
-{#        <span><a href="">屏蔽</a></span>#}
-{#        <span><a href="">举报</a></span>#}
-{#        <span class="pull-right last">12次收藏 / 30次感谢</span>#}
-{#        </div>#}
+        <div class="post-actions border-bottom">
+            <span id="favorite-btn" style="cursor: pointer" data-post-id="{{ post.id }}"> {{isFavorited? '取消收藏' : '加入收藏' }}</span>
+            {% if isFavorited %}
+                 <span id="thinks-btn"  style="cursor: pointer" data-post-id="{{ post.id }}"> 感谢 </span>
+            {% else %}
+                <span> 已发送感谢 </span>
+            {% endif %}
+            <span class="copy-btn"  style="cursor: pointer" data-clipboard-target="#text-to-copy">分享<input type="hidden" id="text-to-copy" value="{{ url('post_show' , {'id' : post.id}) }}"></span>
+            <span id="block-btn"  style="cursor: pointer" data-post-id="{{ post.id }}">屏蔽</span>
+{#            <span  style="cursor: pointer" >举报</span>#}
+            <span class="pull-right last"><span id="favorite-count" style="color:darkgray; margin-right:0px">{{ favoritesCount }}</span>次收藏 / <span id="thinks-count" style="color:darkgray; margin-right:0px">{{ thanksCount }}</span>次感谢</span>
+        </div>
 
     </div>
 
@@ -111,7 +115,7 @@
                 <div style="background-color: rgb(192, 57, 43)"></div>
                 <div style="background-color: rgb(127, 140, 141)"></div>
             </div>
-            <i class="fa fa-question-circle"></i> {{ '发表有颜色的评论'|trans }}
+            <i class="fa fa-question-circle"></i> {{ '发表评论'|trans }}
         </div>
 
         <div class="form-group">

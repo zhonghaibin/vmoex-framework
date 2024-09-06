@@ -195,4 +195,14 @@ class Translation
             throw new \Exception('该词条为系统设置，无法删除');
         }
     }
+
+    /**
+     * Get canDelete.
+     *
+     * @return bool
+     */
+    public function getCanDelete()
+    {
+        return $this->canDelete;
+    }
 }

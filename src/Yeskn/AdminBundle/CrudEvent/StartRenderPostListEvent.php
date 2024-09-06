@@ -49,24 +49,28 @@ class StartRenderPostListEvent extends AbstractCrudListEvent
                 $this->globalValue->ago($post->getCreatedAt()),
                 $this->globalValue->ago($post->getUpdatedAt()),
                 $post->getViews(),
-                $this->translator->trans($this->statusLabel($post->getStatus()))
+                $this->translator->trans($this->statusLabel($post->getStatus())),
+                $post->getDeletedAt()!=null ?$this->globalValue->ago($post->getDeletedAt()):'',
             ];
         }
 
         return [
-            'columns' => ['ID', '标题', '作者', '板块', '发布日期', '更新日期', '点击', '状态'],
+            'columns' => ['ID', '标题', '作者', '板块', '发布日期', '更新日期', '点击', '状态','删除日期'],
             'column_width' => [0 => '5', 1 => 25, 6 => 8, 7 => 20],
             'list' => $result,
             'ids' => $ids,
             'create_btn' => 'yeskn_admin_post_create',
-            'edit_btn' => 'yeskn_admin_post_edit'
+            'edit_btn' => 'yeskn_admin_post_edit',
+            'delete_btn' => 'yeskn_admin_post_delete',
+            'restore_btn' => 'yeskn_admin_post_restore'
         ];
     }
 
     public function statusLabel($status)
     {
         $mappings = [
-            'published' => '已发布'
+            'published' => '已发布',
+            'draft' => '草稿'
         ];
 
         return $mappings[$status];

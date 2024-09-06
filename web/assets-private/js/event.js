@@ -40,6 +40,70 @@ $(document).on('submit', '#site-search', function (e) {
     $('#navbar-collapse-user').collapse('hide');
 });
 
+$(document).on('click', '#favorite-btn', function () {
+    const postId = this.getAttribute('data-post-id');
+    fetch(`/post/${postId}/favorite`, {
+        method: 'POST',
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status) {
+                reload();
+            }else{
+                error(data.message);
+            }
+        });
+});
+
+$(document).on('click', '#thinks-btn', function () {
+    const postId = this.getAttribute('data-post-id');
+    const confirmation = confirm('确定发送感谢？');
+    if(confirmation){
+        fetch(`/post/${postId}/thank`, {
+            method: 'POST',
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    reload();
+                }else{
+                    error(data.message);
+                }
+            });
+    }
+
+});
+$(document).ready(function() {
+    var clipboard = new ClipboardJS('.copy-btn');
+
+    clipboard.on('success', function(e) {
+        alert('链接已复制到剪贴板');
+    });
+
+    clipboard.on('error', function(e) {
+        error('复制失败');
+    });
+});
+
+$(document).on('click', '#block-btn', function () {
+    const postId = this.getAttribute('data-post-id');
+    const confirmation = confirm('确定要屏蔽吗？');
+    if(confirmation) {
+        fetch(`/post/${postId}/block`, {
+            method: 'POST',
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'blocked') {
+                    window.location.href = '/';
+                }else{
+                    error(data.message);
+                }
+            });
+    }
+});
+
+
 $(document).on('click', '.thumb-up', function () {
     var $this = $(this);
     $.ajax({

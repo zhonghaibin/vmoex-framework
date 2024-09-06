@@ -32,18 +32,18 @@ class CommonController extends AbstractController
             $tab = 'all';
         }
 
+        // 排序逻辑，首先按照 isTop 排序，其次按照 createdAt 排序，确保非置顶帖按时间倒序
         if ($sortBy == 'pub') {
-            $sort = ['createdAt' => 'DESC'];
+            $sort = ['isTop' => 'DESC', 'createdAt' => 'DESC']; // 按发布时间倒序排列
+        } else if ($tab == 'hot') {
+            $sort = ['isTop' => 'DESC', 'views' => 'DESC']; // 热门排序，浏览量倒序排列
         } else {
-            $sort = ['updatedAt' => 'DESC'];
-        }
-
-        if ($tab == 'hot') {
-            $sort = ['views' => 'DESC'];
+            $sort = ['isTop' => 'DESC', 'updatedAt' => 'DESC']; // 默认更新时间倒序
         }
 
         $tabObj = null;
-        $tabChild= null;
+        $tabChild = null;
+
         if ($tab && !in_array($tab, ['hot', 'all'])) {
             $tabObj = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
                 ->findOneBy(['alias' => $tab]);
@@ -51,20 +51,23 @@ class CommonController extends AbstractController
             if (empty($tabObj)) {
                 return $this->errorResponse('嘤嘤嘤，板块不存在呢~');
             }
+
             $parentId = $tabObj->getId();
             $tabChild = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
                 ->findByParentId($parentId);
         }
 
+        $user = $this->getUser(); // 获取当前用户
+
+        // 查询帖子列表，按照置顶和发布时间排序
         list($count, $posts) = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
-            ->getIndexList($tabObj, $sort, [$page, $pagesize]);
+            ->getIndexList($tabObj, $sort, [$page, $pagesize], $user); // 传递用户以排除屏蔽帖子
 
         $allTabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->findBy(['level' => 1]);
 
         $pageData['allPage'] = ceil($count / $pagesize);
         $pageData['currentPage'] = $page;
-
 
         $params = [
             'posts' => $posts,
@@ -77,21 +80,23 @@ class CommonController extends AbstractController
         ];
 
         if ($scope == 'home') {
-            $tpl =  '@YesknMain/default/index.html.twig';
+            $tpl = '@YesknMain/default/index.html.twig';
         } else {
             $tpl = '@YesknMain/post/index.html.twig';
         }
 
         $response = $this->render($tpl, $params);
 
-        if ($tabObj and $tabObj->getLevel() == 1) {
+        if ($tabObj && $tabObj->getLevel() == 1) {
             $response->headers->setCookie(new Cookie('_tab', $tab));
         }
 
-        if ($tab == 'all' or $tab == 'hot') {
+        if ($tab == 'all' || $tab == 'hot') {
             $response->headers->setCookie(new Cookie('_tab', $tab));
         }
 
         return $response;
+
+
     }
 }

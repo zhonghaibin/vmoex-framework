@@ -141,4 +141,14 @@ class Announce
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
+
+    /**
+     * Get show.
+     *
+     * @return bool
+     */
+    public function getShow()
+    {
+        return $this->show;
+    }
 }
