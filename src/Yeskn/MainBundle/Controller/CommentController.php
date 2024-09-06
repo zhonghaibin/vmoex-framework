@@ -163,20 +163,9 @@ class CommentController extends AbstractController
         $em->flush();
 
         if ($user->getId() != $post->getAuthor()->getId()) {
-            $notice = new Notice();
-            $notice->setObject($post);
-            $notice->setCreatedAt(new \DateTime());
-            $notice->setType(Notice::TYPE_COMMENT_POST);
-            $notice->setIsRead(false);
-            $notice->setPushTo($post->getAuthor());
-            $notice->setCreatedBy($user);
-            $notice->setContent($comment);
-
-            $em->persist($notice);
+            $this->get(NoticeService::class)
+                ->add($user, $post->getAuthor(), Notice::TYPE_COMMENT_POST, $content, $post, $comment);
         }
-
-        $em->flush();
-
         return new ApiOk();
     }
 }

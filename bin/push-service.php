@@ -91,9 +91,9 @@ $sender_io->on('connection', function (\PHPSocketIO\Socket $socket) {
 
         // 验证Token
         if ($token) {
-            $redisToken = getRedis()->get('socket:'. $user);
+            $redisToken = getRedis()->get('token_secret:' . $user);
             if (empty($redisToken) || $redisToken != $token) {
-                return ; // 如果Token无效，终止登录流程
+                return;
             }
         }
 

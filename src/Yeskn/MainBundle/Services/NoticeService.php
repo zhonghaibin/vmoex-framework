@@ -10,6 +10,7 @@
 namespace Yeskn\MainBundle\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Yeskn\MainBundle\Entity\Comment;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
@@ -67,15 +68,15 @@ class NoticeService extends AbstractService
      * @param $content
      * @param $object
      */
-    public function add(User $creator, User $pushTo, $type, $content, $object)
+    public function add(User $creator, User $pushTo, $type, $content, $object,$comment='')
     {
-        $notice = $this->databaseNotice($creator,  $pushTo, $type, $content, $object);
+        $notice = $this->databaseNotice($creator,  $pushTo, $type, $content, $object,$comment);
 
         $this->pushNotice($notice, $pushTo);
         $this->emailNotice($pushTo->getEmail(), $notice);
     }
 
-    public function databaseNotice(User $creator, User $pushTo, $type, $content, $object)
+    public function databaseNotice(User $creator, User $pushTo, $type, $content, $object, $comment='')
     {
         $notice = new Notice();
 
@@ -86,7 +87,9 @@ class NoticeService extends AbstractService
         $notice->setCreatedAt(new \DateTime());
         $notice->setRowContent($content);
         $notice->setObject($object);
-
+        if($comment instanceof  Comment){
+            $notice->setContent($comment);
+        }
         $this->em->persist($notice);
         $this->em->flush();
 
