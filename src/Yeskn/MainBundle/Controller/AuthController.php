@@ -200,9 +200,6 @@ class AuthController extends AbstractController
                 $this->get('doctrine.orm.entity_manager')->flush();
             } else {
                 $user = $openUser->getUser();
-                if ($user->getIsBlocked()) {
-                    throw new \HttpException($trans->trans('已被拉黑'));
-                }
             }
 
             $token = new UsernamePasswordToken($user, $user->getPassword(), "public", $user->getRoles());
