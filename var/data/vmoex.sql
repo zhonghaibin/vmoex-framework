@@ -11,7 +11,7 @@
  Target Server Version : 101106 (10.11.6-MariaDB)
  File Encoding         : 65001
 
- Date: 06/09/2024 13:48:11
+ Date: 06/09/2024 16:17:41
 */
 
 SET NAMES utf8mb4;
@@ -31,11 +31,14 @@ CREATE TABLE `active`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_4B1EFC02A76ED395`(`user_id` ASC) USING BTREE,
   CONSTRAINT `FK_4B1EFC02A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of active
 -- ----------------------------
+INSERT INTO `active` VALUES (1, 1, 16, '2024-09-06', '2024-09-06 06:17:33', '2024-09-06 07:31:20');
+INSERT INTO `active` VALUES (2, 2, 5, '2024-09-06', '2024-09-06 07:18:04', '2024-09-06 07:18:26');
+INSERT INTO `active` VALUES (3, 3, 45, '2024-09-06', '2024-09-06 07:20:50', '2024-09-06 08:08:13');
 
 -- ----------------------------
 -- Table structure for advertisement
@@ -490,7 +493,7 @@ CREATE TABLE `translation`  (
   `can_delete` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `message_unique`(`message_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 232 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 233 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of translation
@@ -711,21 +714,22 @@ INSERT INTO `translation` VALUES (213, '次收藏', '次收藏', 'Times favorite
 INSERT INTO `translation` VALUES (214, '次感谢', '次感谢', 'Times thanked', '回の感謝', '次感謝', 1);
 INSERT INTO `translation` VALUES (215, '请注意言论,主题创建后不允许删除或修改', '请注意言论,主题创建后不允许删除或修改', 'Please be mindful of your comments. Once a topic is created, it cannot be deleted or modified.', 'コメントにはご注意ください。トピックが作成された後は、削除や変更ができません。', '請注意言論，主題創建後不允許刪除或修改。', 1);
 INSERT INTO `translation` VALUES (216, '图片上传大小', '图片大小最大只能2M', 'The maximum allowed size for the image is 2MB', '最大サイズは2MBまでです。', '圖片大小最大只能2MB。', 1);
-INSERT INTO `translation` VALUES (217, '日常', '日常', 'Daily', '日常', '日常', 1);
-INSERT INTO `translation` VALUES (218, '闲聊灌水', '闲聊灌水', 'Casual Chat', '雑談', '閒聊灌水', 1);
-INSERT INTO `translation` VALUES (219, '职场吐槽', '职场吐槽', 'Workplace Rants', '仕事の愚痴', '職場吐槽', 1);
-INSERT INTO `translation` VALUES (220, '好玩', '好玩', 'Fun', '面白い', '好玩', 1);
-INSERT INTO `translation` VALUES (221, '分享发现', '分享发现', 'Share Discoveries', '発見をシェア', '分享發現', 1);
-INSERT INTO `translation` VALUES (222, '发起活动', '发起活动', 'Start Activity', 'イベントを開始', '發起活動', 1);
-INSERT INTO `translation` VALUES (223, '奇思妙想', '奇思妙想', 'Creative Ideas', '奇想天外', '奇思妙想', 1);
-INSERT INTO `translation` VALUES (224, '问答', '问答', 'Q&A', 'Q&A', '問答', 1);
-INSERT INTO `translation` VALUES (225, '问题求助', '问题求助', 'Help & Support', '問題のヘルプ', '問題求助', 1);
-INSERT INTO `translation` VALUES (226, '技术', '技术', 'Technology', '技術', '技術', 1);
-INSERT INTO `translation` VALUES (227, '编程', '编程', 'Programming', 'プログラミング', '編程', 1);
-INSERT INTO `translation` VALUES (228, '分享创造', '分享创造', 'Share Creations', '創作をシェア', '分享創造', 1);
-INSERT INTO `translation` VALUES (229, '交易', '交易', 'Trading', '取引', '交易', 1);
-INSERT INTO `translation` VALUES (230, '二手交易', '二手交易', 'Second-hand Trading', '中古取引', '二手交易', 1);
-INSERT INTO `translation` VALUES (231, '免费赠送', '免费赠送', 'Free Gifts', '無料贈呈', '免費贈送', 1);
+INSERT INTO `translation` VALUES (217, '已被拉黑', '您的账号已被拉黑，无法登录', 'Your account has been blocked and you cannot log in.', 'あなたのアカウントはブロックされており、ログインできません。', '您的帳號已被拉黑，無法登入', 1);
+INSERT INTO `translation` VALUES (218, '日常', '日常', 'Daily', '日常', '日常', 1);
+INSERT INTO `translation` VALUES (219, '闲聊灌水', '闲聊灌水', 'Casual Chat', '雑談', '閒聊灌水', 1);
+INSERT INTO `translation` VALUES (220, '职场吐槽', '职场吐槽', 'Workplace Rants', '仕事の愚痴', '職場吐槽', 1);
+INSERT INTO `translation` VALUES (221, '好玩', '好玩', 'Fun', '面白い', '好玩', 1);
+INSERT INTO `translation` VALUES (222, '分享发现', '分享发现', 'Share Discoveries', '発見をシェア', '分享發現', 1);
+INSERT INTO `translation` VALUES (223, '发起活动', '发起活动', 'Start Activity', 'イベントを開始', '發起活動', 1);
+INSERT INTO `translation` VALUES (224, '奇思妙想', '奇思妙想', 'Creative Ideas', '奇想天外', '奇思妙想', 1);
+INSERT INTO `translation` VALUES (225, '问答', '问答', 'Q&A', 'Q&A', '問答', 1);
+INSERT INTO `translation` VALUES (226, '问题求助', '问题求助', 'Help & Support', '問題のヘルプ', '問題求助', 1);
+INSERT INTO `translation` VALUES (227, '技术', '技术', 'Technology', '技術', '技術', 1);
+INSERT INTO `translation` VALUES (228, '编程', '编程', 'Programming', 'プログラミング', '編程', 1);
+INSERT INTO `translation` VALUES (229, '分享创造', '分享创造', 'Share Creations', '創作をシェア', '分享創造', 1);
+INSERT INTO `translation` VALUES (230, '交易', '交易', 'Trading', '取引', '交易', 1);
+INSERT INTO `translation` VALUES (231, '二手交易', '二手交易', 'Second-hand Trading', '中古取引', '二手交易', 1);
+INSERT INTO `translation` VALUES (232, '免费赠送', '免费赠送', 'Free Gifts', '無料贈呈', '免費贈送', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -748,6 +752,7 @@ CREATE TABLE `user`  (
   `register_at` datetime NOT NULL,
   `login_at` datetime NOT NULL,
   `changed_nickname_at` datetime NULL DEFAULT NULL,
+  `isBlocked` tinyint(1) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `UNIQ_8D93D649F85E0677`(`username` ASC) USING BTREE,
   UNIQUE INDEX `UNIQ_8D93D649A188FE64`(`nickname` ASC) USING BTREE,
@@ -757,7 +762,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', 'admin', '$2y$13$6/ty6/UFtdBevVHz6wrwSeAjQnB91XE5tNg0DpwWVTPwVdRLUFfFO', '756152823@qq.com', 'avatar/admin.png', '管理员', 265, 115, 3, 1, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2024-09-06 04:43:42', '2022-08-20 02:58:51');
+INSERT INTO `user` VALUES (1, 'admin', 'admin', '$2y$13$6/ty6/UFtdBevVHz6wrwSeAjQnB91XE5tNg0DpwWVTPwVdRLUFfFO', '756152823@qq.com', 'avatar/admin.png', '管理员', 13, 115, 3, 1, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2024-09-06 07:36:47', '2022-08-20 02:58:51', 0);
 
 -- ----------------------------
 -- Table structure for user_thumbup_comment
