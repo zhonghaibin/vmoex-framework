@@ -11,7 +11,7 @@
  Target Server Version : 101106 (10.11.6-MariaDB)
  File Encoding         : 65001
 
- Date: 03/09/2024 20:12:38
+ Date: 06/09/2024 11:33:16
 */
 
 SET NAMES utf8mb4;
@@ -31,14 +31,12 @@ CREATE TABLE `active`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_4B1EFC02A76ED395`(`user_id` ASC) USING BTREE,
   CONSTRAINT `FK_4B1EFC02A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of active
 -- ----------------------------
-INSERT INTO `active` VALUES (1, 1, 807, '2024-09-03', '2024-09-03 00:27:42', '2024-09-03 12:11:09');
-INSERT INTO `active` VALUES (2, 2, 1, '2024-09-03', '2024-09-03 04:04:06', '2024-09-03 04:04:06');
-INSERT INTO `active` VALUES (3, 2, 1, '2024-09-03', '2024-09-03 04:04:06', '2024-09-03 04:04:06');
+INSERT INTO `active` VALUES (1, 1, 2, '2024-09-06', '2024-09-06 03:29:38', '2024-09-06 03:31:09');
 
 -- ----------------------------
 -- Table structure for advertisement
@@ -114,11 +112,12 @@ CREATE TABLE `comment`  (
   INDEX `IDX_9474526CA76ED395`(`user_id` ASC) USING BTREE,
   CONSTRAINT `FK_9474526C4B89032C` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
+INSERT INTO `comment` VALUES (1, 1, '哈哈\n', '2024-09-04 00:24:25', NULL, 2, 0);
 
 -- ----------------------------
 -- Table structure for followers
@@ -213,11 +212,12 @@ CREATE TABLE `message`  (
   INDEX `IDX_B6BD307FCD53EDB6`(`receiver_id` ASC) USING BTREE,
   CONSTRAINT `FK_B6BD307FCD53EDB6` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `FK_B6BD307FF624B39D` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of message
 -- ----------------------------
+INSERT INTO `message` VALUES (1, 2, 1, '多多', 1, '2024-09-04 00:26:52');
 
 -- ----------------------------
 -- Table structure for notice
@@ -242,11 +242,12 @@ CREATE TABLE `notice`  (
   CONSTRAINT `FK_480D45C284A0A3ED` FOREIGN KEY (`content_id`) REFERENCES `comment` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `FK_480D45C29BB57F62` FOREIGN KEY (`push_to`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_480D45C2DE12AB56` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of notice
 -- ----------------------------
+INSERT INTO `notice` VALUES (1, 2, 1, 1, 1, 1, 1, '2024-09-04 00:24:25', '');
 
 -- ----------------------------
 -- Table structure for open_user
@@ -340,26 +341,95 @@ CREATE TABLE `post`  (
   `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `summary` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NULL DEFAULT NULL,
-  `isDeleted` tinyint(1) NOT NULL,
   `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `authorId` int NULL DEFAULT NULL,
   `views` int NOT NULL,
   `isTop` tinyint(1) NOT NULL,
   `tab_id` int NULL DEFAULT NULL,
   `last_comment_at` datetime NOT NULL DEFAULT current_timestamp,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NULL DEFAULT NULL,
+  `deletedAt` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_5A8A6C8DA196F9FD`(`authorId` ASC) USING BTREE,
   INDEX `IDX_5A8A6C8D8D0C9323`(`tab_id` ASC) USING BTREE,
   CONSTRAINT `FK_5A8A6C8D8D0C9323` FOREIGN KEY (`tab_id`) REFERENCES `tab` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_5A8A6C8DA196F9FD` FOREIGN KEY (`authorId`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES (1, '测试帖子', '', '<p>请多多支持</p>', '2024-09-03 00:48:07', '2024-09-03 11:38:55', 0, 'published', 1, 29, 0, 2, '2024-09-03 11:38:55');
+INSERT INTO `post` VALUES (1, '测试帖子', '', '<p></p><p></p><p></p><p></p><p></p><p></p><p>你好，请多多关照</p><p></p><p><br></p><p></p><p><br></p>', 'published', 1, 223, 0, 2, '2024-09-04 00:24:25', '2024-09-03 00:48:07', '2024-09-05 16:53:32', NULL);
+INSERT INTO `post` VALUES (2, '特特', '', '<p></p><p>22</p><p></p><p><br></p>', 'published', 1, 74, 1, 2, '2024-09-05 11:13:43', '2024-09-05 11:13:43', '2024-09-05 16:53:58', NULL);
+INSERT INTO `post` VALUES (3, '543', '', '<p></p><p></p><p></p><p></p><p></p><p></p><p></p><p>5435</p><p></p><p><br></p><p></p><p><br></p><p></p><p><br></p><p></p><p><br></p><p></p><p><br></p><p></p><p><br></p><p></p><p><br></p>', 'published', 1, 5, 0, 2, '2024-09-05 16:54:12', '2024-09-05 16:54:12', '2024-09-06 02:58:39', NULL);
+
+-- ----------------------------
+-- Table structure for post_blocked
+-- ----------------------------
+DROP TABLE IF EXISTS `post_blocked`;
+CREATE TABLE `post_blocked`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `post_id` int NOT NULL,
+  `created_at` datetime NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `user_id`(`user_id` ASC, `post_id` ASC) USING BTREE,
+  INDEX `post_id`(`post_id` ASC) USING BTREE,
+  CONSTRAINT `post_blocked_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `post_blocked_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of post_blocked
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for post_favorites
+-- ----------------------------
+DROP TABLE IF EXISTS `post_favorites`;
+CREATE TABLE `post_favorites`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `post_id` int NOT NULL,
+  `created_at` datetime NULL DEFAULT current_timestamp,
+  `updated_at` datetime NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  INDEX `post_id`(`post_id` ASC) USING BTREE,
+  CONSTRAINT `post_favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `post_favorites_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of post_favorites
+-- ----------------------------
+INSERT INTO `post_favorites` VALUES (30, 1, 1, '2024-09-05 10:40:35', '2024-09-05 18:40:36');
+INSERT INTO `post_favorites` VALUES (36, 1, 2, '2024-09-06 01:17:55', '2024-09-06 09:17:56');
+
+-- ----------------------------
+-- Table structure for post_thanks
+-- ----------------------------
+DROP TABLE IF EXISTS `post_thanks`;
+CREATE TABLE `post_thanks`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sender_id` int NOT NULL,
+  `receiver_id` int NOT NULL,
+  `post_id` int NOT NULL,
+  `created_at` datetime NULL DEFAULT current_timestamp,
+  `updated_at` datetime NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sender_id`(`sender_id` ASC) USING BTREE,
+  INDEX `receiver_id`(`receiver_id` ASC) USING BTREE,
+  INDEX `post_id`(`post_id` ASC) USING BTREE,
+  CONSTRAINT `post_thanks_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `post_thanks_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `post_thanks_ibfk_3` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of post_thanks
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sign
@@ -373,12 +443,15 @@ CREATE TABLE `sign`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `IDX_9F7E91FEA76ED395`(`user_id` ASC) USING BTREE,
   CONSTRAINT `FK_9F7E91FEA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sign
 -- ----------------------------
 INSERT INTO `sign` VALUES (1, 1, '2024-08-21', 10);
+INSERT INTO `sign` VALUES (2, 1, '2024-09-03', 3);
+INSERT INTO `sign` VALUES (3, 1, '2024-09-04', 3);
+INSERT INTO `sign` VALUES (4, 1, '2024-09-05', 6);
 
 -- ----------------------------
 -- Table structure for tab
@@ -429,7 +502,7 @@ CREATE TABLE `translation`  (
   `can_delete` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `message_unique`(`message_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 217 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 222 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of translation
@@ -500,7 +573,7 @@ INSERT INTO `translation` VALUES (63, '查看所有通知', '查看所有通知'
 INSERT INTO `translation` VALUES (64, '查看所有私信', '查看所有私信', 'View all messages', 'すべてのメッセージを表示', '查看所有私信', 1);
 INSERT INTO `translation` VALUES (65, '个人设置', '个人设置', 'Personal Settings', '個人設定', '個人設置', 1);
 INSERT INTO `translation` VALUES (66, '添加新的评论', '添加新的评论', 'Add new comment', '新しいコメントを追加', '添加新的評論', 1);
-INSERT INTO `translation` VALUES (67, '发表评论', '发表评论将消耗1金币哦', 'Posting a colored comment will cost 1 coin', 'カラフルなコメントを投稿するには1ゴールドを消費します', '發表有顏色的評論將消耗1金幣哦', 1);
+INSERT INTO `translation` VALUES (67, '发表评论', '发表评论将消耗1金币哦', 'Posting a comment will cost 1 coin.', 'コメントを投稿すると1ゴールドが消費されますよ。', '發表評論將消耗1金幣哦。', 1);
 INSERT INTO `translation` VALUES (68, '好可怕，速度太快了', '好可怕，速度太快了', 'Scary, that\'s too fast', '速すぎて怖い！', '好可怕，速度太快了', 1);
 INSERT INTO `translation` VALUES (69, '关于作者', '关于作者', 'About the Author', '著者について', '關於作者', 1);
 INSERT INTO `translation` VALUES (70, '拉黑', '拉黑', 'Block', 'ブロック', '拉黑', 1);
@@ -513,8 +586,8 @@ INSERT INTO `translation` VALUES (76, '修改密码', '修改密码', 'Change Pa
 INSERT INTO `translation` VALUES (77, '支持我们', '支持我们', 'Support Us', 'サポート', '支持我們', 1);
 INSERT INTO `translation` VALUES (78, '个新的粉丝', '个新的粉丝', 'new followers', '新しいフォロワー', '個新的粉絲', 1);
 INSERT INTO `translation` VALUES (79, '赞', '赞', 'Like', 'いいね', '贊', 1);
-INSERT INTO `translation` VALUES (80, '什么是瞎聊', '什么是聊聊', 'What is Chat', '雑談', '什麼是聊聊', 1);
-INSERT INTO `translation` VALUES (81, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Chat\" is an instant messaging feature provided by the Vmoex community. Each \"Chat\" message sent will cost one coin.', '「雑談」はVmoexコミュニティが提供するリアルタイムチャット機能で、メッセージを送信するたびに1ゴールドを消費します。', '“聊聊”是 Vmoex 社區提供的一個線上即時聊天功能，每發送一條“聊聊”消息將消耗一枚金幣。', 1);
+INSERT INTO `translation` VALUES (80, '什么是瞎聊', '什么是聊聊', 'What is Chat', 'チャット', '什麼是聊聊', 1);
+INSERT INTO `translation` VALUES (81, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Chat\" is an instant messaging feature provided by the Vmoex community. Each \"Chat\" message sent will cost one coin.', '「チャット」はVmoexコミュニティが提供するリアルタイムチャット機能で、メッセージを送信するたびに1ゴールドを消費します。', '“聊聊”是 Vmoex 社區提供的一個線上即時聊天功能，每發送一條“聊聊”消息將消耗一枚金幣。', 1);
 INSERT INTO `translation` VALUES (82, '社区运行状态', '社区运行状态', 'Community Status', 'コミュニティの運営状態', '社區運行狀態', 1);
 INSERT INTO `translation` VALUES (83, '社区成立时间', '社区成立时间', 'Community Established', 'コミュニティ設立日', '社區成立時間', 1);
 INSERT INTO `translation` VALUES (84, '主题数量', '主题数量', 'Topic Count', 'トピック数', '主題數量', 1);
@@ -619,37 +692,42 @@ INSERT INTO `translation` VALUES (182, '直接登录', '直接登录', 'Log in d
 INSERT INTO `translation` VALUES (183, '立即注册', '立即注册', 'Register now', '今すぐ登録', '立即註冊', 1);
 INSERT INTO `translation` VALUES (184, '记住登录状态', '记住登录状态', 'Remember login status', 'ログイン状態を記憶する', '記住登入狀態', 1);
 INSERT INTO `translation` VALUES (185, '推荐主题', '推荐主题', 'Recommended Topics', 'おすすめのトピック', '推薦主題', 1);
-INSERT INTO `translation` VALUES (186, '日常', '日常', 'Daily', '日常', '日常', 1);
-INSERT INTO `translation` VALUES (187, '闲聊灌水', '闲聊灌水', 'Casual Chat', '雑談', '閒聊灌水', 1);
-INSERT INTO `translation` VALUES (188, '职场吐槽', '职场吐槽', 'Workplace Rants', '仕事の愚痴', '職場吐槽', 1);
-INSERT INTO `translation` VALUES (189, '好玩', '好玩', 'Fun', '面白い', '好玩', 1);
-INSERT INTO `translation` VALUES (190, '分享发现', '分享发现', 'Share Discoveries', '発見をシェア', '分享發現', 1);
-INSERT INTO `translation` VALUES (191, '发起活动', '发起活动', 'Start Activity', 'イベントを開始', '發起活動', 1);
-INSERT INTO `translation` VALUES (192, '奇思妙想', '奇思妙想', 'Creative Ideas', '奇想天外', '奇思妙想', 1);
-INSERT INTO `translation` VALUES (193, '问答', '问答', 'Q&A', 'Q&A', '問答', 1);
-INSERT INTO `translation` VALUES (194, '问题求助', '问题求助', 'Help & Support', '問題のヘルプ', '問題求助', 1);
-INSERT INTO `translation` VALUES (195, '技术', '技术', 'Technology', '技術', '技術', 1);
-INSERT INTO `translation` VALUES (196, '编程', '编程', 'Programming', 'プログラミング', '編程', 1);
-INSERT INTO `translation` VALUES (197, '分享创造', '分享创造', 'Share Creations', '創作をシェア', '分享創造', 1);
-INSERT INTO `translation` VALUES (198, '交易', '交易', 'Trading', '取引', '交易', 1);
-INSERT INTO `translation` VALUES (199, '二手交易', '二手交易', 'Second-hand Trading', '中古取引', '二手交易', 1);
-INSERT INTO `translation` VALUES (200, '免费赠送', '免费赠送', 'Free Gifts', '無料贈呈', '免費贈送', 1);
-INSERT INTO `translation` VALUES (201, '暂时没有任何文档！', '暂时没有任何文档！', 'No documents available at the moment!', '現在、ドキュメントはありません！', '暫時沒有任何文檔！', 1);
-INSERT INTO `translation` VALUES (202, '签到领取奖励', '签到领取奖励', 'Check in to receive rewards', '出席して報酬を受け取る', '簽到領取獎勳', 1);
-INSERT INTO `translation` VALUES (203, '验证码', '验证码', 'Verification code', '認証コード', '驗證碼', 1);
-INSERT INTO `translation` VALUES (204, '验证', '验证', 'Verification', '検証', '驗證', 1);
-INSERT INTO `translation` VALUES (205, '发送验证码', '发送验证码', 'Send verification code', '認証コードを送信する', '發送驗證碼', 1);
-INSERT INTO `translation` VALUES (206, '基本资料', '基本资料', 'Basic information', '基本情報', '基本資料', 1);
-INSERT INTO `translation` VALUES (207, '用户名不能被修改', '用户名不能被修改', 'Username cannot be changed', 'ユーザー名は変更できません', '用戶名不能被修改', 1);
-INSERT INTO `translation` VALUES (208, '昵称每180天可修改一次，请谨慎修改。', '昵称每180天可修改一次，请谨慎修改。', 'Nickname can be changed once every 180 days. Please make changes carefully.', 'ニックネームは180日に1回変更できます。慎重に変更してください。', '昵称每180天可修改一次，請謹慎修改。', 1);
-INSERT INTO `translation` VALUES (209, '天后可修改昵称。', '天后可修改昵称。', 'Nickname can be changed after day.', '天後にニックネームを変更できます。', '天後可修改暱稱。', 1);
-INSERT INTO `translation` VALUES (210, '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', 'Supports jpg, png, and gif formats up to 2MB. It is recommended to use a 200*200 PNG file for the best effect. Gif format requires 50 coins.', '2MB以内のjpg、png、gif形式がサポートされています。最適な効果を得るには200*200のPNGファイルを使用することをお勧めします。gif形式は50コインが必要です。', '支援 2MB 以內的jpg、png、gif格式，推薦使用一張 200*200 的 PNG 文件以獲得最佳效果，gif格式需消耗50金幣', 1);
-INSERT INTO `translation` VALUES (211, '我的信箱', '我的信箱', 'My mailbox', '私のメールボックス', '我的信箱', 1);
-INSERT INTO `translation` VALUES (212, '更新', '更新', 'Update', '更新', '更新', 1);
-INSERT INTO `translation` VALUES (213, '管理员', '管理员', 'Administrator', 'かんりしゃ', '管理員', 1);
-INSERT INTO `translation` VALUES (214, '内容', '内容', 'Content', '内容', '內容', 1);
-INSERT INTO `translation` VALUES (215, '选择板块', '选择板块', 'Select Board', '板を選択', '選擇板塊', 1);
-INSERT INTO `translation` VALUES (216, '提交', '提交', 'Submit', '提出', '提交', 1);
+INSERT INTO `translation` VALUES (186, '暂时没有任何文档！', '暂时没有任何文档！', 'No documents available at the moment!', '現在、ドキュメントはありません！', '暫時沒有任何文檔！', 1);
+INSERT INTO `translation` VALUES (187, '签到领取奖励', '签到领取奖励', 'Check in to receive rewards', '出席して報酬を受け取る', '簽到領取獎勳', 1);
+INSERT INTO `translation` VALUES (188, '验证码', '验证码', 'Verification code', '認証コード', '驗證碼', 1);
+INSERT INTO `translation` VALUES (189, '验证', '验证', 'Verification', '検証', '驗證', 1);
+INSERT INTO `translation` VALUES (190, '发送验证码', '发送验证码', 'Send verification code', '認証コードを送信する', '發送驗證碼', 1);
+INSERT INTO `translation` VALUES (191, '基本资料', '基本资料', 'Basic information', '基本情報', '基本資料', 1);
+INSERT INTO `translation` VALUES (192, '用户名不能被修改', '用户名不能被修改', 'Username cannot be changed', 'ユーザー名は変更できません', '用戶名不能被修改', 1);
+INSERT INTO `translation` VALUES (193, '昵称每180天可修改一次，请谨慎修改。', '昵称每180天可修改一次，请谨慎修改。', 'Nickname can be changed once every 180 days. Please make changes carefully.', 'ニックネームは180日に1回変更できます。慎重に変更してください。', '昵称每180天可修改一次，請謹慎修改。', 1);
+INSERT INTO `translation` VALUES (194, '天后可修改昵称。', '天后可修改昵称。', 'Nickname can be changed after day.', '天後にニックネームを変更できます。', '天後可修改暱稱。', 1);
+INSERT INTO `translation` VALUES (195, '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', 'Supports jpg, png, and gif formats up to 2MB. It is recommended to use a 200*200 PNG file for the best effect. Gif format requires 50 coins.', '2MB以内のjpg、png、gif形式がサポートされています。最適な効果を得るには200*200のPNGファイルを使用することをお勧めします。gif形式は50コインが必要です。', '支援 2MB 以內的jpg、png、gif格式，推薦使用一張 200*200 的 PNG 文件以獲得最佳效果，gif格式需消耗50金幣', 1);
+INSERT INTO `translation` VALUES (196, '我的信箱', '我的信箱', 'My mailbox', '私のメールボックス', '我的信箱', 1);
+INSERT INTO `translation` VALUES (197, '更新', '更新', 'Update', '更新', '更新', 1);
+INSERT INTO `translation` VALUES (198, '管理员', '管理员', 'Administrator', 'かんりしゃ', '管理員', 1);
+INSERT INTO `translation` VALUES (199, '内容', '内容', 'Content', '内容', '內容', 1);
+INSERT INTO `translation` VALUES (200, '选择板块', '选择板块', 'Select Board', '板を選択', '選擇板塊', 1);
+INSERT INTO `translation` VALUES (201, '提交', '提交', 'Submit', '提出', '提交', 1);
+INSERT INTO `translation` VALUES (202, '我的收藏', '我的收藏', 'My Favorites', 'マイコレクション (私のコレクション)', '我的收藏', 1);
+INSERT INTO `translation` VALUES (203, '我的感谢', '我的感谢', 'My Thanks', '私の感謝', '我的感謝', 1);
+INSERT INTO `translation` VALUES (204, '主题', '主题', 'Topics', 'トピック', '主題', 1);
+INSERT INTO `translation` VALUES (205, '我收到的', '我收到的', 'Received', '受け取った', '我收到的', 1);
+INSERT INTO `translation` VALUES (206, '我送出的', '我送出的', 'Sent', '送った', '我送出的', 1);
+INSERT INTO `translation` VALUES (207, '日常', '日常', 'Daily', '日常', '日常', 1);
+INSERT INTO `translation` VALUES (208, '闲聊灌水', '闲聊灌水', 'Casual Chat', '雑談', '閒聊灌水', 1);
+INSERT INTO `translation` VALUES (209, '职场吐槽', '职场吐槽', 'Workplace Rants', '仕事の愚痴', '職場吐槽', 1);
+INSERT INTO `translation` VALUES (210, '好玩', '好玩', 'Fun', '面白い', '好玩', 1);
+INSERT INTO `translation` VALUES (211, '分享发现', '分享发现', 'Share Discoveries', '発見をシェア', '分享發現', 1);
+INSERT INTO `translation` VALUES (212, '发起活动', '发起活动', 'Start Activity', 'イベントを開始', '發起活動', 1);
+INSERT INTO `translation` VALUES (213, '奇思妙想', '奇思妙想', 'Creative Ideas', '奇想天外', '奇思妙想', 1);
+INSERT INTO `translation` VALUES (214, '问答', '问答', 'Q&A', 'Q&A', '問答', 1);
+INSERT INTO `translation` VALUES (215, '问题求助', '问题求助', 'Help & Support', '問題のヘルプ', '問題求助', 1);
+INSERT INTO `translation` VALUES (216, '技术', '技术', 'Technology', '技術', '技術', 1);
+INSERT INTO `translation` VALUES (217, '编程', '编程', 'Programming', 'プログラミング', '編程', 1);
+INSERT INTO `translation` VALUES (218, '分享创造', '分享创造', 'Share Creations', '創作をシェア', '分享創造', 1);
+INSERT INTO `translation` VALUES (219, '交易', '交易', 'Trading', '取引', '交易', 1);
+INSERT INTO `translation` VALUES (220, '二手交易', '二手交易', 'Second-hand Trading', '中古取引', '二手交易', 1);
+INSERT INTO `translation` VALUES (221, '免费赠送', '免费赠送', 'Free Gifts', '無料贈呈', '免費贈送', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -681,8 +759,8 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', 'admin', '$2y$13$6/ty6/UFtdBevVHz6wrwSeAjQnB91XE5tNg0DpwWVTPwVdRLUFfFO', '756152823@qq.com', 'avatar/admin.png', '管理员', 723, 103, 1, 1, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2024-09-03 12:05:16', '2022-08-20 02:58:51');
-INSERT INTO `user` VALUES (2, 'test', 'test', '$2y$13$P24ssXTGRvcNbmIKuMUJnuTHXbKiTLjTaT9ONS5LZA.FI1uNX7SRC', '111@qq.com', 'upload/avatar/eca22fc06ed7a851baefb916fe57e485.png', '', 1, 9, 0, 0, 'ROLE_USER', '566200bf005dd77cc39a69eb752c1d75', '2024-09-03 04:03:50', '2024-09-03 12:05:34', NULL);
+INSERT INTO `user` VALUES (1, 'admin', 'admin', '$2y$13$6/ty6/UFtdBevVHz6wrwSeAjQnB91XE5tNg0DpwWVTPwVdRLUFfFO', '756152823@qq.com', 'avatar/admin.png', '管理员', 2, 115, 3, 1, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2024-09-06 01:00:38', '2022-08-20 02:58:51');
+INSERT INTO `user` VALUES (2, 'test', 'test', '$2y$13$P24ssXTGRvcNbmIKuMUJnuTHXbKiTLjTaT9ONS5LZA.FI1uNX7SRC', '111@qq.com', 'upload/avatar/eca22fc06ed7a851baefb916fe57e485.png', '', 10, 5, 0, 0, 'ROLE_USER', '566200bf005dd77cc39a69eb752c1d75', '2024-09-03 04:03:50', '2024-09-04 00:24:01', NULL);
 
 -- ----------------------------
 -- Table structure for user_thumbup_comment
