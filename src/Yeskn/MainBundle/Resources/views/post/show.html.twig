@@ -25,7 +25,7 @@
                     </span>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}">编辑</a>
+                        <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}"> {{'编辑'|trans }} </a>
                     {% endif %}
                 </p>
             </div>
@@ -34,16 +34,22 @@
             </div>
         </div>
         <div class="post-actions border-bottom">
-            <span id="favorite-btn" style="cursor: pointer" data-post-id="{{ post.id }}"> {{isFavorited? '取消收藏' : '加入收藏' }}</span>
-            {% if isFavorited %}
-                 <span id="thinks-btn"  style="cursor: pointer" data-post-id="{{ post.id }}"> 感谢 </span>
+            <span id="favorite-btn" style="cursor: pointer" data-post-id="{{ post.id }}">
+                  {% if isFavorited %}
+                      <span>{{'取消收藏'|trans }}</span>
+                  {% else %}
+                      <span>{{'加入收藏'|trans }}</span>
+                  {% endif %}
+            </span>
+            {% if isThanks %}
+                <span>{{'已发送感谢'|trans }}</span>
             {% else %}
-                <span> 已发送感谢 </span>
+                <span id="thinks-btn"  style="cursor: pointer" data-post-id="{{ post.id }}">{{'感谢'|trans }}</span>
             {% endif %}
-            <span class="copy-btn"  style="cursor: pointer" data-clipboard-target="#text-to-copy">分享<input type="hidden" id="text-to-copy" value="{{ url('post_show' , {'id' : post.id}) }}"></span>
-            <span id="block-btn"  style="cursor: pointer" data-post-id="{{ post.id }}">屏蔽</span>
+            <span class="copy-btn"  style="cursor: pointer" data-clipboard-target="#text-to-copy">{{'分享'|trans }}<input type="hidden" id="text-to-copy" value="{{ url('post_show' , {'id' : post.id}) }}"></span>
+            <span id="block-btn"  style="cursor: pointer" data-post-id="{{ post.id }}">{{'屏蔽'|trans }}</span>
 {#            <span  style="cursor: pointer" >举报</span>#}
-            <span class="pull-right last"><span id="favorite-count" style="color:darkgray; margin-right:0px">{{ favoritesCount }}</span>次收藏 / <span id="thinks-count" style="color:darkgray; margin-right:0px">{{ thanksCount }}</span>次感谢</span>
+            <span class="pull-right last"><span id="favorite-count" style="color:darkgray; margin-right:0px">{{ favoritesCount }}</span>{{'次收藏'|trans }} / <span id="thinks-count" style="color:darkgray; margin-right:0px">{{ thanksCount }}</span>{{'次感谢'|trans }}</span>
         </div>
 
     </div>

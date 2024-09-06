@@ -173,7 +173,6 @@ class PostController extends Controller
         $post->setViews(mt_rand(1, 3));
         $post->setIsTop(false);
         $post->setAuthor($this->getUser());
-        $post->setIsDeleted(false);
         $post->setSummary('');
         $post->setTab($tab);
         $post->setStatus('published');
@@ -203,15 +202,24 @@ class PostController extends Controller
     public function uploadImage(Request $request)
     {
         $name = $request->get('name', 'file');
-
         $file = $request->files->get($name);
+
+        // 设置最大文件大小为2MB
+        $maxFileSize = 2 * 1024 * 1024; // 2MB in bytes
+
+        if ($file->getSize() > $maxFileSize) {
+            return new JsonResponse([
+                'errno' => '1',
+                'error' => 'File size exceeds 2MB limit.'
+            ], 400); // 返回400 Bad Request状态码
+        }
 
         $extension = $file->guessExtension();
         $fileName = 'upload/images/' . time() . mt_rand(1000, 9999) . '.' . $extension;
 
-        $targetPath = $this->getParameter('kernel.project_dir') .  '/web/' . $fileName;
+        $targetPath = $this->getParameter('kernel.project_dir') . '/web/' . $fileName;
 
-        $fs = new Filesystem()  ;
+        $fs = new Filesystem();
         $fs->copy($file->getRealPath(), $targetPath);
 
         return new JsonResponse([

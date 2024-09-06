@@ -33,7 +33,6 @@ class PostController extends Controller
 
             $post->setCreatedAt(new \DateTime());
             $post->setUpdatedAt(new \DateTime());
-            $post->setIsDeleted(false);
             $post->setStatus('published');
             $post->setSummary('');
 
