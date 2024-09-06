@@ -166,6 +166,11 @@ class User implements UserInterface
      */
     private $chats;
 
+    /**
+     * @ORM\Column(name="isBlocked",type="boolean")
+     */
+    private $isBlocked;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -834,4 +839,17 @@ class User implements UserInterface
     {
         return $this->chats->removeElement($chat);
     }
+
+
+// Getter and Setter
+    public function getIsBlocked()
+    {
+        return $this->isBlocked;
+    }
+
+    public function setIsBlocked($isBlocked)
+    {
+        $this->isBlocked = $isBlocked;
+    }
+
 }

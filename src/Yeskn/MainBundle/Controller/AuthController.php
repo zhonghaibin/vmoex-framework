@@ -15,7 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\MainBundle\Entity\OpenUser;
 use Yeskn\MainBundle\Entity\User;
 use Yeskn\MainBundle\Form\UserLoginType;
@@ -84,7 +86,7 @@ class AuthController extends AbstractController
             $user->setNickname($user->getUsername());
             $user->setLoginAt(new \DateTime());
             $user->setRole('ROLE_USER');
-
+            $user->setIsBlocked(0);
             $em->persist($user);
             $em->flush();
 
@@ -119,7 +121,7 @@ class AuthController extends AbstractController
      * @param Request $request
      * @return RedirectResponse|\Yeskn\Support\Http\ApiFail
      */
-    public function oauthGithub(Request $request)
+    public function oauthGithub(Request $request,TranslatorInterface $trans)
     {
         $code = $request->get('code');
 
@@ -186,7 +188,7 @@ class AuthController extends AbstractController
                 $user->setRemark($response->bio ?: '');
                 $user->setSalt('');
                 $user->setPassword(uniqid());
-
+                $user->setIsBlocked(0);
                 $openUser = new OpenUser();
 
                 $openUser->setUser($user);
@@ -198,6 +200,9 @@ class AuthController extends AbstractController
                 $this->get('doctrine.orm.entity_manager')->flush();
             } else {
                 $user = $openUser->getUser();
+                if ($user->getIsBlocked()) {
+                    throw new \HttpException($trans->trans('已被拉黑'));
+                }
             }
 
             $token = new UsernamePasswordToken($user, $user->getPassword(), "public", $user->getRoles());

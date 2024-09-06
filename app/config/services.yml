@@ -32,5 +32,12 @@ services:
 #            $redis: '@redis'
         tags:
             - { name: 'security.logout_success_handler', firewall: 'main' }
+    Yeskn\MainBundle\EventListener\UserBlockListener:
+        arguments:
+            - '@security.token_storage'
+            - '@doctrine.orm.entity_manager'
+            - '@router'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
     Symfony\Bridge\Twig\Extension\AssetExtension: "@twig.extension.assets"
     Symfony\Bundle\SecurityBundle\Security\FirewallMap: "@security.firewall.map"

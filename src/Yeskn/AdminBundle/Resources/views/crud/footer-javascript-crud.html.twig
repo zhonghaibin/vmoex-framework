@@ -50,6 +50,23 @@
                 ajaxForm('#modalForm'+formId);
             });
         });
+
+        $(document).on('click', '.status-toggle', function () {
+            var userId = $(this).data('id');
+            var $button = $(this);
+
+            $.ajax({
+                url: '/admin/update-status', // 接口地址
+                method: 'POST',
+                data: {
+                    id: userId
+                },
+                success: function (response) {
+                    // 成功后更新按钮文字
+                    $button.text(response.newStatus);
+                }
+            });
+        });
     });
 
 
