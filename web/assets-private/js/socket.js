@@ -1,5 +1,9 @@
 $(function () {
-    var socket = io(window.Yeskn.socketHost);
+    var socket = io(window.Yeskn.socketHost,{
+        path: '/ws/socket.io',  // 与服务端路径匹配
+        transports: ['websocket', 'polling'],
+        withCredentials: true
+    });
 
     socket.on('connect', function(){
         socket.emit('login', {
