@@ -144,50 +144,68 @@ class PostController extends Controller
     {
         if ($request->isMethod('GET')) {
 
-            $tabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')->findBy(['level' => 2]);
-
+            $tabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')->findBy(['level' => [1,2]]);
+            $hierarchicalTabs = [];
+            foreach ($tabs as $tab) {
+                if ($tab->getLevel() === 1) {
+                    // 父级直接添加到数组
+                    $hierarchicalTabs[] = [
+                        'tab' => $tab,
+                        'children' => [],
+                    ];
+                } else {
+                    // 子级找到对应的父级并关联
+                    $parent = $tab->getParent(); // 假设有 parent 关联
+                    foreach ($hierarchicalTabs as &$parentTab) {
+                        if ($parentTab['tab']->getId() === $parent->getId()) {
+                            $parentTab['children'][] = $tab;
+                            break;
+                        }
+                    }
+                }
+            }
             return $this->render('@YesknMain/post/create.html.twig', [
-                'tabs' => $tabs
+                'hierarchicalTabs' => $hierarchicalTabs
             ]);
+        }else {
+
+
+            $title = strip_tags($request->get('title'));
+            $content = $request->get('content');
+            $content = nl2br($content);
+
+            if (empty($title) or empty($content)) {
+                return new JsonResponse(['ret' => 0, 'msg' => '内容为空!']);
+            }
+
+            $htmlPure = new HtmlPurer($this->container);
+
+            $content = $htmlPure->pureHtmlText($content)->getResult(true);
+            $tab = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
+                ->findOneBy(['alias' => $request->get('tab')]);
+            $post = new Post();
+
+            $post->setTitle($title);
+            $post->setContent($content);
+            $post->setViews(mt_rand(1, 3));
+            $post->setIsTop(false);
+            $post->setAuthor($this->getUser());
+            $post->setSummary('');
+            $post->setTab($tab);
+            $post->setStatus('published');
+
+            $date = new \DateTime();
+
+            $post->setCreatedAt($date);
+            $post->setUpdatedAt($date);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
-
-        $title = strip_tags($request->get('title'));
-        $content = $request->get('content');
-
-        $content = nl2br($content);
-
-        if (empty($title) or empty(strip_tags($content))) {
-            return new JsonResponse(['ret' => 0, 'msg' => '内容为空!']);
-        }
-
-        $htmlPure = new HtmlPurer($this->container);
-
-        $content = $htmlPure->pureHtmlText($content)->getResult(true);
-
-        $tab = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
-            ->findOneBy(['alias' => $request->get('tab')]);
-        $post = new Post();
-
-        $post->setTitle($title);
-        $post->setContent($content);
-        $post->setViews(mt_rand(1, 3));
-        $post->setIsTop(false);
-        $post->setAuthor($this->getUser());
-        $post->setSummary('');
-        $post->setTab($tab);
-        $post->setStatus('published');
-
-        $date = new \DateTime();
-
-        $post->setCreatedAt($date);
-        $post->setUpdatedAt($date);
-
-        $em = $this->getDoctrine()->getManager();
-
-        $em->persist($post);
-        $em->flush();
-
-        return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
     }
 
     /**

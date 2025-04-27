@@ -18,12 +18,12 @@ class PostRepository extends EntityRepository
 {
     use RepositoryTrait;
     /**
-     * @param Tab $tab
+     * @param Tab $tabObjs
      * @param $sort
      * @param $page [$pageNo, $pageSize]
      * @return Post[]
      */
-    public function getIndexList($tabObj, $sort, $pagination, $user = null)
+    public function getIndexList($tabObjs, $sort, $pagination, $user = null)
     {
         list($page, $pageSize) = $pagination;
 
@@ -39,9 +39,9 @@ class PostRepository extends EntityRepository
             $qb->addOrderBy('p.' . $field, $direction);
         }
 
-        if ($tabObj) {
-            $qb->andWhere('p.tab = :tab')
-                ->setParameter('tab', $tabObj);
+        if ($tabObjs) {
+            $qb->andWhere('p.tab IN (:tabs)')
+                ->setParameter('tabs', $tabObjs);
         }
 
         if ($user) {
@@ -60,9 +60,9 @@ class PostRepository extends EntityRepository
             ->andWhere('p.status = :status')
             ->setParameter('status', 'published');
 
-        if ($tabObj) {
-            $countQuery->andWhere('p.tab = :tab')
-                ->setParameter('tab', $tabObj);
+        if ($tabObjs) {
+            $countQuery->andWhere('p.tab IN (:tabs)')
+                ->setParameter('tabs', $tabObjs);
         }
 
         if ($user) {

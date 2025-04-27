@@ -41,7 +41,7 @@ class CommonController extends AbstractController
             $sort = ['isTop' => 'DESC', 'updatedAt' => 'DESC']; // 默认更新时间倒序
         }
 
-        $tabObj = null;
+        $tabObjs = [];
         $tabChild = null;
 
         if ($tab && !in_array($tab, ['hot', 'all'])) {
@@ -55,13 +55,17 @@ class CommonController extends AbstractController
             $parentId = $tabObj->getId();
             $tabChild = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
                 ->findByParentId($parentId);
+            $tabObjs[]=$tabObj;
+            foreach ($tabChild as $child) {
+                $tabObjs[] =$child;
+            }
         }
 
         $user = $this->getUser(); // 获取当前用户
 
         // 查询帖子列表，按照置顶和发布时间排序
         list($count, $posts) = $this->getDoctrine()->getRepository('YesknMainBundle:Post')
-            ->getIndexList($tabObj, $sort, [$page, $pagesize], $user); // 传递用户以排除屏蔽帖子
+            ->getIndexList($tabObjs, $sort, [$page, $pagesize], $user); // 传递用户以排除屏蔽帖子
 
         $allTabs = $this->getDoctrine()->getRepository('YesknMainBundle:Tab')
             ->findBy(['level' => 1]);

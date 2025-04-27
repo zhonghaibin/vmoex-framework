@@ -22,9 +22,16 @@
 
                         <div class="form-group">
                             <label for="select-node"> {{ '选择板块'|trans }}</label>
-                            <select name="tab" id="select-node" class="form-control" title="">
-                                {% for tab in tabs %}
-                                    <option value="{{ tab.alias }}">{{ tab.name |trans }}</option>
+                            <select name="tab" id="select-node" class="form-control">
+                                {% for parent in hierarchicalTabs %}
+                                    {# 父级选项 #}
+                                    <option value="{{ parent.tab.alias }}">{{ parent.tab.name|trans }}</option>
+                                    {# 子级选项（带缩进） #}
+                                    {% for child in parent.children %}
+                                        <option value="{{ child.alias }}">
+                                            &nbsp;{{ child.name|trans }}
+                                        </option>
+                                    {% endfor %}
                                 {% endfor %}
                             </select>
                         </div>
