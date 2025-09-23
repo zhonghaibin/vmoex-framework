@@ -20,7 +20,7 @@ nav_all_notifications: すべての通知を表示
 nav_user_home: マイページ
 nav_user_setting: 設定
 footer_online_user_count: 現在オンライン中のcount人
-footer_oneline_user_most: 最高記録
+footer_online_user_most: 最高記録
 trends: 動向
 blind.chat: チャット
 search: 検索
@@ -170,7 +170,7 @@ access_denied: アクセスが拒否されました
 服务条款: 利用規約
 支持: サポート
 关于Vmoex: Vmoexについて
-member_oneline_count: メンバーオンライン
+member_online_count: メンバーオンライン
 visitor: 訪問者
 person: 人
 最新发布: 最新公開

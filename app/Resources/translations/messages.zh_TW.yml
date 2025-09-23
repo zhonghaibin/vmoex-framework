@@ -20,7 +20,7 @@ nav_all_notifications: 查看所有通知
 nav_user_home: 個人中心
 nav_user_setting: 個人設置
 footer_online_user_count: 當前在線count人
-footer_oneline_user_most: 歷史最高
+footer_online_user_most: 歷史最高
 trends: 動態
 blind.chat: 聊聊
 search: 搜索
@@ -170,7 +170,7 @@ access_denied: 訪問被拒絕
 服务条款: 服務條款
 支持: 支持
 关于Vmoex: 關於Vmoex
-member_oneline_count: 會員在線
+member_online_count: 會員在線
 visitor: 遊客
 person: 人
 最新发布: 最新發布

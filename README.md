@@ -118,10 +118,6 @@ php bin/console doctrine:cache:clear-result
 
 > 😘 感谢第三方插件和框架~
 
-## 看板娘
-
-![](web/assets/images/vmoex-screenshot-kanbanniang.png)
-
 由[维基萌](https://www.wikimoe.com/)提供(😘)。
 
 ## 帮助与反馈

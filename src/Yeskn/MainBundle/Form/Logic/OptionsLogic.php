@@ -38,16 +38,13 @@ class OptionsLogic
         'baiduTransKey'
     ];
 
-    private $girlOptions = [
-        'girl_enable'
-    ];
+
 
     private $maintainOptions = [
         'maintain_enable', 'maintain_time'
     ];
 
     private $groupNames = [
-        'girl' => '看板娘',
         'maintain' => '维护模式'
     ];
 
@@ -126,7 +123,7 @@ class OptionsLogic
             return new \DateTime($value);
         }
 
-        if (in_array($key, ['siteAnnounce', 'girl_enable', 'maintain_enable'])) {
+        if (in_array($key, ['siteAnnounce', 'maintain_enable'])) {
             return boolval($value);
         }
 
@@ -139,7 +136,7 @@ class OptionsLogic
 
     private function fallbackOption($key, $value)
     {
-        if (in_array($key, ['siteAnnounce', 'girl_enable', 'maintain_enable'])) {
+        if (in_array($key, ['siteAnnounce', 'maintain_enable'])) {
             return intval($value);
         }
 

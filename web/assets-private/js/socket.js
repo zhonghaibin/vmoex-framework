@@ -22,16 +22,8 @@ $(function () {
     socket.on('create_blog_event', handleCreateBlogEvent);
     socket.on('update_online_count', function (data) {
         data = JSON.parse(data);
-
-        var totalCnt;
-
-        if (data.onlineCount < parseInt($('#memberCnt').text())) {
-            totalCnt = parseInt($('#memberCnt').text());
-        } else {
-            totalCnt = data.onlineCount;
-        }
-
-        $('#onlineCnt').text(totalCnt);
+        $('#onlineCount').text(data.onlineCount);
+        $('#onlineCnt').text( data.guestCount);
         $('#maxOnlineCnt').text( data.maxOnlineCount);
     });
     socket.on('broadcast', function (data) {

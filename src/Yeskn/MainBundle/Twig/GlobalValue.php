@@ -193,7 +193,6 @@ class GlobalValue extends AbstractExtension
                 'topicCount' => $this->em->getRepository('YesknMainBundle:Post')->countPost(),
                 'userCount' => $this->em->getRepository('YesknMainBundle:User')->countUser(),
                 'commentCount' => $this->em->getRepository('YesknMainBundle:Comment')->countComment(),
-                'onlineUserCount' => $this->em->getRepository('YesknMainBundle:Active')->countOnlineUser(),
                 'footerLinks' => $this->em->getRepository('YesknMainBundle:FooterLink')->findBy([], ['priority' => 'DESC']),
             ];
         }
@@ -278,11 +277,6 @@ class GlobalValue extends AbstractExtension
                 'links' => ['/assets/lib/wangeditor/release/wangEditor.min.css'],
                 'identifier' => 'wangEditor' // 插件提供的构造函数
             ],
-            'landLord' => [
-                'scripts' => ['/assets/lib/live2d/js/live2d.js', '/assets/lib/live2d/js/message.js'],
-                'links' => ['/assets/lib/live2d/css/live2d.css'],
-                'identifier' => null,
-            ],
             'atwho' => [
                 'scripts' => [
                     '/assets/lib/Caret.js/dist/jquery.caret.min.js',
@@ -340,7 +334,6 @@ class GlobalValue extends AbstractExtension
             new Twig\TwigFunction('hotComments', [$this, 'hotComments', ['needs_environment' => true, 'is_safe' => 'html']]),
             new Twig\TwigFunction('unReadMessages', [$this, 'unReadMessages', ['needs_environment' => true, 'is_safe' => 'html']]),
             new Twig\TwigFunction('hotUsers', [$this, 'hotUsers', ['needs_environment' => true, 'is_safe' => 'html']]),
-            new Twig\TwigFunction('onlineUserCount', [$this, 'onlineUserCount', ['needs_environment' => true, 'is_safe' => 'html']]),
             new Twig\TwigFunction('siteState', [$this, 'siteState', ['needs_environment' => true, 'is_safe' => 'html']]),
             new Twig\TwigFunction('javascriptVariables', [$this, 'javascriptVariables']),
             new Twig\TwigFunction('javascriptPlugins', [$this, 'javascriptPlugins']),

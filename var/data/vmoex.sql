@@ -285,14 +285,13 @@ INSERT INTO `options` VALUES (1, 'siteLogo', '/assets/images/logo.png');
 INSERT INTO `options` VALUES (2, 'siteSince', '2024-08-20');
 INSERT INTO `options` VALUES (3, 'siteVersion', 'v1.0');
 INSERT INTO `options` VALUES (4, 'siteAnnounce', '1');
-INSERT INTO `options` VALUES (5, 'girl_enable', '1');
-INSERT INTO `options` VALUES (9, 'githubClientId', NULL);
-INSERT INTO `options` VALUES (10, 'githubClientSecret', NULL);
-INSERT INTO `options` VALUES (11, 'githubRedirectUrl', NULL);
-INSERT INTO `options` VALUES (12, 'baiduTransAppId', NULL);
-INSERT INTO `options` VALUES (13, 'baiduTransKey', NULL);
-INSERT INTO `options` VALUES (14, 'maintain_enable', '');
-INSERT INTO `options` VALUES (15, 'maintain_time', '');
+INSERT INTO `options` VALUES (5, 'githubClientId', NULL);
+INSERT INTO `options` VALUES (6, 'githubClientSecret', NULL);
+INSERT INTO `options` VALUES (7, 'githubRedirectUrl', NULL);
+INSERT INTO `options` VALUES (8, 'baiduTransAppId', NULL);
+INSERT INTO `options` VALUES (9, 'baiduTransKey', NULL);
+INSERT INTO `options` VALUES (10, 'maintain_enable', '');
+INSERT INTO `options` VALUES (11, 'maintain_time', '');
 
 -- ----------------------------
 -- Table structure for page
@@ -520,7 +519,7 @@ INSERT INTO `translation` VALUES (19, 'nav_all_notifications', '查看所有通�
 INSERT INTO `translation` VALUES (20, 'nav_user_home', '个人中心', 'User Center', 'マイページ', '個人中心', 1);
 INSERT INTO `translation` VALUES (21, 'nav_user_setting', '个人设置', 'Settings', '設定', '個人設置', 1);
 INSERT INTO `translation` VALUES (22, 'footer_online_user_count', '当前在线count人', 'Currently count users online', '現在オンライン中のcount人', '當前在線count人', 1);
-INSERT INTO `translation` VALUES (23, 'footer_oneline_user_most', '历史最高', 'Highest record', '最高記録', '歷史最高', 1);
+INSERT INTO `translation` VALUES (23, 'footer_online_user_most', '历史最高', 'Highest record', '最高記録', '歷史最高', 1);
 INSERT INTO `translation` VALUES (24, 'trends', '动态', 'Trends', '動向', '動態', 1);
 INSERT INTO `translation` VALUES (25, 'blind.chat', '聊聊', 'Chat', 'チャット', '聊聊', 1);
 INSERT INTO `translation` VALUES (26, 'search', '搜索', 'Search', '検索', '搜索', 1);
@@ -670,7 +669,7 @@ INSERT INTO `translation` VALUES (169, '历史公告', '历史公告', 'Historic
 INSERT INTO `translation` VALUES (170, '服务条款', '服务条款', 'Terms of Service', '利用規約', '服務條款', 1);
 INSERT INTO `translation` VALUES (171, '支持', '支持', 'Support', 'サポート', '支持', 1);
 INSERT INTO `translation` VALUES (172, '关于Vmoex', '关于Vmoex', 'About Vmoex', 'Vmoexについて', '關於Vmoex', 1);
-INSERT INTO `translation` VALUES (173, 'member_oneline_count', '会员在线', 'Members online', 'メンバーオンライン', '會員在線', 1);
+INSERT INTO `translation` VALUES (173, 'member_online_count', '会员在线', 'Members online', 'メンバーオンライン', '會員在線', 1);
 INSERT INTO `translation` VALUES (174, 'visitor', '游客', 'Visitor', '訪問者', '遊客', 1);
 INSERT INTO `translation` VALUES (175, 'person', '人', 'Person', '人', '人', 1);
 INSERT INTO `translation` VALUES (176, '最新发布', '最新发布', 'Latest Releases', '最新公開', '最新發布', 1);

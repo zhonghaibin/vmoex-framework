@@ -20,7 +20,7 @@ nav_all_notifications: View all notifications
 nav_user_home: User Center
 nav_user_setting: Settings
 footer_online_user_count: Currently count users online
-footer_oneline_user_most: Highest record
+footer_online_user_most: Highest record
 trends: Trends
 blind.chat: Chat
 search: Search
@@ -170,7 +170,7 @@ access_denied: Access denied
 服务条款: Terms of Service
 支持: Support
 关于Vmoex: About Vmoex
-member_oneline_count: Members online
+member_online_count: Members online
 visitor: Visitor
 person: Person
 最新发布: Latest Releases
