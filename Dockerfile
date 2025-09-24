@@ -6,10 +6,6 @@ ENV COMPOSER_VERSION=2.2.9 \
     WORKDIR=/var/www \
     APP_DIR=/var/app
 
-# 2. 先备份源文件，然后更新（更安全的方法）
-RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak && \
-    sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    sed -i 's/security.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 # 3. 尝试更新包列表（增加重试机制）
 RUN apt-get update || apt-get update || apt-get update
