@@ -3,6 +3,7 @@
     "at.js": "^1.5.4",
     "bootstrap": "^3.4.1",
     "bootstrap-social": "^5.1.1",
+    "clipboard": "^2.0.11",
     "echarts": "^4.2.1",
     "eds-ui": "github:jaggle/eds-ui",
     "font-awesome": "^4.7.0",

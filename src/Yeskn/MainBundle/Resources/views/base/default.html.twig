@@ -28,10 +28,20 @@
             <script>
                 window.Yeskn = {{ javascriptVariables(1)|raw }};
                 window.YesknPlugins = {{ javascriptPlugins()|raw }};
+                window.AppConfig = {
+                    locale: "{{ app.request.locale }}",
+                };
+                function getCurrentLocale() {
+                    // 从全局配置获取
+                    if (window.AppConfig && window.AppConfig.locale) {
+                        return window.AppConfig.locale;
+                    }
+                    return 'zh_CN';
+                }
             </script>
         {% endjavascripts %}
     {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
 
 </head>
 
@@ -63,6 +73,7 @@
 {% block javascripts %}
     {# 需要把assets-private放在前头，否则会报错 #}
     {% javascripts
+        'assets-private/js/translation.js'
         'assets-private/js/common.js'
         'assets-private/js/functions.js'
         'assets-private/js/event.js'
@@ -72,6 +83,7 @@
         'assets/lib/jquery-pjax/jquery.pjax.js'
         'assets/lib/bootoast/js/bootoast.js'
         'assets/lib/socket.io-client/dist/socket.io.js'
+        'assets/lib/clipboard.js'
         'assets-private/js/pjax.js'
         filter='uglifyjs2' output='build/js/*.js' %}
         <script src="{{ asset_url }}"></script>

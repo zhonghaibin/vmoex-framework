@@ -21,11 +21,11 @@
                     <span><i class="fa fa-eye"></i> {{ post.views }}{{ 'click'|trans }}</span>
                     {% if post.comments.count %}
                         <span><i class="fa fa-commenting-o"></i>
-                        <a href="#comments">{{ post.comments.count }}{{ 'comment'|trans }}</a>
+                        <a href="#comments" style="color: #9d9d9d;font-weight:normal">{{ post.comments.count }}{{ 'comment'|trans }}</a>
                     </span>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}"> {{'编辑'|trans }} </a>
+                        <a href="{{ path('yeskn_admin_post_edit', {id:post.id}) }}" style="color: #9d9d9d;font-weight:normal"><i class="fa fa-edit"></i> {{'编辑'|trans }}</a>
                     {% endif %}
                 </p>
             </div>
@@ -36,20 +36,25 @@
         <div class="post-actions border-bottom">
             <span id="favorite-btn" style="cursor: pointer" data-post-id="{{ post.id }}">
                   {% if isFavorited %}
-                      <span>{{'取消收藏'|trans }}</span>
+                      <span><i class="fa fa-bookmark"></i></span>
                   {% else %}
-                      <span>{{'加入收藏'|trans }}</span>
+                     <span> <i class="fa fa-bookmark-o"></i></span>
                   {% endif %}
             </span>
             {% if isThanks %}
-                <span>{{'已发送感谢'|trans }}</span>
+                <span><i class="fa fa-thumbs-up"></i></span>
             {% else %}
-                <span id="thinks-btn"  style="cursor: pointer" data-post-id="{{ post.id }}">{{'感谢'|trans }}</span>
+                <span id="thinks-btn"  style="cursor: pointer" data-post-id="{{ post.id }}"><i class="fa fa-thumbs-o-up"></i></span>
             {% endif %}
-            <span class="copy-btn"  style="cursor: pointer" data-clipboard-target="#text-to-copy">{{'分享'|trans }}<input type="hidden" id="text-to-copy" value="{{ url('post_show' , {'id' : post.id}) }}"></span>
-            <span id="block-btn"  style="cursor: pointer" data-post-id="{{ post.id }}">{{'屏蔽'|trans }}</span>
-{#            <span  style="cursor: pointer" >举报</span>#}
-            <span class="pull-right last"><span id="favorite-count" style="color:darkgray; margin-right:0px">{{ favoritesCount }}</span>{{'次收藏'|trans }} / <span id="thinks-count" style="color:darkgray; margin-right:0px">{{ thanksCount }}</span>{{'次感谢'|trans }}</span>
+            <span class="copy-btn"  style="cursor: pointer" data-clipboard-target="#text-to-copy"><i class="fa fa-link"></i><input type="hidden" id="text-to-copy" value="{{ url('post_show' , {'id' : post.id}) }}"></span>
+            <span id="block-btn"  style="cursor: pointer" data-post-id="{{ post.id }}"><i class="fa fa-eye-slash"></i></span>
+{#            <span  style="cursor: pointer" ><i class="fa fa-flag-o"></i></span>#}
+            <span class="pull-right last">
+                <i class="fa fa-bookmark-o"></i>
+                <span id="favorite-count" style="color:darkgray; margin-right:0px">{{ favoritesCount }}</span>/
+                <i class="fa fa-thumbs-o-up"></i>
+                <span id="thinks-count" style="color:darkgray; margin-right:0px">{{ thanksCount }}</span>
+            </span>
         </div>
 
     </div>

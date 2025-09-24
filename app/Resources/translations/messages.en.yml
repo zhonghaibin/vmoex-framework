@@ -194,6 +194,7 @@ person: Person
 昵称每180天可修改一次，请谨慎修改。: Nickname can be changed once every 180 days. Please make changes carefully.
 支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币: Supports jpg, png, and gif formats up to 2MB. It is recommended to use a 200*200 PNG file for the best effect. Gif format requires 50 coins.
 我的信箱: My mailbox
+编辑: Edit
 更新: Update
 管理员: Administrator
 内容: Content
@@ -204,14 +205,6 @@ person: Person
 主题: Topics
 我收到的: Received
 我送出的: Sent
-加入收藏: Add to Favorites
-取消收藏: Remove from Favorites
-感谢: Thanks
-分享: Share
-屏蔽: Block
-已发送感谢: Thanks sent
-次收藏: Times favorited
-次感谢: Times thanked
 请注意言论,主题创建后不允许删除或修改: Please be mindful of your comments. Once a topic is created, it cannot be deleted or modified.
 图片上传大小: The maximum allowed size for the image is 2MB
 已被拉黑: Your account has been blocked and you cannot log in.
@@ -230,3 +223,7 @@ person: Person
 交易: Trading
 二手交易: Second-hand Trading
 免费赠送: Free Gifts
+you_cannot_blocked_yourself: You cannot block yourself.
+already_blocked: Already blocked.
+you_cannot_thank_yourself: You cannot thank yourself.
+post_has_no_author: The post has no author.

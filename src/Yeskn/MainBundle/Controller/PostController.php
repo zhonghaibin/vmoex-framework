@@ -280,7 +280,7 @@ class PostController extends Controller
 
         // 检查用户是否试图感谢自己的帖子
         if ($receiver === $user) {
-            return new ApiFail($trans->trans( 'You cannot thank yourself'));
+            return new ApiFail($trans->trans( 'you_cannot_thank_yourself'));
         }
 
         // 创建新的感谢记录
@@ -323,7 +323,7 @@ class PostController extends Controller
 
         // 检查用户是否试图感谢自己的帖子
         if ($author === $user) {
-            return new ApiFail($trans->trans('不能自己屏蔽自己'));
+            return new ApiFail($trans->trans('you_cannot_blocked_yourself'));
         }
 
         // 添加屏蔽记录

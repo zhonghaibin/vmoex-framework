@@ -20,8 +20,23 @@ class AnnounceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content', TinyHtmlTextareaType::class, [
-            'label' => '内容',
+        $builder->add('zh_CN', TinyHtmlTextareaType::class, [
+            'label' => '简体中文',
+            'height' => '100',
+            'required' => true,
+        ]);
+        $builder->add('en', TinyHtmlTextareaType::class, [
+            'label' => '英文内容',
+            'height' => '100',
+            'required' => true,
+        ]);
+        $builder->add('jp', TinyHtmlTextareaType::class, [
+            'label' => '日语内容',
+            'height' => '100',
+            'required' => true,
+        ]);
+        $builder->add('zh_TW', TinyHtmlTextareaType::class, [
+            'label' => '繁体中文',
             'height' => '100',
             'required' => true,
         ]);

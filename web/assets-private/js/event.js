@@ -68,16 +68,22 @@ $(document).on('click', '#thinks-btn', function (e) {
 
 });
 $(document).ready(function() {
-    var clipboard = new ClipboardJS('.copy-btn');
-    let modalId = Math.round(Math.random() * 100000000);
+    const clipboard = new ClipboardJS('.copy-btn');
     clipboard.on('success', function(e) {
-        success( '链接已复制到剪贴板');
+        const lang = getCurrentLocale();
+        const messages = copyMessage?.[lang];
+        const successMsg = messages?.success || '';
+        success(successMsg);
     });
 
     clipboard.on('error', function(e) {
-        error( '复制失败')
+        const lang = getCurrentLocale();
+        const messages = copyMessage?.[lang];
+        const failMsg = messages?.fail || '';
+        error( failMsg)
     });
 });
+
 
 $(document).on('click', '#block-btn', function () {
     const postId = this.getAttribute('data-post-id');

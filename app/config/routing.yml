@@ -5,8 +5,8 @@ yeskn_admin:
 
 yeskn_main:
     resource: "@YesknMainBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    type: annotation
+    prefix: /
 
 yeskn_dynamic:
     resource: .

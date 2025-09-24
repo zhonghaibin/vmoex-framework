@@ -131,7 +131,7 @@ class GlobalValue extends AbstractExtension
             return $h . $hour . ($m ? $m . $minute : '') . $ago;
         } else {
             $d = intval($diff / (24 * 60 * 60));
-            return $d . $day . $ago;
+            return $d . $day .' '. $ago;
         }
     }
 

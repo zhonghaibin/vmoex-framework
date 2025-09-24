@@ -35,7 +35,10 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        return $this->render('@YesknMain/about.html.twig');
+        $row = $this->getDoctrine()->getRepository('YesknMainBundle:Page')->findOneBy(['id' => 1]);
+        return $this->render('@YesknMain/about.html.twig',[
+            'row' => $row
+        ]);
     }
 
     /**

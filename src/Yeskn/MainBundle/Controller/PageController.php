@@ -24,7 +24,10 @@ class PageController extends Controller
 
         return $this->render('@YesknMain/page/default.html.twig', [
             'pageName' => $one->getTitle(),
-            'content' => $one->getContent()
+            'zh_CN' => $one->getZhCN(),
+            'en' => $one->getEn(),
+            'jp' => $one->getJp(),
+            'zh_TW' => $one->getZhTW()
         ]);
     }
 }

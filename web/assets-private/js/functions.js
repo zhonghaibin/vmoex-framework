@@ -87,51 +87,18 @@ function handleNewNotification(data) {
 }
 
 function handleNewMessage(data) {
-    success("您收到了新的通知，请到个人中心查看");
-
+    const lang = getCurrentLocale();
+    const { message } = newMessage[lang];
+    success(message);
     $('.nav-bell-dot').addClass('push-notifications-count');
 }
 
 function handleNewFollower(data) {
-    success("有人关注你了，请到个人中心查看");
-
+    const lang = getCurrentLocale();
+    const { message } = newFollower[lang];
+    success(message);
     $('.nav-bell-dot').addClass('push-notifications-count');
 }
-
-// 语言翻译对象
-const translations = {
-    en: {
-        ago: ' ago',
-        second: ' second',
-        minute: ' minute',
-        hour: ' hour',
-        day: ' day'
-    },
-    zh_CN: {
-        ago: '前',
-        second: '秒',
-        minute: '分钟',
-        hour: '小时',
-        day: '天'
-    },
-    zh_TW: {
-        ago: '前',
-        second: '秒',
-        minute: '分鐘',
-        hour: '小時',
-        day: '天'
-    },
-    jp: {
-        ago: '前',
-        second: '秒',
-        minute: '分',
-        hour: '時間',
-        day: '日'
-    },
-    // 可以添加更多语言
-};
-
-
 
 
 function ago(timestamp) {
@@ -144,19 +111,8 @@ function ago(timestamp) {
     }
 
     const diff = now - ts;
-
+    const lang = getCurrentLocale();
     // 根据用户语言选择适当的翻译
-    let lang;
-    if (userLang.startsWith('zh_TW')) {
-        lang = 'zh_TW';
-    } else if (userLang.startsWith('jp')) {
-        lang = 'jp';
-    } else if (userLang.startsWith('zh_CN')) {
-        lang = 'zh_CN';
-    } else {
-        lang = 'en';
-    }
-
     const { ago, second, minute, hour, day } = translations[lang];
 
     if (diff < 60) {

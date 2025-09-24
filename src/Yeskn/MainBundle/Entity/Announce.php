@@ -31,9 +31,28 @@ class Announce
 
     /**
      * @var string
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="zh_CN", type="text")
      */
-    private $content;
+    private $zh_CN;
+
+    /**
+     * @var string
+     * @ORM\Column(name="en", type="text")
+     */
+    private $en;
+
+    /**
+     * @var string
+     * @ORM\Column(name="jp", type="text")
+     */
+    private $jp;
+
+    /**
+     * @var string
+     * @ORM\Column(name="zh_TW", type="text")
+     */
+    private $zh_TW;
+
 
     /**
      * @var boolean
@@ -69,22 +88,70 @@ class Announce
         $this->id = $id;
     }
 
+
     /**
      * @return string
      */
-    public function getContent()
+    public function getZhCN()
     {
-        return $this->content;
+        return $this->zh_CN;
     }
 
     /**
-     * @param string $content
+     * @param string $zh_CN
      */
-    public function setContent($content)
+    public function setZhCN($zh_CN)
     {
-        $this->content = $content;
+        $this->zh_CN = $zh_CN;
     }
 
+    /**
+     * @return string
+     */
+    public function getEn()
+    {
+        return $this->en;
+    }
+
+    /**
+     * @param string $en
+     */
+    public function setEn($en)
+    {
+        $this->en = $en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJp()
+    {
+        return $this->jp;
+    }
+
+    /**
+     * @param string $jp
+     */
+    public function setJp($jp)
+    {
+        $this->jp = $jp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZhTW()
+    {
+        return $this->zh_TW;
+    }
+
+    /**
+     * @param string $zh_TW
+     */
+    public function setZhTW($zh_TW)
+    {
+        $this->zh_TW = $zh_TW;
+    }
     /**
      * @return bool
      */

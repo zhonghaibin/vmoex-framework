@@ -26,6 +26,7 @@ if [ -z "$(ls -A $TARGET_DIR)" ]; then
   ln -s /var/www/node_modules/socket.io-client /var/www/web/assets/lib/socket.io-client
   ln -s /var/www/node_modules/startbootstrap-sb-admin-2 /var/www/web/assets/lib/startbootstrap-sb-admin-2
   ln -s /var/www/node_modules/wangeditor /var/www/web/assets/lib/wangeditor
+  ln -s /var/www/node_modules/clipboard/dist/clipboard.js /var/www/web/assets/lib/clipboard.js
 else
   rm -Rf /var/app
 fi

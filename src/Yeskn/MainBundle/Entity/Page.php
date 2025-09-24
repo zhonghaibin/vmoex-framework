@@ -36,15 +36,36 @@ class Page
 
     /**
      * @var string
+     * @ORM\Column(name="zh_CN", type="text")
+     */
+    private $zh_CN;
+
+    /**
+     * @var string
+     * @ORM\Column(name="en", type="text")
+     */
+    private $en;
+
+    /**
+     * @var string
+     * @ORM\Column(name="jp", type="text")
+     */
+    private $jp;
+
+    /**
+     * @var string
+     * @ORM\Column(name="zh_TW", type="text")
+     */
+    private $zh_TW;
+
+
+    /**
+     * @var string
      * @ORM\Column(name="summary", type="string")
      */
     private $summary = '';
 
-    /**
-     * @var string
-     * @ORM\Column(name="content", type="text")
-     */
-    private $content;
+
 
     /**
      * @var integer
@@ -111,6 +132,70 @@ class Page
     /**
      * @return string
      */
+    public function getZhCN()
+    {
+        return $this->zh_CN;
+    }
+
+    /**
+     * @param string $zh_CN
+     */
+    public function setZhCN($zh_CN)
+    {
+        $this->zh_CN = $zh_CN;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEn()
+    {
+        return $this->en;
+    }
+
+    /**
+     * @param string $en
+     */
+    public function setEn($en)
+    {
+        $this->en = $en;
+    }
+
+    /**
+     * @return string
+     */
+    public function getJp()
+    {
+        return $this->jp;
+    }
+
+    /**
+     * @param string $jp
+     */
+    public function setJp($jp)
+    {
+        $this->jp = $jp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZhTW()
+    {
+        return $this->zh_TW;
+    }
+
+    /**
+     * @param string $zh_TW
+     */
+    public function setZhTW($zh_TW)
+    {
+        $this->zh_TW = $zh_TW;
+    }
+
+    /**
+     * @return string
+     */
     public function getSummary()
     {
         return $this->summary;
@@ -124,21 +209,7 @@ class Page
         $this->summary = $summary;
     }
 
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
 
-    /**
-     * @param string $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
 
     /**
      * @return int

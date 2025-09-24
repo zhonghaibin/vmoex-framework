@@ -703,14 +703,6 @@ INSERT INTO `translation` VALUES (203, '我的感谢', '我的感谢', 'My Thank
 INSERT INTO `translation` VALUES (204, '主题', '主题', 'Topics', 'トピック', '主題', 1);
 INSERT INTO `translation` VALUES (205, '我收到的', '我收到的', 'Received', '受け取った', '我收到的', 1);
 INSERT INTO `translation` VALUES (206, '我送出的', '我送出的', 'Sent', '送った', '我送出的', 1);
-INSERT INTO `translation` VALUES (207, '加入收藏', '加入收藏', 'Add to Favorites', 'お気に入りに追加', '加入收藏', 1);
-INSERT INTO `translation` VALUES (208, '取消收藏', '取消收藏', 'Remove from Favorites', 'お気に入りから削除', '取消收藏', 1);
-INSERT INTO `translation` VALUES (209, '感谢', '感谢', 'Thanks', '感謝', '感謝', 1);
-INSERT INTO `translation` VALUES (210, '分享', '分享', 'Share', 'シェア', '分享', 1);
-INSERT INTO `translation` VALUES (211, '屏蔽', '屏蔽', 'Block', 'ブロック', '隱藏', 1);
-INSERT INTO `translation` VALUES (212, '已发送感谢', '已发送感谢', 'Thanks sent', '送信済みの感謝', '已發送感謝', 1);
-INSERT INTO `translation` VALUES (213, '次收藏', '次收藏', 'Times favorited', '回のお気に入り', '次收藏', 1);
-INSERT INTO `translation` VALUES (214, '次感谢', '次感谢', 'Times thanked', '回の感謝', '次感謝', 1);
 INSERT INTO `translation` VALUES (215, '请注意言论,主题创建后不允许删除或修改', '请注意言论,主题创建后不允许删除或修改', 'Please be mindful of your comments. Once a topic is created, it cannot be deleted or modified.', 'コメントにはご注意ください。トピックが作成された後は、削除や変更ができません。', '請注意言論，主題創建後不允許刪除或修改。', 1);
 INSERT INTO `translation` VALUES (216, '图片上传大小', '图片大小最大只能2M', 'The maximum allowed size for the image is 2MB', '最大サイズは2MBまでです。', '圖片大小最大只能2MB。', 1);
 INSERT INTO `translation` VALUES (217, '已被拉黑', '您的账号已被拉黑，无法登录', 'Your account has been blocked and you cannot log in.', 'あなたのアカウントはブロックされており、ログインできません。', '您的帳號已被拉黑，無法登入', 1);

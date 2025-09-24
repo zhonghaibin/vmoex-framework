@@ -18,7 +18,18 @@
                                                 <i class="fa fa-clock-o fa-fw"></i> {{ item.createdAt|ago }}
                                             </small>
                                         </div>
-                                        <p class="pull-left" style="margin-top: 5px">{{ item.content|raw }}</p>
+                                        <p class="pull-left" style="margin-top: 5px">
+                                            {% set locale = app.request.locale %}
+                                            {% if locale == 'en' %}
+                                                {{ item.en|raw }}
+                                            {% elseif locale == 'jp'  %}
+                                                {{ item.jp|raw }}
+                                            {% elseif locale == 'zh_TW' %}
+                                                {{ item.zhTW|raw }}
+                                            {% else %}
+                                                {{ item.zhCN|raw }}
+                                            {% endif %}
+                                        </p>
                                     </div>
                                 </li>
                             {% endfor %}

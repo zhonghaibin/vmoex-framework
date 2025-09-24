@@ -41,7 +41,10 @@ class StartRenderAnnounceListEvent extends AbstractCrudListEvent
 
             $result[] = [
                 $tag->getId(),
-                $tag->getContent(),
+                $tag->getZhCN(),
+                $tag->getEn(),
+                $tag->getJp(),
+                $tag->getZhTW(),
                 $tag->isShow() ? '启用' : '不启用',
                 $this->globalValue->ago($tag->getCreatedAt()),
                 $this->globalValue->ago($tag->getUpdatedAt())
@@ -49,7 +52,7 @@ class StartRenderAnnounceListEvent extends AbstractCrudListEvent
         }
 
         return [
-            'columns' => ['ID', '内容', '状态', '创建时间', '更新时间'],
+            'columns' => ['ID', '简体','英文','日语','繁体', '状态', '创建时间', '更新时间'],
             'entitySubTitle' => '公告用于展示在首页导航下方，用户点击后可关闭并不再显示。',
             'list' => $result,
             'ids' => $ids

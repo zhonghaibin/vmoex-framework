@@ -8,7 +8,16 @@
                     <i class="fa fa-file-text"></i> {{ pageName|trans }}
                 </div>
                 <div class="panel-body">
-                    {{ content|markdown|raw }}
+                    {% set locale = app.request.locale %}
+                    {% if locale == 'en' %}
+                        {{ en|markdown|raw }}
+                    {% elseif locale == 'jp'  %}
+                        {{ jp|markdown|raw }}
+                    {% elseif locale == 'zh_TW' %}
+                        {{ zh_TW|markdown|raw }}
+                    {% else %}
+                        {{ zh_CN|markdown|raw }}
+                    {% endif %}
                 </div>
             </div>
         </div>
