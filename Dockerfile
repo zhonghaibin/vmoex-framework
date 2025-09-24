@@ -32,10 +32,29 @@ RUN apt-get install -y --no-install-recommends \
     libicu-dev \
     default-mysql-client
 
-# 安装 PHP 扩展
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install -j$(nproc) \
-    pdo pdo_mysql mysqli mbstring zip gd exif pcntl bcmath intl opcache sockets
+# 修正：PHP 7.2 的正确 gd 扩展配置
+RUN docker-php-ext-configure gd \
+    --with-gd \
+    --with-freetype-dir=/usr/include/ \
+    --with-png-dir=/usr/include/ \
+    --with-jpeg-dir=/usr/include/
+
+# 安装 PHP 扩展（分开安装，避免单个命令失败）
+RUN docker-php-ext-install -j$(nproc) \
+    pdo \
+    pdo_mysql \
+    mysqli \
+    mbstring \
+    zip \
+    exif \
+    pcntl \
+    bcmath \
+    intl \
+    opcache \
+    sockets
+
+# 单独安装 gd 扩展
+RUN docker-php-ext-install gd
 
 # 安装 Redis
 RUN pecl install redis && docker-php-ext-enable redis
@@ -47,10 +66,16 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 # 设置工作目录
 WORKDIR /var/www
 
+# 创建日志目录
+RUN mkdir -p /var/log/php-fpm && \
+    touch /var/log/php-fpm/php-fpm_stdout.log \
+          /var/log/php-fpm/php-fpm_stderr.log && \
+    chmod 666 /var/log/php-fpm/*.log
+
 # 复制应用代码
 COPY . /var/app
 
-# 安装 Node.js（使用 NodeSource）
+# 安装 Node.js（使用更兼容的方法）
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npmmirror.com/
