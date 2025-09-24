@@ -4,7 +4,9 @@ FROM php:7.2-fpm
 # 2. 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
     COMPOSER_ALLOW_SUPERUSER=1 \
-    COMPOSER_MEMORY_LIMIT=-1
+    COMPOSER_MEMORY_LIMIT=-1  \
+    APP_ENV=prod  \
+    SYMFONY_ENV=prod
 
 # 3. 替换 Debian 源（Buster 已 EOL，改为 archive）
 RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
