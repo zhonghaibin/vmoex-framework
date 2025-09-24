@@ -56,8 +56,10 @@ RUN docker-php-ext-install -j$(nproc) \
 # 单独安装 gd 扩展
 RUN docker-php-ext-install gd
 
-# 安装 Redis
-RUN pecl install redis && docker-php-ext-enable redis
+# 修复：为 PHP 7.2 安装兼容的 Redis 扩展版本
+RUN pecl channel-update pecl.php.net && \
+    pecl install redis-5.3.7 && \
+    docker-php-ext-enable redis
 
 # 安装 Composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
