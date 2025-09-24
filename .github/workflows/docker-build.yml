@@ -29,21 +29,18 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}  # 引用 GitHub Secret
           password: ${{ secrets.DOCKER_HUB_TOKEN }}     # 引用 GitHub Secret
 
-      # 步骤 4：提取镜像标签（支持分支标签和版本标签）
+      # 步骤 4：提取镜像标签
       - name: Extract Docker tags
-        id: extract-tags  # 步骤 ID，后续可通过 ${{ steps.extract-tags.outputs.tags }} 引用
+        id: extract-tags
         run: |
-          # 定义基础镜像名（格式：DockerHub用户名/仓库名，需与你 Docker Hub 仓库一致）
           IMAGE_NAME=${{ secrets.DOCKER_HUB_USERNAME }}/vmoex-framework
           
-          # 如果是标签推送（如 v1.0.0），标签为：IMAGE_NAME:v1.0.0、IMAGE_NAME:latest
           if [[ $GITHUB_REF == refs/tags/* ]]; then
-            TAG=${GITHUB_REF#refs/tags/}  # 提取标签名（如 v1.0.0）
+            TAG=${GITHUB_REF#refs/tags/}  # 版本号标签
             echo "tags=$IMAGE_NAME:$TAG,$IMAGE_NAME:latest" >> $GITHUB_OUTPUT
-          # 如果是分支推送（如 main），标签为：IMAGE_NAME:main
           else
-            BRANCH=${GITHUB_REF#refs/heads/}  # 提取分支名（如 main）
-            echo "tags=$IMAGE_NAME:$BRANCH" >> $GITHUB_OUTPUT
+            # 分支推送统一打 latest
+            echo "tags=$IMAGE_NAME:latest" >> $GITHUB_OUTPUT
           fi
 
       # 步骤 5：构建 Docker 镜像并推送到 Docker Hub
