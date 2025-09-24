@@ -11,7 +11,7 @@
  Target Server Version : 101106 (10.11.6-MariaDB)
  File Encoding         : 65001
 
- Date: 24/09/2025 17:48:54
+ Date: 24/09/2025 21:38:26
 */
 
 SET NAMES utf8mb4;
@@ -457,11 +457,240 @@ CREATE TABLE `translation`  (
   `can_delete` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `message_unique`(`message_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 230 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of translation
 -- ----------------------------
+INSERT INTO `translation` VALUES (1, 'about_site', '关于 Vmoex', 'About Vmoex', 'Vmoexについて', '關於 Vmoex', 1);
+INSERT INTO `translation` VALUES (2, 'chinese', '简体中文', 'Simplified Chinese', '簡体字中国語', '簡體中文', 1);
+INSERT INTO `translation` VALUES (3, 'english', '英文', 'English', '英語', '英文', 1);
+INSERT INTO `translation` VALUES (4, 'chinese.tw', '繁体中文', 'Traditional Chinese', '繁体字中国語', '繁體中文', 1);
+INSERT INTO `translation` VALUES (5, 'japanese', '日语', 'Japanese', '日本語', '日語', 1);
+INSERT INTO `translation` VALUES (6, 'ago', '前', 'ago', '前', '前', 1);
+INSERT INTO `translation` VALUES (7, 'second', '秒', 'seconds', '秒', '秒', 1);
+INSERT INTO `translation` VALUES (8, 'day', '天', 'days', '日', '天', 1);
+INSERT INTO `translation` VALUES (9, 'hour', '小时', 'hours', '時間', '小時', 1);
+INSERT INTO `translation` VALUES (10, 'minute', '分钟', 'minutes', '分', '分鐘', 1);
+INSERT INTO `translation` VALUES (11, 'login', '登录', 'Login', 'ログイン', '登錄', 1);
+INSERT INTO `translation` VALUES (12, 'logout', '登出', 'Logout', 'ログアウト', '登出', 1);
+INSERT INTO `translation` VALUES (13, 'register', '注册', 'Register', '登録', '註冊', 1);
+INSERT INTO `translation` VALUES (14, 'success', '操作成功', 'Operation successful', '操作が成功しました', '操作成功', 1);
+INSERT INTO `translation` VALUES (15, 'fail', '操作失败', 'Operation failed', '操作が失敗しました', '操作失敗', 1);
+INSERT INTO `translation` VALUES (16, 'click', '点击', 'Click', 'クリック', '點擊', 1);
+INSERT INTO `translation` VALUES (17, 'nav_messages', '查看所有私信', 'View all messages', 'すべてのメッセージを表示', '查看所有私信', 1);
+INSERT INTO `translation` VALUES (18, 'nav_new_fans', '个新的粉丝', 'new followers', '新しいフォロワー', '個新的粉絲', 1);
+INSERT INTO `translation` VALUES (19, 'nav_all_notifications', '查看所有通知', 'View all notifications', 'すべての通知を表示', '查看所有通知', 1);
+INSERT INTO `translation` VALUES (20, 'nav_user_home', '个人中心', 'User Center', 'マイページ', '個人中心', 1);
+INSERT INTO `translation` VALUES (21, 'nav_user_setting', '个人设置', 'Settings', '設定', '個人設置', 1);
+INSERT INTO `translation` VALUES (22, 'footer_online_user_count', '当前在线count人', 'Currently count users online', '現在オンライン中のcount人', '當前在線count人', 1);
+INSERT INTO `translation` VALUES (23, 'footer_online_user_most', '历史最高', 'Highest record', '最高記録', '歷史最高', 1);
+INSERT INTO `translation` VALUES (24, 'trends', '动态', 'Trends', '動向', '動態', 1);
+INSERT INTO `translation` VALUES (25, 'blind.chat', '聊聊', 'Chat', 'チャット', '聊聊', 1);
+INSERT INTO `translation` VALUES (26, 'search', '搜索', 'Search', '検索', '搜索', 1);
+INSERT INTO `translation` VALUES (27, 'about', '关于', 'About', 'について', '關於', 1);
+INSERT INTO `translation` VALUES (28, 'messages', '私信', 'Messages', 'メッセージ', '私信', 1);
+INSERT INTO `translation` VALUES (29, 'notifications', '通知', 'Notifications', '通知', '通知', 1);
+INSERT INTO `translation` VALUES (30, 'comment', '评论', 'Comment', 'コメント', '評論', 1);
+INSERT INTO `translation` VALUES (31, 'hello_stranger', ' 您好，陌生人！', 'Hello, Stranger!', 'こんにちは、初めまして！', ' 您好，陌生人！', 1);
+INSERT INTO `translation` VALUES (32, 'hello_stranger_detail', '如果你喜欢Vmoex，请记得注册或者保存网址哦~', 'If you like Vmoex, remember to register or bookmark us~', 'Vmoexが気に入ったら、登録するかブックマークしてくださいね~', '如果你喜歡Vmoex，請記得註冊或者保存網址哦~', 1);
+INSERT INTO `translation` VALUES (33, 'my.status', '我的状态', 'My Status', '自分の状態', '我的狀態', 1);
+INSERT INTO `translation` VALUES (34, 'hot.users', '活跃用户', 'Active Users', '活発なユーザー', '活躍用戶', 1);
+INSERT INTO `translation` VALUES (35, 'today.hot.topics', '热门文档', 'Hot Topics', '今日の人気トピック', '熱門文檔', 1);
+INSERT INTO `translation` VALUES (36, 'newly.comments', '最新评论', 'Latest Comments', '最新コメント', '最新評論', 1);
+INSERT INTO `translation` VALUES (37, 'today.activity', '今日活跃度', 'Today\'s Activity', '今日のアクティビティ', '今日活躍度', 1);
+INSERT INTO `translation` VALUES (38, 'continuous_signed count day', '已连续签到count天', 'Continuous check-in count days', '連続サインインcount日目', '已連續簽到count天', 1);
+INSERT INTO `translation` VALUES (39, 'create_new_topic', '创建新主题', 'Create New Topic', '新しいトピックを作成', '創建新主題', 1);
+INSERT INTO `translation` VALUES (40, 'activity', '活跃度', 'Activity', 'アクティビティ', '活躍度', 1);
+INSERT INTO `translation` VALUES (41, '用户名', '用户名', 'Username', 'ユーザー名', '用戶名', 1);
+INSERT INTO `translation` VALUES (42, '邮箱', '邮箱', 'Email', 'メールアドレス', '郵箱', 1);
+INSERT INTO `translation` VALUES (43, '密码', '密码', 'Password', 'パスワード', '密碼', 1);
+INSERT INTO `translation` VALUES (44, 'verify_email', '你的邮箱尚未激活，<a data-pjax href=\"/user/setting#emailSetting\" class=\"alert-link\">点此激活</a>', 'Your email is not yet activated, <a data-pjax href=\"/user/setting#emailSetting\" class=\"alert-link\">click here to activate</a>', 'メールアドレスが未認証です、<a data-pjax href=\"/user/setting#emailSetting\" class=\"alert-link\">ここをクリックして認証</a>', '你的郵箱尚未激活，<a data-pjax href=\"/user/setting#emailSetting\" class=\"alert-link\">點此激活</a>', 1);
+INSERT INTO `translation` VALUES (45, '在线可撩', '在线可撩', 'Available Online', 'オンライン中', '在線可撩', 1);
+INSERT INTO `translation` VALUES (46, '加入于', '加入于', 'Joined on', '参加日', '加入於', 1);
+INSERT INTO `translation` VALUES (47, '第count位Vmoex用户', '第count位Vmoex用户', 'The count-th Vmoex user', 'Vmoexの第count位のユーザー', '第count位Vmoex用戶', 1);
+INSERT INTO `translation` VALUES (48, '最后在线时间：time', '最后在线时间：time', 'Last online time: time', '最終オンライン時間：time', '最後在線時間：time', 1);
+INSERT INTO `translation` VALUES (49, 'name发布的帖子', 'name发布的帖子', 'name\'s posts', 'nameの投稿', 'name發布的帖子', 1);
+INSERT INTO `translation` VALUES (50, 'name的回复', 'name的回复', 'name\'s replies', 'nameの返信', 'name的回覆', 1);
+INSERT INTO `translation` VALUES (51, 'time 发表在', 'time 发表在', 'Posted on time', 'timeに投稿', 'time 發表在', 1);
+INSERT INTO `translation` VALUES (52, 'name的关注', 'name的关注', 'name\'s following', 'nameのフォロー', 'name的關注', 1);
+INSERT INTO `translation` VALUES (53, 'name的粉丝', 'name的粉丝', 'name\'s followers', 'nameのフォロワー', 'name的粉絲', 1);
+INSERT INTO `translation` VALUES (54, '发送成功', '发送成功', 'Sent successfully', '送信に成功しました', '發送成功', 1);
+INSERT INTO `translation` VALUES (55, 'documents', '交流分享', 'Documents', '文書', '交流分享', 1);
+INSERT INTO `translation` VALUES (56, 'support', '支持', 'Support', 'サポート', '支持', 1);
+INSERT INTO `translation` VALUES (57, '刷新', '刷新', 'Refresh', '更新', '刷新', 1);
+INSERT INTO `translation` VALUES (58, '板块', '板块', 'Sections', 'セクション', '板塊', 1);
+INSERT INTO `translation` VALUES (59, '当前在线count人', '当前在线count人', 'Currently count users online', '現在オンラインのcount人', '當前在線count人', 1);
+INSERT INTO `translation` VALUES (60, '历史最高', '历史最高', 'Highest record', '最高記録', '歷史最高', 1);
+INSERT INTO `translation` VALUES (61, '全部', '全部', 'All', '全て', '全部', 1);
+INSERT INTO `translation` VALUES (62, '热门', '热门', 'Hot', '人気', '熱門', 1);
+INSERT INTO `translation` VALUES (63, '查看所有通知', '查看所有通知', 'View all notifications', 'すべての通知を表示', '查看所有通知', 1);
+INSERT INTO `translation` VALUES (64, '查看所有私信', '查看所有私信', 'View all messages', 'すべてのメッセージを表示', '查看所有私信', 1);
+INSERT INTO `translation` VALUES (65, '个人设置', '个人设置', 'Personal Settings', '個人設定', '個人設置', 1);
+INSERT INTO `translation` VALUES (66, '添加新的评论', '添加新的评论', 'Add new comment', '新しいコメントを追加', '添加新的評論', 1);
+INSERT INTO `translation` VALUES (67, '发表评论', '发表评论将消耗1金币哦', 'Posting a comment will cost 1 coin.', 'コメントを投稿すると1ゴールドが消費されますよ。', '發表評論將消耗1金幣哦。', 1);
+INSERT INTO `translation` VALUES (68, '好可怕，速度太快了', '好可怕，速度太快了', 'Scary, that\'s too fast', '速すぎて怖い！', '好可怕，速度太快了', 1);
+INSERT INTO `translation` VALUES (69, '关于作者', '关于作者', 'About the Author', '著者について', '關於作者', 1);
+INSERT INTO `translation` VALUES (70, '拉黑', '拉黑', 'Block', 'ブロック', '拉黑', 1);
+INSERT INTO `translation` VALUES (71, '昵称', '昵称', 'Nickname', 'ニックネーム', '暱稱', 1);
+INSERT INTO `translation` VALUES (72, '状态', '状态', 'Status', '状態', '狀態', 1);
+INSERT INTO `translation` VALUES (73, '头像', '头像', 'Avatar', 'アイコン', '頭像', 1);
+INSERT INTO `translation` VALUES (74, '保存', '保存', 'Save', '保存', '保存', 1);
+INSERT INTO `translation` VALUES (75, '修改', '修改', 'Modify', '修正', '修改', 1);
+INSERT INTO `translation` VALUES (76, '修改密码', '修改密码', 'Change Password', 'パスワードを変更', '修改密碼', 1);
+INSERT INTO `translation` VALUES (77, '支持我们', '支持我们', 'Support Us', 'サポート', '支持我們', 1);
+INSERT INTO `translation` VALUES (78, '个新的粉丝', '个新的粉丝', 'new followers', '新しいフォロワー', '個新的粉絲', 1);
+INSERT INTO `translation` VALUES (79, '赞', '赞', 'Like', 'いいね', '贊', 1);
+INSERT INTO `translation` VALUES (80, '什么是瞎聊', '什么是聊聊', 'What is Chat', 'チャット', '什麼是聊聊', 1);
+INSERT INTO `translation` VALUES (81, 'blind_description', '“聊聊”是 Vmoex 社区提供的一个线上即时聊天功能，每发送一条“聊聊”消息将消耗一枚金币。', '\"Chat\" is an instant messaging feature provided by the Vmoex community. Each \"Chat\" message sent will cost one coin.', '「チャット」はVmoexコミュニティが提供するリアルタイムチャット機能で、メッセージを送信するたびに1ゴールドを消費します。', '“聊聊”是 Vmoex 社區提供的一個線上即時聊天功能，每發送一條“聊聊”消息將消耗一枚金幣。', 1);
+INSERT INTO `translation` VALUES (82, '社区运行状态', '社区运行状态', 'Community Status', 'コミュニティの運営状態', '社區運行狀態', 1);
+INSERT INTO `translation` VALUES (83, '社区成立时间', '社区成立时间', 'Community Established', 'コミュニティ設立日', '社區成立時間', 1);
+INSERT INTO `translation` VALUES (84, '主题数量', '主题数量', 'Topic Count', 'トピック数', '主題數量', 1);
+INSERT INTO `translation` VALUES (85, '回复数量', '回复数量', 'Reply Count', '返信数', '回覆數量', 1);
+INSERT INTO `translation` VALUES (86, '注册用户数量', '注册用户数量', 'Registered Users', '登録ユーザー数', '註冊用戶數量', 1);
+INSERT INTO `translation` VALUES (87, '添加', '添加', 'Add', '追加', '添加', 1);
+INSERT INTO `translation` VALUES (88, '请先登录', '请先登录', 'Please log in first', '先にログインしてください', '請先登錄', 1);
+INSERT INTO `translation` VALUES (89, 'Vmoex当前板块数量', 'Vmoex当前板块数量', 'Vmoex\'s current section count', 'Vmoex現在のセクション数', 'Vmoex當前板塊數量', 1);
+INSERT INTO `translation` VALUES (90, 'userhome_send_message', '发送私信', 'Send Message', 'メッセージを送信', '發送私信', 1);
+INSERT INTO `translation` VALUES (91, 'userhome_has_followed', '已经关注', 'Already Followed', 'フォロー済み', '已經關注', 1);
+INSERT INTO `translation` VALUES (92, 'userhome_follow', '关注', 'Follow', 'フォロー', '關注', 1);
+INSERT INTO `translation` VALUES (93, 'userhome_block', '屏蔽', 'Block', 'ブロック', '屏蔽', 1);
+INSERT INTO `translation` VALUES (94, 'userhome_no_recent_reply', '该用户最近没有回复', 'This user has no recent replies', 'このユーザーには最近の返信がありません', '該用戶最近沒有回覆', 1);
+INSERT INTO `translation` VALUES (95, 'userhome_he_is_cold', '比较高冷?，目前没有关注任何人。', 'A bit distant? Currently not following anyone.', 'クールですか？まだ誰もフォローしていません。', '比較高冷?，目前沒有關注任何人。', 1);
+INSERT INTO `translation` VALUES (96, 'userhome_he_has_no_follower', '名声不佳，没有任何粉丝╮(╯_╰)╭', 'Not very popular, has no followers ╮(╯_╰)╭', '人気がないようです。フォロワーがいません╮(╯_╰)╭', '名聲不佳，沒有任何粉絲╮(╯_╰)╭', 1);
+INSERT INTO `translation` VALUES (97, 'post_add_comment', '添加评论', 'Add Comment', 'コメントを追加', '添加評論', 1);
+INSERT INTO `translation` VALUES (98, 'post_no_comment', '文章没有评论', 'No comments on this post', 'コメントはありません', '文章沒有評論', 1);
+INSERT INTO `translation` VALUES (99, 'chat_sorry_co_content', '抱歉，暂时没有聊天消息', 'Sorry, no chat messages at the moment', '申し訳ありませんが、現在チャットメッセージはありません', '抱歉，暫時沒有聊天消息', 1);
+INSERT INTO `translation` VALUES (100, 'chat_please_type', '请输入', 'Please type', '入力してください', '請輸入', 1);
+INSERT INTO `translation` VALUES (101, 'send', '发送', 'Send', '送信', '發送', 1);
+INSERT INTO `translation` VALUES (102, 'please_login', '请登录', 'Please login', 'ログインしてください', '請登錄', 1);
+INSERT INTO `translation` VALUES (103, 'why_this', '为什么会这样？', 'Why is this happening?', 'なぜこうなったの？', '為什麼會這樣？', 1);
+INSERT INTO `translation` VALUES (104, 'userhome_no_published_post', '用户目前没有发布文章', 'The user has not published any articles', 'ユーザーはまだ記事を投稿していません', '用戶目前沒有發布文章', 1);
+INSERT INTO `translation` VALUES (105, 'reply', '回复', 'Reply', '返信', '回覆', 1);
+INSERT INTO `translation` VALUES (106, 'notice_my_notice', '我的通知', 'My Notifications', 'マイ通知', '我的通知', 1);
+INSERT INTO `translation` VALUES (107, 'notice_unread', '未读通知', 'Unread Notifications', '未読通知', '未讀通知', 1);
+INSERT INTO `translation` VALUES (108, 'notice_read', '已读通知', 'Read Notifications', '読んだ通知', '已讀通知', 1);
+INSERT INTO `translation` VALUES (109, 'notice_replied_you', '回复我的', 'Replied to me', '返信がありました', '回覆我的', 1);
+INSERT INTO `translation` VALUES (110, 'post_top', '置顶', 'Pinned', 'トップに固定', '置頂', 1);
+INSERT INTO `translation` VALUES (111, 'like', '赞', 'Like', 'いいね', '贊', 1);
+INSERT INTO `translation` VALUES (112, 'action_too_fast', '好可怕，速度太快了', 'Scary, that\'s too fast', '速すぎて怖い！', '好可怕，速度太快了', 1);
+INSERT INTO `translation` VALUES (113, 'banner_announce', '歡迎您來到Vmoex，這裡是一個知识与兴趣聚集地，很期待你成為這裡的一員！', 'Welcome to Vmoex, a place where knowledge and interests converge. We look forward to you becoming a part of this community!', 'Vmoexへようこそ。ここは知識と興味の集まる場所です。あなたがここに参加するのを楽しみにしています！', '歡迎您來到Vmoex，這裡是一個知識與興趣聚集地，很期待你成為這裡的一員！', 1);
+INSERT INTO `translation` VALUES (114, 'all', '全部', 'All', '全部', '全部', 1);
+INSERT INTO `translation` VALUES (115, 'hot', '热门', 'Hot', '人気', '熱門', 1);
+INSERT INTO `translation` VALUES (116, 'site_state', '社区运行状态', 'Community Status', 'コミュニティの運営状態', '社區運行狀態', 1);
+INSERT INTO `translation` VALUES (117, 'site_since', '社区成立时间', 'Community Established', 'コミュニティ設立日', '社區成立時間', 1);
+INSERT INTO `translation` VALUES (118, 'site_post_count', '主题数量', 'Topic Count', 'トピック数', '主題數量', 1);
+INSERT INTO `translation` VALUES (119, 'site_comment_count', '回复数量', 'Reply Count', '返信数', '回覆數量', 1);
+INSERT INTO `translation` VALUES (120, 'site_user_count', '注册用户数量', 'Registered Users', '登録ユーザー数', '註冊用戶數量', 1);
+INSERT INTO `translation` VALUES (121, 'site_copyright', '@2024 Vmoex - 知识与兴趣聚集地', '@2024 Vmoex - A Hub of Knowledge and Interests', '@2024 Vmoex - 知識と興味の集まる場所', '@2024 Vmoex - 知識與興趣聚集地', 1);
+INSERT INTO `translation` VALUES (122, 'site_title', 'Vmoex - 知识与兴趣聚集地', 'Vmoex - A Hub of Knowledge and Interests', 'Vmoex - 知識と興味の集まる場所', 'Vmoex - 知識與興趣聚集地', 1);
+INSERT INTO `translation` VALUES (123, 'site_name', 'Vmoex', 'Vmoex', 'Vmoex', 'Vmoex', 1);
+INSERT INTO `translation` VALUES (124, 'user_place_in_site', '第count位Vmoex用户', 'The count-th Vmoex user', 'Vmoexの第count位のユーザー', '第count位Vmoex用戶', 1);
+INSERT INTO `translation` VALUES (125, 'footer_available_with', '可用于: ', 'Available with: ', '使用可能: ', '可用於: ', 1);
+INSERT INTO `translation` VALUES (126, 'user_my_messages', '我的私信', 'My Messages', 'マイメッセージ', '我的私信', 1);
+INSERT INTO `translation` VALUES (127, 'user_my_received_messages', '我接收的', 'Received', '受信メッセージ', '我接收的', 1);
+INSERT INTO `translation` VALUES (128, 'user_my_sent_messages', '我发出的', 'Sent', '送信メッセージ', '我發出的', 1);
+INSERT INTO `translation` VALUES (129, 'sorry_no_content', '抱歉，暂时没有任何内容！', 'Sorry, no content available at the moment!', '申し訳ありませんが、現在コンテンツがありません！', '抱歉，暫時沒有任何內容！', 1);
+INSERT INTO `translation` VALUES (130, 'user_you_send_message_to', '你对receiver说：', 'You said to receiver', 'あなたがreceiverに送信したメッセージ：', '你對receiver說：', 1);
+INSERT INTO `translation` VALUES (131, 'user_send_message_to_you', '对你说：', 'receiver said to you', 'receiverがあなたに送信したメッセージ：', '對你說：', 1);
+INSERT INTO `translation` VALUES (132, 'Title', '标题', 'Title', 'タイトル', '標題', 1);
+INSERT INTO `translation` VALUES (133, 'Cover', '封面', 'Cover', 'カバー', '封面', 1);
+INSERT INTO `translation` VALUES (134, 'Detail', '详情', 'Details', '詳細', '詳情', 1);
+INSERT INTO `translation` VALUES (135, 'latest_blogs', '最新创建', 'Latest Blogs', '最新作成', '最新創建', 1);
+INSERT INTO `translation` VALUES (136, 'nav_create_blog', '创建博客', 'Create Blog', 'ブログを作成', '創建博客', 1);
+INSERT INTO `translation` VALUES (137, 'nav_create_post', '创建新主题', 'Create New Topic', '新しいトピックを作成', '創建新主題', 1);
+INSERT INTO `translation` VALUES (138, 'Old password', '老密码', 'Old Password', '古いパスワード', '老密碼', 1);
+INSERT INTO `translation` VALUES (139, 'New Password', '新密码', 'New Password', '新しいパスワード', '新密碼', 1);
+INSERT INTO `translation` VALUES (140, 'Repeat Password', '重复密码', 'Repeat Password', 'パスワードを再入力', '重複密碼', 1);
+INSERT INTO `translation` VALUES (141, 'home_now_register', '立即注册！', 'Register Now!', '今すぐ登録！', '立即註冊！', 1);
+INSERT INTO `translation` VALUES (142, 'user_my_posts', '我的帖子', 'My Posts', 'マイ投稿', '我的帖子', 1);
+INSERT INTO `translation` VALUES (143, 'user_my_comments', '我的评论', 'My Comments', 'マイコメント', '我的評論', 1);
+INSERT INTO `translation` VALUES (144, 'user_my_following', '我的关注', 'My Followings', 'フォロー中', '我的關注', 1);
+INSERT INTO `translation` VALUES (145, 'user_my_follower', '关注我的', 'My Followers', 'フォロワー', '關注我的', 1);
+INSERT INTO `translation` VALUES (146, 'user_my_blog', '我创建的博客', 'My Blog', 'マイブログ', '我創建的博客', 1);
+INSERT INTO `translation` VALUES (147, 'email', '邮箱', 'Email', 'メールアドレス', '郵箱', 1);
+INSERT INTO `translation` VALUES (148, 'user_setting_email_verified', '邮箱已验证通过', 'Email verified', 'メールアドレスが認証されました', '郵箱已驗證通過', 1);
+INSERT INTO `translation` VALUES (149, 'community', '社区', 'Community', 'コミュニティ', '社區', 1);
+INSERT INTO `translation` VALUES (150, 'notice_comment_mention_you', '在评论中提到你', 'Mentioned you in a comment', 'コメントであなたに言及しました', '在評論中提到你', 1);
+INSERT INTO `translation` VALUES (151, 'post_add_comment_hint', '请尽量添加有意义的评论。', 'Please try to add meaningful comments.', 'できるだけ意味のあるコメントを追加してください。', '請盡量添加有意義的評論。', 1);
+INSERT INTO `translation` VALUES (152, 'users.gold_rank', '用户金币排行榜', 'User Gold Rankings', 'ユーザーゴールドランキング', '用戶金幣排行榜', 1);
+INSERT INTO `translation` VALUES (153, 'users.rank', '排名', 'Rank', 'ランク', '排名', 1);
+INSERT INTO `translation` VALUES (154, 'username', '用户名', 'Username', 'ユーザー名', '用戶名', 1);
+INSERT INTO `translation` VALUES (155, 'gold', '金币', 'Coins', 'ゴールド', '金幣', 1);
+INSERT INTO `translation` VALUES (156, 'users.sign_rank', '用户签到排行榜', 'User Sign-in Rankings', 'ユーザーサインインランキング', '用戶簽到排行榜', 1);
+INSERT INTO `translation` VALUES (157, 'global.sign', '签到', 'Sign In', 'サインイン', '簽到', 1);
+INSERT INTO `translation` VALUES (158, 'post_not_exist', '文章不存在', 'Post does not exist', '記事が存在しません', '文章不存在', 1);
+INSERT INTO `translation` VALUES (159, 'length_not_support', '内个啥...长度好像不合适哦！', 'Hmm... seems like the length isn\'t quite right!', 'あの…長さが合ってないようです！', '內個啥...長度好像不合適哦！', 1);
+INSERT INTO `translation` VALUES (160, 'do_not_repeat_mention_others', '请勿重复@其他人！', 'Please don\'t repeat @mention others!', '他の人に重複して@しないでください！', '請勿重複@其他人！', 1);
+INSERT INTO `translation` VALUES (161, 'no_enough_gold', '金币不足', 'Not enough coins', 'ゴールドが不足しています', '金幣不足', 1);
+INSERT INTO `translation` VALUES (162, 'comment_not_exist', '评论不存在', 'Comment does not exist', 'コメントが存在しません', '評論不存在', 1);
+INSERT INTO `translation` VALUES (163, 'cant_modify_current_user_in_admin', '不能在管理端修改当前个人信息，请在用户端个人中心修改', 'Can\'t modify current user info in the admin panel, please change it in your user center.', '管理画面で現在のユーザー情報を変更できません。ユーザー画面のマイページで変更してください', '不能在管理端修改當前個人信息，請在用戶端個人中心修改', 1);
+INSERT INTO `translation` VALUES (164, 'user_not_exist', '用户不存在', 'User does not exist', 'ユーザーが存在しません', '用戶不存在', 1);
+INSERT INTO `translation` VALUES (165, 'locale_invalid', '非法的语言', 'Invalid language', '無効な言語', '非法的語言', 1);
+INSERT INTO `translation` VALUES (166, 'hours', '小时', 'hours', '時間', '小時', 1);
+INSERT INTO `translation` VALUES (167, 'access_denied', '访问被拒绝', 'Access denied', 'アクセスが拒否されました', '訪問被拒絕', 1);
+INSERT INTO `translation` VALUES (168, 'locale invalid', '未知的语言', 'Unknown language', '不明な言語', '未知的語言', 1);
+INSERT INTO `translation` VALUES (169, '历史公告', '历史公告', 'Historical Announcements', '過去のお知らせ', '歷史公告', 1);
+INSERT INTO `translation` VALUES (170, '服务条款', '服务条款', 'Terms of Service', '利用規約', '服務條款', 1);
+INSERT INTO `translation` VALUES (171, '支持', '支持', 'Support', 'サポート', '支持', 1);
+INSERT INTO `translation` VALUES (172, '关于Vmoex', '关于Vmoex', 'About Vmoex', 'Vmoexについて', '關於Vmoex', 1);
+INSERT INTO `translation` VALUES (173, 'member_online_count', '会员在线', 'Members online', 'メンバーオンライン', '會員在線', 1);
+INSERT INTO `translation` VALUES (174, 'visitor', '游客', 'Visitor', '訪問者', '遊客', 1);
+INSERT INTO `translation` VALUES (175, 'person', '人', 'Person', '人', '人', 1);
+INSERT INTO `translation` VALUES (176, '最新发布', '最新发布', 'Latest Releases', '最新公開', '最新發布', 1);
+INSERT INTO `translation` VALUES (177, '最新评论', '最新评论', 'Latest Comments', '最新コメント', '最新評論', 1);
+INSERT INTO `translation` VALUES (178, '更多', '更多', 'More', 'もっと見る', '更多', 1);
+INSERT INTO `translation` VALUES (179, '使用条款', '使用条款', 'Terms of Use', '利用規約', '使用條款', 1);
+INSERT INTO `translation` VALUES (180, '第三方登录', '第三方登录', 'Third-Party Login', 'サードパーティーログイン', '第三方登入', 1);
+INSERT INTO `translation` VALUES (181, '已有帐号？', '已有帐号？', 'Already have an account?', '既にアカウントをお持ちですか？', '已有帳號？', 1);
+INSERT INTO `translation` VALUES (182, '直接登录', '直接登录', 'Log in directly', '直接ログイン', '直接登入', 1);
+INSERT INTO `translation` VALUES (183, '立即注册', '立即注册', 'Register now', '今すぐ登録', '立即註冊', 1);
+INSERT INTO `translation` VALUES (184, '记住登录状态', '记住登录状态', 'Remember login status', 'ログイン状態を記憶する', '記住登入狀態', 1);
+INSERT INTO `translation` VALUES (185, '推荐主题', '推荐主题', 'Recommended Topics', 'おすすめのトピック', '推薦主題', 1);
+INSERT INTO `translation` VALUES (186, '暂时没有任何文档！', '暂时没有任何文档！', 'No documents available at the moment!', '現在、ドキュメントはありません！', '暫時沒有任何文檔！', 1);
+INSERT INTO `translation` VALUES (187, '签到领取奖励', '签到领取奖励', 'Check in to receive rewards', '出席して報酬を受け取る', '簽到領取獎勳', 1);
+INSERT INTO `translation` VALUES (188, '验证码', '验证码', 'Verification code', '認証コード', '驗證碼', 1);
+INSERT INTO `translation` VALUES (189, '验证', '验证', 'Verification', '検証', '驗證', 1);
+INSERT INTO `translation` VALUES (190, '发送验证码', '发送验证码', 'Send verification code', '認証コードを送信する', '發送驗證碼', 1);
+INSERT INTO `translation` VALUES (191, '基本资料', '基本资料', 'Basic information', '基本情報', '基本資料', 1);
+INSERT INTO `translation` VALUES (192, '用户名不能被修改', '用户名不能被修改', 'Username cannot be changed', 'ユーザー名は変更できません', '用戶名不能被修改', 1);
+INSERT INTO `translation` VALUES (193, '昵称每180天可修改一次，请谨慎修改。', '昵称每180天可修改一次，请谨慎修改。', 'Nickname can be changed once every 180 days. Please make changes carefully.', 'ニックネームは180日に1回変更できます。慎重に変更してください。', '昵称每180天可修改一次，請謹慎修改。', 1);
+INSERT INTO `translation` VALUES (194, '天后可修改昵称。', '天后可修改昵称。', 'Nickname can be changed after day.', '天後にニックネームを変更できます。', '天後可修改暱稱。', 1);
+INSERT INTO `translation` VALUES (195, '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', '支持 2MB 以内的jpg、png、gif格式，推荐使用一张 200*200 的 PNG 文件以获得最佳效果，gif格式需消耗50金币', 'Supports jpg, png, and gif formats up to 2MB. It is recommended to use a 200*200 PNG file for the best effect. Gif format requires 50 coins.', '2MB以内のjpg、png、gif形式がサポートされています。最適な効果を得るには200*200のPNGファイルを使用することをお勧めします。gif形式は50コインが必要です。', '支援 2MB 以內的jpg、png、gif格式，推薦使用一張 200*200 的 PNG 文件以獲得最佳效果，gif格式需消耗50金幣', 1);
+INSERT INTO `translation` VALUES (196, '我的信箱', '我的信箱', 'My mailbox', '私のメールボックス', '我的信箱', 1);
+INSERT INTO `translation` VALUES (197, '编辑', '编辑', 'Edit', '編集', '編輯', 1);
+INSERT INTO `translation` VALUES (198, '更新', '更新', 'Update', '更新', '更新', 1);
+INSERT INTO `translation` VALUES (199, '管理员', '管理员', 'Administrator', 'かんりしゃ', '管理員', 1);
+INSERT INTO `translation` VALUES (200, '内容', '内容', 'Content', '内容', '內容', 1);
+INSERT INTO `translation` VALUES (201, '选择板块', '选择板块', 'Select Board', '板を選択', '選擇板塊', 1);
+INSERT INTO `translation` VALUES (202, '提交', '提交', 'Submit', '提出', '提交', 1);
+INSERT INTO `translation` VALUES (203, '我的收藏', '我的收藏', 'My Favorites', 'マイコレクション (私のコレクション)', '我的收藏', 1);
+INSERT INTO `translation` VALUES (204, '我的感谢', '我的感谢', 'My Thanks', '私の感謝', '我的感謝', 1);
+INSERT INTO `translation` VALUES (205, '主题', '主题', 'Topics', 'トピック', '主題', 1);
+INSERT INTO `translation` VALUES (206, '我收到的', '我收到的', 'Received', '受け取った', '我收到的', 1);
+INSERT INTO `translation` VALUES (207, '我送出的', '我送出的', 'Sent', '送った', '我送出的', 1);
+INSERT INTO `translation` VALUES (208, '请注意言论,主题创建后不允许删除或修改', '请注意言论,主题创建后不允许删除或修改', 'Please be mindful of your comments. Once a topic is created, it cannot be deleted or modified.', 'コメントにはご注意ください。トピックが作成された後は、削除や変更ができません。', '請注意言論，主題創建後不允許刪除或修改。', 1);
+INSERT INTO `translation` VALUES (209, '图片上传大小', '图片大小最大只能2M', 'The maximum allowed size for the image is 2MB', '最大サイズは2MBまでです。', '圖片大小最大只能2MB。', 1);
+INSERT INTO `translation` VALUES (210, '已被拉黑', '您的账号已被拉黑，无法登录', 'Your account has been blocked and you cannot log in.', 'あなたのアカウントはブロックされており、ログインできません。', '您的帳號已被拉黑，無法登入', 1);
+INSERT INTO `translation` VALUES (211, '日常', '日常', 'Daily', '日常', '日常', 1);
+INSERT INTO `translation` VALUES (212, '闲聊灌水', '闲聊灌水', 'Casual Chat', '雑談', '閒聊灌水', 1);
+INSERT INTO `translation` VALUES (213, '职场吐槽', '职场吐槽', 'Workplace Rants', '仕事の愚痴', '職場吐槽', 1);
+INSERT INTO `translation` VALUES (214, '好玩', '好玩', 'Fun', '面白い', '好玩', 1);
+INSERT INTO `translation` VALUES (215, '分享发现', '分享发现', 'Share Discoveries', '発見をシェア', '分享發現', 1);
+INSERT INTO `translation` VALUES (216, '发起活动', '发起活动', 'Start Activity', 'イベントを開始', '發起活動', 1);
+INSERT INTO `translation` VALUES (217, '奇思妙想', '奇思妙想', 'Creative Ideas', '奇想天外', '奇思妙想', 1);
+INSERT INTO `translation` VALUES (218, '问答', '问答', 'Q&A', 'Q&A', '問答', 1);
+INSERT INTO `translation` VALUES (219, '问题求助', '问题求助', 'Help & Support', '問題のヘルプ', '問題求助', 1);
+INSERT INTO `translation` VALUES (220, '技术', '技术', 'Technology', '技術', '技術', 1);
+INSERT INTO `translation` VALUES (221, '编程', '编程', 'Programming', 'プログラミング', '編程', 1);
+INSERT INTO `translation` VALUES (222, '分享创造', '分享创造', 'Share Creations', '創作をシェア', '分享創造', 1);
+INSERT INTO `translation` VALUES (223, '交易', '交易', 'Trading', '取引', '交易', 1);
+INSERT INTO `translation` VALUES (224, '二手交易', '二手交易', 'Second-hand Trading', '中古取引', '二手交易', 1);
+INSERT INTO `translation` VALUES (225, '免费赠送', '免费赠送', 'Free Gifts', '無料贈呈', '免費贈送', 1);
+INSERT INTO `translation` VALUES (226, 'you_cannot_blocked_yourself', '不能自己屏蔽自己', 'You cannot block yourself.', '自分自身をブロックすることはできません。', '不能自己封鎖自己', 1);
+INSERT INTO `translation` VALUES (227, 'already_blocked', '已经屏蔽', 'Already blocked.', '既にブロックされています。', '已經封鎖', 1);
+INSERT INTO `translation` VALUES (228, 'you_cannot_thank_yourself', '你不能感谢你自己', 'You cannot thank yourself.', '自分自身に感謝することはできません。', '你不能感謝你自己', 1);
+INSERT INTO `translation` VALUES (229, 'post_has_no_author', '帖子没有作者', 'The post has no author.', '投稿に作者はいません。', '帖子沒有作者', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -489,11 +718,12 @@ CREATE TABLE `user`  (
   UNIQUE INDEX `UNIQ_8D93D649F85E0677`(`username` ASC) USING BTREE,
   UNIQUE INDEX `UNIQ_8D93D649A188FE64`(`nickname` ASC) USING BTREE,
   UNIQUE INDEX `UNIQ_8D93D649E7927C74`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES (1, 'admin', 'admin', '', '', 'avatar/admin.png', '管理员', 763, 191, 2, 0, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2025-09-24 07:41:24', '2022-08-20 02:58:51', 0);
 
 -- ----------------------------
 -- Table structure for user_thumbup_comment
