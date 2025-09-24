@@ -4,7 +4,7 @@ name: Build and Push Docker Image to Docker Hub
 # 触发条件：当代码推送到 main 分支，或创建标签（tag）时执行
 on:
   push:
-    branches: [ "main" ]  # 可替换为你的核心分支（如 master、dev）
+    branches: [ "master" ]  # 可替换为你的核心分支（如 master、dev）
     tags: [ "v*" ]        # 标签触发（如 v1.0.0、v2.1.1，用于版本化镜像）
 
 # 工作流的核心任务
