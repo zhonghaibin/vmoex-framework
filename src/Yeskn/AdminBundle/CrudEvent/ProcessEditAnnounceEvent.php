@@ -22,10 +22,28 @@ class ProcessEditAnnounceEvent extends AbstractCrudEntityEvent
     {
         $entityObj = $this->entity;
 
-        $content = strip_tags($entityObj->getContent(),
+        $en = strip_tags($entityObj->getEn(),
             'b, strong,i,em,font,small,bold,span,p'
         );
 
-        $entityObj->setContent($content);
+        $entityObj->setEn($en);
+
+        $jp = strip_tags($entityObj->getJp(),
+            'b, strong,i,em,font,small,bold,span,p'
+        );
+
+        $entityObj->setJp($jp);
+
+        $zh_TW = strip_tags($entityObj->getZhTW(),
+            'b, strong,i,em,font,small,bold,span,p'
+        );
+
+        $entityObj->setZhTW($zh_TW);
+
+        $zh_CN = strip_tags($entityObj->getZhCN(),
+            'b, strong,i,em,font,small,bold,span,p'
+        );
+
+        $entityObj->setZhCN($zh_CN);
     }
 }

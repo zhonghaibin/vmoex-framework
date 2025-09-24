@@ -20,7 +20,7 @@ if [ -z "$(ls -A $TARGET_DIR)" ]; then
   ln -s /var/www/node_modules/jquery /var/www/web/assets/lib/jquery
   ln -s /var/www/node_modules/jquery-pjax /var/www/web/assets/lib/jquery-pjax
   ln -s /var/www/node_modules/at.js /var/www/web/assets/lib/jquery.atwho
-  ln -s /var/www/node_modules/laydate /var/www/web/assets/lib/laydate
+  ln -s /var/www/node_modules/layui-laydate /var/www/web/assets/lib/laydate
   ln -s /var/www/node_modules/metismenu /var/www/web/assets/lib/metisMenu
   ln -s /var/www/node_modules/nprogress /var/www/web/assets/lib/nprogress
   ln -s /var/www/node_modules/socket.io-client /var/www/web/assets/lib/socket.io-client
