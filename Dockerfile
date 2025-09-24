@@ -61,9 +61,9 @@ RUN pecl channel-update pecl.php.net && \
     pecl install redis-5.3.7 && \
     docker-php-ext-enable redis
 
-# 安装 Composer
+# 安装 Composer（使用更兼容的版本）
 RUN curl -sS https://getcomposer.org/installer | php -- \
-    --install-dir=/usr/local/bin --filename=composer
+    --install-dir=/usr/local/bin --filename=composer --version=2.2.18
 
 # 设置工作目录
 WORKDIR /var/www
@@ -74,24 +74,42 @@ RUN mkdir -p /var/log/php-fpm && \
           /var/log/php-fpm/php-fpm_stderr.log && \
     chmod 666 /var/log/php-fpm/*.log
 
-# 复制应用代码
-COPY . /var/app
+# 复制应用代码（先复制 composer 文件，利用 Docker 缓存）
+COPY composer.json composer.lock* /var/app/
+WORKDIR /var/app
+
+# 调试：显示 composer 文件内容
+RUN ls -la /var/app/ && \
+    if [ -f composer.json ]; then cat composer.json; else echo "No composer.json found"; fi && \
+    if [ -f composer.lock ]; then echo "composer.lock exists"; else echo "No composer.lock"; fi
+
+# 先尝试只安装依赖，不运行脚本
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --no-autoloader
+
+# 如果上一步成功，再运行完整的安装
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# 复制剩余的应用代码
+COPY . /var/app/
 
 # 安装 Node.js（使用更兼容的方法）
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npmmirror.com/
 
-# 安装项目依赖
-WORKDIR /var/app
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-RUN npm install --production
+# 安装 npm 依赖（如果有 package.json）
+COPY package.json package-lock.json* /var/app/
+RUN if [ -f package.json ]; then npm install --production; else echo "No package.json found"; fi
 
 # 复制配置
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY init.sh /usr/local/bin/init.sh
 RUN chmod +x /usr/local/bin/init.sh
+
+# 设置正确的文件权限
+RUN chown -R www-data:www-data /var/app/storage /var/app/bootstrap/cache && \
+    chmod -R 775 /var/app/storage /var/app/bootstrap/cache
 
 # 清理
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
