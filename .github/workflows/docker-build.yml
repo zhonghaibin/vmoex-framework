@@ -1,0 +1,58 @@
+#  workflow 名称（GitHub 界面显示用）
+name: Build and Push Docker Image to Docker Hub
+
+# 触发条件：当代码推送到 main 分支，或创建标签（tag）时执行
+on:
+  push:
+    branches: [ "main" ]  # 可替换为你的核心分支（如 master、dev）
+    tags: [ "v*" ]        # 标签触发（如 v1.0.0、v2.1.1，用于版本化镜像）
+
+# 工作流的核心任务
+jobs:
+  build-and-push:
+    # 运行环境：选择最新的 Ubuntu（Docker 已预装）
+    runs-on: ubuntu-latest
+    # 任务步骤
+    steps:
+      # 步骤 1：拉取 GitHub 仓库代码（必须第一步，否则无法访问 Dockerfile）
+      - name: Checkout code
+        uses: actions/checkout@v4  # GitHub 官方的代码拉取 Action
+
+      # 步骤 2：设置 Docker Buildx（优化镜像构建，支持多平台构建）
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3  # Docker 官方的 Buildx 配置 Action
+
+      # 步骤 3：登录 Docker Hub（使用前面配置的 Secrets）
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3  # Docker 官方的登录 Action
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}  # 引用 GitHub Secret
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}     # 引用 GitHub Secret
+
+      # 步骤 4：提取镜像标签（支持分支标签和版本标签）
+      - name: Extract Docker tags
+        id: extract-tags  # 步骤 ID，后续可通过 ${{ steps.extract-tags.outputs.tags }} 引用
+        run: |
+          # 定义基础镜像名（格式：DockerHub用户名/仓库名，需与你 Docker Hub 仓库一致）
+          IMAGE_NAME=${{ secrets.DOCKER_HUB_USERNAME }}/vmoex-framework
+          
+          # 如果是标签推送（如 v1.0.0），标签为：IMAGE_NAME:v1.0.0、IMAGE_NAME:latest
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            TAG=${GITHUB_REF#refs/tags/}  # 提取标签名（如 v1.0.0）
+            echo "tags=$IMAGE_NAME:$TAG,$IMAGE_NAME:latest" >> $GITHUB_OUTPUT
+          # 如果是分支推送（如 main），标签为：IMAGE_NAME:main
+          else
+            BRANCH=${GITHUB_REF#refs/heads/}  # 提取分支名（如 main）
+            echo "tags=$IMAGE_NAME:$BRANCH" >> $GITHUB_OUTPUT
+          fi
+
+      # 步骤 5：构建 Docker 镜像并推送到 Docker Hub
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5  # Docker 官方的构建+推送 Action
+        with:
+          context: .  # 构建上下文（当前仓库根目录，即 Dockerfile 所在目录）
+          file: ./Dockerfile  # Dockerfile 路径（如果在子目录，需修改如 ./src/Dockerfile）
+          push: true  # 启用推送（false 仅构建不推送，用于测试）
+          tags: ${{ steps.extract-tags.outputs.tags }}  # 引用前面提取的镜像标签
+          cache-from: type=gha  # 使用 GitHub Actions 缓存，加速后续构建
+          cache-to: type=gha,mode=max  # 保存缓存到 GitHub Actions
