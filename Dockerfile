@@ -84,8 +84,8 @@ WORKDIR /var/www
 COPY . /var/app
 
 # 8. 安装项目依赖
-RUN composer install --no-dev --optimize-autoloader --working-dir=/var/app && \
-    yarn install --cwd /var/app --frozen-lockfile
+RUN  composer install --no-dev --optimize-autoloader --working-dir=/var/app --no-scripts \
+        && yarn install --cwd /var/app --frozen-lockfile
 
 # 9. 创建日志目录
 RUN mkdir -p /var/log/php-fpm && \
