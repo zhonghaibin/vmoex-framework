@@ -24,6 +24,8 @@ class DefaultController extends Controller
         $postCount = $this->getDoctrine()->getRepository('YesknMainBundle:Post')->countPost();
         $userCount = $this->getDoctrine()->getRepository('YesknMainBundle:User')->countUser();
         $commentCount = $this->getDoctrine()->getRepository('YesknMainBundle:Comment')->countComment();
+        $loginSummaryByWeekdayCount  = $this->getDoctrine()->getRepository('YesknMainBundle:UserLoginLog')->getAllWeeklySummary();
+        $commentSummaryByWeekdayCount = $this->getDoctrine()->getRepository('YesknMainBundle:Comment')->getAllWeeklySummary();
 
         $todayLoginUserCount = $this->getDoctrine()->getRepository('YesknMainBundle:User')
             ->getTodayLoggedUserCount();
@@ -33,7 +35,9 @@ class DefaultController extends Controller
                 'post' => $postCount,
                 'user' => $userCount,
                 'todayLoginUserCount' => $todayLoginUserCount,
-                'comment' => $commentCount
+                'comment' => $commentCount,
+                'loginSummaryByWeekday' => json_encode($loginSummaryByWeekdayCount),
+                'commentSummaryByWeekday' => json_encode($commentSummaryByWeekdayCount),
             ]
         ]);
     }

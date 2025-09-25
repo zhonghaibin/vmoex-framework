@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 101106 (10.11.6-MariaDB)
  Source Host           : 192.168.2.24:3306
- Source Schema         : 111
+ Source Schema         : vmoex-dev
 
  Target Server Type    : MySQL
  Target Server Version : 101106 (10.11.6-MariaDB)
  File Encoding         : 65001
 
- Date: 24/09/2025 21:38:26
+ Date: 25/09/2025 10:18:29
 */
 
 SET NAMES utf8mb4;
@@ -724,6 +724,25 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, 'admin', 'admin', '', '', 'avatar/admin.png', '管理员', 763, 191, 2, 0, 'ROLE_SUPER_ADMIN', 'df', '2024-08-18 20:36:01', '2025-09-24 07:41:24', '2022-08-20 02:58:51', 0);
+
+-- ----------------------------
+-- Table structure for user_login_log
+-- ----------------------------
+DROP TABLE IF EXISTS `user_login_log`;
+CREATE TABLE `user_login_log`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL COMMENT '用户ID',
+  `login_at` datetime NOT NULL COMMENT '登录时间',
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '登录IP (支持IPv6)',
+  `user_agent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '客户端UA',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_user`(`user_id` ASC) USING BTREE,
+  INDEX `idx_login_at`(`login_at` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户登录记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_login_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user_thumbup_comment

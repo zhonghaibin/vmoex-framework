@@ -9,7 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Translation\TranslatorInterface;
-
+use Yeskn\MainBundle\Entity\UserLoginLog;
+use Symfony\Component\HttpFoundation\RequestStack;
 class LoginListener
 {
     private $entityManager;
@@ -19,12 +20,15 @@ class LoginListener
 
     private $trans;
 
-    public function __construct(EntityManagerInterface $entityManager, RedisClient $redis, ContainerInterface $container,TranslatorInterface $trans)
+    private $requestStack;
+
+    public function __construct(EntityManagerInterface $entityManager, RedisClient $redis, ContainerInterface $container, TranslatorInterface $trans, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
         $this->redis = $redis;
         $this->container = $container;
         $this->trans = $trans;
+        $this->requestStack = $requestStack;
     }
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
@@ -40,6 +44,17 @@ class LoginListener
             // 更新登录时间
             $user->setLoginAt(new \DateTime());
             $this->entityManager->persist($user);
+
+            // 写入登录日志
+            $request = $this->requestStack->getCurrentRequest();
+            $log = new UserLoginLog();
+            $log->setUser($user);
+            $log->setLoginAt(new \DateTime());
+            $log->setIpAddress($request ? $request->getClientIp() : null);
+            $log->setUserAgent($request ? $request->headers->get('User-Agent') : null);
+
+            $this->entityManager->persist($log);
+
             $this->entityManager->flush();
 
             // 生成并保存 Token 到 Redis
