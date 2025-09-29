@@ -1,5 +1,5 @@
-# 1. 基于官方 PHP 镜像（7.2-fpm, Debian Buster）
-FROM php:7.2-fpm
+# 1. 基于官方 PHP 镜像（7.3-fpm, Debian Buster）
+FROM php:7.3-fpm
 
 # 2. 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -60,7 +60,7 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
         --with-png-dir=/usr/include/ \
         --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd sockets \
-    # 安装 redis 扩展（兼容 PHP 7.2 的稳定版）
+    # 安装 redis 扩展（兼容 PHP 7.3 的版本）
     && pecl install redis-5.3.7 \
     && docker-php-ext-enable redis \
     # 清理
@@ -84,8 +84,8 @@ WORKDIR /var/www
 COPY . /var/app
 
 # 8. 安装项目依赖
-RUN  composer install --no-dev --optimize-autoloader --working-dir=/var/app --no-scripts \
-        && yarn install --cwd /var/app --frozen-lockfile
+RUN composer install --no-dev --optimize-autoloader --working-dir=/var/app --no-scripts \
+    && yarn install --cwd /var/app --frozen-lockfile
 
 # 9. 创建日志目录
 RUN mkdir -p /var/log/php-fpm && \
