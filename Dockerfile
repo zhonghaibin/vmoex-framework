@@ -1,4 +1,4 @@
-# 1. 基于官方 PHP 镜像（7.3-fpm, Debian Buster）
+# 1. 基于官方 PHP 镜像（7.3-fpm, Debian Bullseye）
 FROM php:7.3-fpm
 
 # 2. 环境变量
@@ -8,10 +8,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
     APP_ENV=prod  \
     SYMFONY_ENV=prod
 
-# 3. 替换 Debian 源（Buster 已 EOL，改为 archive）
-RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
-    sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
-    sed -i '/buster-updates/d' /etc/apt/sources.list && \
+# 3. 替换 Debian 源（Bullseye 已归档，去掉 security）
+RUN echo "deb http://archive.debian.org/debian bullseye main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian bullseye-updates main contrib non-free" >> /etc/apt/sources.list && \
     apt-get -o Acquire::Check-Valid-Until=false update && \
     apt-get install -y --no-install-recommends \
         cron \
@@ -53,7 +52,7 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
         bcmath \
         intl \
         opcache \
-    # 配置并安装 gd（PHP 7.3 开始用新参数）
+    # 配置并安装 gd（PHP 7.3 用新参数）
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
