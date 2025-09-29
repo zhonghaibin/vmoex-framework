@@ -121,3 +121,6 @@ snc_redis:
     profiler_storage:
         client: default
         ttl: 3600
+knp_markdown:
+  parser:
+    service: markdown.parser.commonmark

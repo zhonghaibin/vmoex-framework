@@ -41,3 +41,21 @@ services:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
     Symfony\Bridge\Twig\Extension\AssetExtension: "@twig.extension.assets"
     Symfony\Bundle\SecurityBundle\Security\FirewallMap: "@security.firewall.map"
+
+
+    markdown.environment:
+      class: League\CommonMark\Environment\Environment
+      factory: [ 'League\CommonMark\Environment\Environment', 'createCommonMarkEnvironment' ]
+
+    league.commonmark.converter:
+      class: League\CommonMark\MarkdownConverter
+      arguments:
+        - '@markdown.environment'
+
+    # alias，让 autowire 能找到 MarkdownConverter
+    League\CommonMark\MarkdownConverter: '@league.commonmark.converter'
+
+    markdown.parser.commonmark:
+      class: Yeskn\MainBundle\Markdown\CommonMarkParser
+      arguments:
+        - '@league.commonmark.converter'
