@@ -53,14 +53,13 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
         bcmath \
         intl \
         opcache \
-    # 配置并安装 gd
+    # 配置并安装 gd（PHP 7.3 开始用新参数）
     && docker-php-ext-configure gd \
-        --with-freetype-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/ \
-        --with-png-dir=/usr/include/ \
-        --with-webp-dir=/usr/include/ \
+        --with-freetype \
+        --with-jpeg \
+        --with-webp \
     && docker-php-ext-install -j$(nproc) gd sockets \
-    # 安装 redis 扩展（兼容 PHP 7.3 的版本）
+    # 安装 redis 扩展（兼容 PHP 7.3 的稳定版）
     && pecl install redis-5.3.7 \
     && docker-php-ext-enable redis \
     # 清理
