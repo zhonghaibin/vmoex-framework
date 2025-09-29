@@ -40,7 +40,6 @@ RUN echo "deb http://archive.debian.org/debian bullseye main contrib non-free" >
         default-mysql-client \
         nodejs \
         npm \
-    # 安装 PHP 扩展
     && docker-php-ext-install -j$(nproc) \
         pdo \
         pdo_mysql \
@@ -52,16 +51,14 @@ RUN echo "deb http://archive.debian.org/debian bullseye main contrib non-free" >
         bcmath \
         intl \
         opcache \
-    # 配置并安装 gd（PHP 7.3 用新参数）
     && docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg \
-        --with-webp \
+        --with-freetype-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/ \
+        --with-png-dir=/usr/include/ \
+        --with-webp-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd sockets \
-    # 安装 redis 扩展（兼容 PHP 7.3 的稳定版）
     && pecl install redis-5.3.7 \
     && docker-php-ext-enable redis \
-    # 清理
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
