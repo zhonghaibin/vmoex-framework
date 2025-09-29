@@ -30,7 +30,7 @@ cd vmoex-framework
 ```
 ### 启动容器
 ```
-docker run -d -p 3110:3110 -p 3120:3120 -p 3121:3121 --name vmoex  -v $(pwd):/var/www zhonghaibin/vmoex-framework
+docker run -d -p 3110:3110 -p 3120:3120  --name vmoex  -v $(pwd):/var/www zhonghaibin/vmoex-framework
 ```
 3110是web端口，3120是websocket端口
 ### 进入容器

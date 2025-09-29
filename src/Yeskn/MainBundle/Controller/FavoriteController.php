@@ -2,6 +2,7 @@
 namespace Yeskn\MainBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +16,6 @@ use Yeskn\MainBundle\Entity\PostFavorites;
 /**
  * Class FavoriteController
  * @package Yeskn\MainBundle\Controller
- *
- * @Security("has_role('ROLE_USER')")
  */
 class FavoriteController extends AbstractController
 {
@@ -26,7 +25,9 @@ class FavoriteController extends AbstractController
     public function favoriteAction(Request $request, Post $post, TranslatorInterface $trans)
     {
         $user = $this->getUser();
-
+        if (!$user) {
+            return new JsonResponse(['ret' => 0, 'message' => $trans->trans( '请先登录')]);
+        }
         // 检查是否已经收藏
         $favorite = $this->getDoctrine()
             ->getRepository(PostFavorites::class)

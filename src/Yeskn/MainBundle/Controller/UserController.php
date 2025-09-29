@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Yeskn\MainBundle\Entity\Message;
 use Yeskn\MainBundle\Entity\Notice;
 use Yeskn\MainBundle\Entity\User;
@@ -315,14 +316,14 @@ class UserController extends AbstractController
      * @param $request
      * @return Response
      */
-    public function modifyUserInfo(Request $request)
+    public function modifyUserInfo(Request $request,TranslatorInterface $trans)
     {
         /**
          * @var User $user
          */
         $user = $this->getUser();
         if (!$user) {
-            return new JsonResponse(['ret' => 0, 'msg' => '用户未登录']);
+            return new JsonResponse(['ret' => 0, 'msg' => $trans->trans( '请先登录')]);
         }
 
         /**
@@ -388,13 +389,13 @@ class UserController extends AbstractController
      * @return ApiFail|ApiOk
      * @throws \LogicException
      */
-    public function sendVerifyEmailCodeAction(Request $request,  \Swift_Mailer $mailer)
+    public function sendVerifyEmailCodeAction(Request $request,  \Swift_Mailer $mailer,TranslatorInterface $trans)
     {
         $user = $this->getUser();
         $email = $request->get('email');
 
         if ($user->isEmailVerified()) {
-            return new ApiFail('邮箱已经验证');
+            return new ApiFail($trans->trans( 'user_setting_email_verified'));
         }
 
         if (!Validator::isEmail($email)) {
@@ -434,12 +435,12 @@ class UserController extends AbstractController
      * @return Response
      * @throws \LogicException
      */
-    public function verifyEmailAction(Request $request)
+    public function verifyEmailAction(Request $request,TranslatorInterface $trans)
     {
         $user = $this->getUser();
 
         if ($user->isEmailVerified()) {
-            return $this->errorResponse('邮箱已经验证');
+            return $this->errorResponse($trans->trans( 'user_setting_email_verified'));
         }
 
         $email = $request->get('email');

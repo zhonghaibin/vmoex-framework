@@ -255,6 +255,10 @@ class PostController extends Controller
     {
         $user = $this->getUser(); // 获取当前登录用户
 
+        if (!$user) {
+            return new JsonResponse(['ret' => 0, 'message' => $trans->trans( '请先登录')]);
+        }
+
         // 检查用户是否已经感谢过该帖子
         $existingThanks = $this->getDoctrine()
             ->getRepository(PostThanks::class)
@@ -303,6 +307,10 @@ class PostController extends Controller
     public function blockAction(Request $request, Post $post, TranslatorInterface $trans)
     {
         $user = $this->getUser(); // 获取当前登录的用户
+
+        if (!$user) {
+            return new JsonResponse(['ret' => 0, 'message' => $trans->trans( '请先登录')]);
+        }
 
         // 检查用户是否已经屏蔽了该帖子
         $existingBlock = $this->getDoctrine()

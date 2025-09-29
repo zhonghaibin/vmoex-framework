@@ -33,23 +33,23 @@
                 {{ post.content|markdown|raw }}
             </div>
         </div>
-        <div class="post-actions border-bottom">
+        <div class="post-actions border-bottom" style="font-size: 18px;">
             <span id="favorite-btn" style="cursor: pointer" data-post-id="{{ post.id }}">
                   {% if isFavorited %}
-                      <span><i class="fa fa-bookmark"></i></span>
+                      <span><i class="fa fa-bookmark" style="color: #ff394f;"></i></span>
                   {% else %}
                      <span> <i class="fa fa-bookmark-o"></i></span>
                   {% endif %}
             </span>
             {% if isThanks %}
-                <span><i class="fa fa-thumbs-up"></i></span>
+                <span><i class="fa fa-thumbs-up" style="color: #ff394f;"></i></span>
             {% else %}
                 <span id="thinks-btn"  style="cursor: pointer" data-post-id="{{ post.id }}"><i class="fa fa-thumbs-o-up"></i></span>
             {% endif %}
             <span class="copy-btn"  style="cursor: pointer" data-clipboard-target="#text-to-copy"><i class="fa fa-link"></i><input type="hidden" id="text-to-copy" value="{{ url('post_show' , {'id' : post.id}) }}"></span>
             <span id="block-btn"  style="cursor: pointer" data-post-id="{{ post.id }}"><i class="fa fa-eye-slash"></i></span>
 {#            <span  style="cursor: pointer" ><i class="fa fa-flag-o"></i></span>#}
-            <span class="pull-right last">
+            <span class="pull-right last" style="font-size: 18px;">
                 <i class="fa fa-bookmark-o"></i>
                 <span id="favorite-count" style="color:darkgray; margin-right:0px">{{ favoritesCount }}</span>/
                 <i class="fa fa-thumbs-o-up"></i>
