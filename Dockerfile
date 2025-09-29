@@ -1,5 +1,5 @@
-# 1. 基于官方 PHP 精简镜像（7.4-fpm-bullseye-slim）
-FROM php:7.4-fpm-bullseye-slim
+# 1. 基于官方 PHP 镜像（7.4-fpm, Debian Bullseye）
+FROM php:7.4-fpm
 
 # 2. 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -59,7 +59,7 @@ RUN echo "deb http://archive.debian.org/debian bullseye main contrib non-free" >
     && pecl install redis-5.3.7 \
     && docker-php-ext-enable redis \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/*
 
 # 4. 安装 Composer（指定版本），并配置阿里云镜像
 RUN curl -sS https://getcomposer.org/installer | php -- --version=2.2.9 --install-dir=/usr/local/bin --filename=composer && \
