@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # 要检查和复制的目标目录，例如 /var/www
 TARGET_DIR="/var/www"
 
